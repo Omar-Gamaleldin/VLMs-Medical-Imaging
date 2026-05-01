@@ -5,11 +5,15 @@
 #SBATCH --output=slurm_log/gepa/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
 #SBATCH --container-name=vllm_qwen3.5
 #SBATCH --job-name=Qwen3.5_9B
-#SBATCH --container-workdir $HOME/VLMs-Medical-Imaging/
 #SBATCH --gres=gpu:1
 
-vllm serve models/Qwen3.5-9B
-	--port 8001
+cd $HOME/VLMs-Medical-Imaging
+
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export XDG_CACHE_HOME=/tmp/cache
+
+vllm serve models/Qwen3.5-9B \
+	--port 8001 \
 	--mm-encoder-tp-mode data \
 	--mm-processor-cache-type shm \
 	--reasoning-parser qwen3 \
