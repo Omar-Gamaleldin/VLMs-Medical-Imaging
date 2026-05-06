@@ -215,12 +215,15 @@ if __name__ == "__main__":
     #  Model
     # ──────────────────────────────────────────────────────────────────────────────
 
-    vlm_model= "../models/Qwen3.5-9B"
-    reflective_model= "../models/Qwen3.5-27B"
+    vlm_model= "models/Qwen3.5-9B"
+    reflective_model= "models/Qwen3.5-9B"
 
-    vlm = dspy.LM(model=vlm_model)
+    vlm = dspy.LM(model=vlm_model,
+                api_base="http://localhost:8001",)
+
     dspy.configure(lm=vlm)
-    reflective_llm =dspy.LM(model=reflective_model) 
+    reflective_llm =dspy.LM(model=reflective_model,
+                api_base="http://localhost:8001",)
 
     # ──────────────────────────────────────────────────────────────────────────────
     #  Paths and Experiment Selection
@@ -248,12 +251,14 @@ if __name__ == "__main__":
     optimizer =dspy.GEPA(
             metric=metric,
             reflection_lm=reflective_llm,
+            max_full_evals=5
             )
-            
 
+    optimized_program = optimizer.compile(
+            dspy.Predict(VQA),
+            trainset=trainset[:160],
+            valset=trainset[160:]
+            )
 
-
-
-
-
+    optimized_program.inspect()
 
