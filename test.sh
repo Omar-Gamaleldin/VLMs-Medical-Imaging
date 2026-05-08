@@ -4,7 +4,7 @@
 #SBATCH --container-mount-home
 #SBATCH --output=slurm_log/gepa/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
 #SBATCH --container-name=vllm_qwen3.5
-#SBATCH --job-name=Qwen3.5_9B
+#SBATCH --job-name=Qwen3.5_9B_Server
 #SBATCH --gres=gpu:1
 
 cd $HOME/VLMs-Medical-Imaging
@@ -17,5 +17,6 @@ vllm serve models/Qwen3.5-9B \
 	--mm-encoder-tp-mode data \
 	--mm-processor-cache-type shm \
 	--reasoning-parser qwen3 \
-	--enable-prefix-caching
+	--enable-prefix-caching \
+	--served-model-name qwen3.5-9b\
 

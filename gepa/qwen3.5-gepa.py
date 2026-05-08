@@ -197,44 +197,60 @@ class VQA(dspy.Signature):
     image = dspy.InputField(desc="Image input")
     answer = dspy.OutputField(desc="Answer with 0 or 1 only")
 
-def metric(example, pred, trace=None):
-    pred_ans = pred.answer.strip()
+def metric(gold, pred, pred_trace=None, trace=None , pred_name=None):
 
-    # exact match
-    correct = pred_ans == example.answer
+    correct_answer = int(gold.answer)
+    try:
+        llm_answer = int(pred.answer)
+    except ValueError as _:
+        feedback_text = f"The final answer must be a '1' or a '0'. You responded with '{pred.answer}', which couldn't be parsed as a python integer. Please ensure your answer is a valid integer without any additional text or formatting."
+        feedback_text += f" The correct answer is '{correct_answer}'."
+        return dspy.Prediction(score=0, feedback=feedback_text)
 
-    return correct
+    score = int(correct_answer == llm_answer)
+    feedback_text = ""
+
+    if score == 1:
+        feedback_text = f"Your answer is correct. The correct answer is '{correct_answer}'."
+    else:
+        feedback_text = f"Your answer is incorrect. The correct answer is '{correct_answer}'."
+
+    return dspy.Prediction(score=score, feedback=feedback_text)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test run Script")
     parser.add_argument("--data_dir", type=str, required=True, help="Path to dataset")
     args = parser.parse_args()
 
-    images_dir = os.path.join(args.data_dir, "RQ1", "images")
+    data_dir = os.path.join(args.data_dir, "RQ1")
+    images_dir = os.path.join(data_dir, "images")
     # ──────────────────────────────────────────────────────────────────────────────
     #  Model
     # ──────────────────────────────────────────────────────────────────────────────
 
-    vlm_model= "models/Qwen3.5-9B"
-    reflective_model= "models/Qwen3.5-9B"
+    vlm_model= "openai/qwen3.5-9b"
+    reflective_model= "openai/qwen3.5-9b"
 
     vlm = dspy.LM(model=vlm_model,
-                api_base="http://localhost:8001",)
+                  api_base="http://localhost:8001",
+                  api_key="EMPTY")
 
     dspy.configure(lm=vlm)
     reflective_llm =dspy.LM(model=reflective_model,
-                api_base="http://localhost:8001",)
-
+                api_base="http://localhost:8001",
+                api_key="EMPTY")
     # ──────────────────────────────────────────────────────────────────────────────
     #  Paths and Experiment Selection
     # ──────────────────────────────────────────────────────────────────────────────
 
-    with open("qa.json", "r", encoding="utf8") as file:
+    final_path = os.path.join(data_dir, "qa.json")
+
+    with open(final_path, "r", encoding="utf8") as file:
         data = json.load(file)
 
     random.seed(2026)
 
-    entire_dataset= [{"question": entry["question_answer"]["question"], "answer": entry["question_answer"]["answer"], "image": entry["filename"]} for entry in data]
+    entire_dataset= [{"question": entry["question_answer"][0]["question"], "answer": entry["question_answer"][0]["answer"], "image": entry["filename"]} for entry in data]
     dataset = random.choices(entire_dataset, k=200)
 
     images = [entry["image"] for entry in dataset]
@@ -245,20 +261,22 @@ if __name__ == "__main__":
         img_dir = os.path.join(images_dir, img)
         rgb_image = get_clean_image(img_dir)
 
-        dataset[:]= [{"question": entry["question"], "answer": entry["answer"], "image": rgb_image} for entry in dataset if entry["image"] == img]
+        for i, entry  in enumerate(dataset):
+            if entry["image"] == img:
+                dataset[i]["image"] = rgb_image
+                break
+
 
     trainset = [dspy.Example(question=entry["question"], image=entry["image"], answer=entry["answer"]).with_inputs("question", "image") for entry in dataset]
-    optimizer =dspy.GEPA(
+    optimizer = GEPA(
             metric=metric,
             reflection_lm=reflective_llm,
-            max_full_evals=5
+            max_full_evals=1
             )
 
     optimized_program = optimizer.compile(
             dspy.Predict(VQA),
-            trainset=trainset[:160],
-            valset=trainset[160:]
+            trainset=trainset,
             )
 
-    optimized_program.inspect()
-
+    print(optimized_program.predict.signature.instructions)
