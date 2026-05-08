@@ -49,6 +49,7 @@ wait_for_server() {
 	--served-model-name qwen3.5-9b\ ) &
 
 wait_for_server "http://localhost:8001/health"
+curl http://localhost:8001/v1/models
 
 python3 -m pip install -q pillow dspy transformers==5.5.0
 
