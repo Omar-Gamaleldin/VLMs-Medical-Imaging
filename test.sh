@@ -9,14 +9,47 @@
 
 cd $HOME/VLMs-Medical-Imaging
 
+# Get Data form Workspace to GPU Node -------------------------------
+export WORKSPACE_PATH=/pfs/work9/workspace/scratch/ul_ekd37-gepa-optimization
+
+# Extract compressed input dataset on local SSD
+echo "Extracting dataset..."
+tar -C $TMPDIR/ -xzf $WORKSPACE_PATH/dataset.tgz
+
+export DATAPATH=$TMPDIR/dataset
+
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
 export XDG_CACHE_HOME=/tmp/cache
 
-vllm serve models/Qwen3.5-9B \
+wait_for_server() {
+  local url=$1
+  local max_attempts=${2:-30}
+  local interval=${3:-2}
+
+  echo "Waiting for server at $url..."
+  for ((i=1; i<=max_attempts; i++)); do
+    if curl -sf "$url" > /dev/null 2>&1; then
+      echo "Server is ready!"
+      return 0
+    fi
+    echo "Attempt $i/$max_attempts — retrying in ${interval}s..."
+    sleep "$interval"
+  done
+
+  echo "Server did not become ready in time."
+  return 1
+}
+
+(vllm serve models/Qwen3.5-9B \
 	--port 8001 \
 	--mm-encoder-tp-mode data \
 	--mm-processor-cache-type shm \
 	--reasoning-parser qwen3 \
 	--enable-prefix-caching \
-	--served-model-name qwen3.5-9b\
+	--served-model-name qwen3.5-9b\ ) &
 
+wait_for_server "http://localhost:8001/health"
+
+python3 -m pip install -q pillow dspy transformers==5.5.0
+
+pyhton3 gepa/qwen3.5-gepa.py --data_dir $DATAPATH

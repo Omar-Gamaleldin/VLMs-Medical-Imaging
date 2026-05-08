@@ -154,8 +154,7 @@ def get_clean_image(image_path):
         rgb_image = ensure_rgb(img)
     base64_image = encode_image_from_bytes(rgb_image)
 
-    return base64_image
-
+    return dspy.Image(url=f"data:image/png;base64,{base64_image}")
 
 def get_qa(img_file_name, json_dir):
     """
@@ -193,9 +192,9 @@ def get_qa(img_file_name, json_dir):
 
 class VQA(dspy.Signature):
     """Answer the question about the image with one word only."""
-    question = dspy.InputField()
-    image = dspy.InputField(desc="Image input")
-    answer = dspy.OutputField(desc="Answer with 0 or 1 only")
+    question: str = dspy.InputField()
+    image: dspy.Image = dspy.InputField(desc="Image input")
+    answer: str = dspy.OutputField(desc="Answer with 0 or 1 only")
 
 def metric(gold, pred, pred_trace=None, trace=None , pred_name=None):
 
@@ -232,12 +231,14 @@ if __name__ == "__main__":
     reflective_model= "openai/qwen3.5-9b"
 
     vlm = dspy.LM(model=vlm_model,
-                  api_base="http://localhost:8001",
-                  api_key="EMPTY")
+                  api_base="http://localhost:8001/v1",
+                  api_key="EMPTY",
+                   timeout=30,  # add timeout so it fails fast instead of hanging)
+                  )
 
     dspy.configure(lm=vlm)
     reflective_llm =dspy.LM(model=reflective_model,
-                api_base="http://localhost:8001",
+                api_base="http://localhost:8001/v1",
                 api_key="EMPTY")
     # ──────────────────────────────────────────────────────────────────────────────
     #  Paths and Experiment Selection
@@ -268,15 +269,20 @@ if __name__ == "__main__":
 
 
     trainset = [dspy.Example(question=entry["question"], image=entry["image"], answer=entry["answer"]).with_inputs("question", "image") for entry in dataset]
+
+    predictor = dspy.Predict(VQA)
+    result = predictor(question="Is there a person in the image?", image=trainset[0].image)
+    print(result)
+
     optimizer = GEPA(
             metric=metric,
             reflection_lm=reflective_llm,
-            max_full_evals=1
+            max_full_evals=1,
+            num_threads=1,
             )
 
     optimized_program = optimizer.compile(
             dspy.Predict(VQA),
-            trainset=trainset,
+            trainset=trainset[:20],
             )
-
-    print(optimized_program.predict.signature.instructions)
+    optimized_program.save("optimized.json")
