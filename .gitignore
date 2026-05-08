@@ -1,2 +1,4 @@
 models/*
 slurm_jobs/*
+
+excluded_images.txt
