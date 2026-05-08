@@ -1,0 +1,494 @@
+(APIServer pid=3097521) INFO 05-08 21:33:44 [utils.py:299] 
+(APIServer pid=3097521) INFO 05-08 21:33:44 [utils.py:299]        █     █     █▄   ▄█
+(APIServer pid=3097521) INFO 05-08 21:33:44 [utils.py:299]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.19.0
+(APIServer pid=3097521) INFO 05-08 21:33:44 [utils.py:299]   █▄█▀ █     █     █     █  model   models/Qwen3.5-9B
+(APIServer pid=3097521) INFO 05-08 21:33:44 [utils.py:299]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=3097521) INFO 05-08 21:33:44 [utils.py:299] 
+(APIServer pid=3097521) INFO 05-08 21:33:44 [utils.py:233] non-default args: {'model_tag': 'models/Qwen3.5-9B', 'port': 8001, 'model': 'models/Qwen3.5-9B', 'served_model_name': ['qwen3.5-9b'], 'reasoning_parser': 'qwen3', 'enable_prefix_caching': True, 'mm_processor_cache_type': 'shm', 'mm_encoder_tp_mode': 'data'}
+(APIServer pid=3097521) INFO 05-08 21:34:00 [model.py:549] Resolved architecture: Qwen3_5ForConditionalGeneration
+(APIServer pid=3097521) INFO 05-08 21:34:00 [model.py:1678] Using max model len 262144
+(APIServer pid=3097521) INFO 05-08 21:34:00 [scheduler.py:238] Chunked prefill is enabled with max_num_batched_tokens=8192.
+(APIServer pid=3097521) WARNING 05-08 21:34:00 [config.py:441] Mamba cache mode is set to 'align' for Qwen3_5ForConditionalGeneration by default when prefix caching is enabled
+(APIServer pid=3097521) INFO 05-08 21:34:00 [config.py:461] Warning: Prefix caching in Mamba cache 'align' mode is currently enabled. Its support for Mamba layers is experimental. Please report any issues you may observe.
+(APIServer pid=3097521) `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(APIServer pid=3097521) INFO 05-08 21:34:01 [config.py:281] Setting attention block size to 528 tokens to ensure that attention page size is >= mamba page size.
+(APIServer pid=3097521) INFO 05-08 21:34:01 [config.py:312] Padding mamba page size by 0.76% to ensure that mamba page size and attention page size are exactly equal.
+(APIServer pid=3097521) INFO 05-08 21:34:01 [vllm.py:790] Asynchronous scheduling is enabled.
+(APIServer pid=3097521) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(EngineCore pid=3097605) INFO 05-08 21:34:22 [core.py:105] Initializing a V1 LLM engine (v0.19.0) with config: model='models/Qwen3.5-9B', speculative_config=None, tokenizer='models/Qwen3.5-9B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=262144, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='qwen3', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=qwen3.5-9b, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_images_per_batch': 0, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
+(EngineCore pid=3097605) `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(EngineCore pid=3097605) INFO 05-08 21:34:24 [parallel_state.py:1400] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.21.224.85:40923 backend=nccl
+(EngineCore pid=3097605) INFO 05-08 21:34:24 [parallel_state.py:1716] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=3097605) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(EngineCore pid=3097605) INFO 05-08 21:34:29 [gpu_model_runner.py:4735] Starting to load model models/Qwen3.5-9B...
+(EngineCore pid=3097605) INFO 05-08 21:34:29 [cuda.py:390] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=3097605) INFO 05-08 21:34:29 [mm_encoder_attention.py:230] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=3097605) INFO 05-08 21:34:30 [gdn_linear_attn.py:139] Using FlashInfer GDN prefill kernel
+(EngineCore pid=3097605) INFO 05-08 21:34:30 [gdn_linear_attn.py:140] FlashInfer GDN prefill kernel is JIT-compiled; first run may take a while to compile. Set `--gdn-prefill-backend triton` to avoid JIT compile time.
+(EngineCore pid=3097605) INFO 05-08 21:34:32 [cuda.py:334] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=3097605) INFO 05-08 21:34:32 [flash_attn.py:596] Using FlashAttention version 3
+(EngineCore pid=3097605) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=3097605) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=3097605) Loading safetensors checkpoint shards:   0% Completed | 0/4 [00:00<?, ?it/s]
+(EngineCore pid=3097605) Loading safetensors checkpoint shards:  25% Completed | 1/4 [00:02<00:08,  2.84s/it]
+(EngineCore pid=3097605) Loading safetensors checkpoint shards:  50% Completed | 2/4 [00:05<00:05,  2.78s/it]
+(EngineCore pid=3097605) Loading safetensors checkpoint shards:  75% Completed | 3/4 [00:18<00:07,  7.38s/it]
+(EngineCore pid=3097605) Loading safetensors checkpoint shards: 100% Completed | 4/4 [00:20<00:00,  5.44s/it]
+(EngineCore pid=3097605) Loading safetensors checkpoint shards: 100% Completed | 4/4 [00:20<00:00,  5.22s/it]
+(EngineCore pid=3097605) 
+(EngineCore pid=3097605) INFO 05-08 21:34:53 [default_loader.py:384] Loading weights took 20.99 seconds
+(EngineCore pid=3097605) INFO 05-08 21:34:53 [gpu_model_runner.py:4820] Model loading took 17.66 GiB memory and 23.626517 seconds
+(EngineCore pid=3097605) INFO 05-08 21:34:54 [gpu_model_runner.py:5753] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=3097605) INFO 05-08 21:35:03 [backends.py:1051] Using cache directory: /tmp/cache/vllm/torch_compile_cache/0faff68895/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=3097605) INFO 05-08 21:35:03 [backends.py:1111] Dynamo bytecode transform time: 6.30 s
+(EngineCore pid=3097605) INFO 05-08 21:35:05 [backends.py:372] Cache the graph of compile range (1, 8192) for later use
+(EngineCore pid=3097605) INFO 05-08 21:35:24 [backends.py:390] Compiling a graph for compile range (1, 8192) takes 20.18 s
+(EngineCore pid=3097605) INFO 05-08 21:35:24 [decorators.py:640] saved AOT compiled function to /tmp/cache/vllm/torch_compile_cache/torch_aot_compile/dadc17b2d23e64d017f905868e68164cb8cbe63aaf9b71d86ebcf7009f4e7535/rank_0_0/model
+(EngineCore pid=3097605) INFO 05-08 21:35:24 [monitor.py:48] torch.compile took 27.53 s in total
+(EngineCore pid=3097605) INFO 05-08 21:35:27 [monitor.py:76] Initial profiling/warmup run took 2.37 s
+(EngineCore pid=3097605) INFO 05-08 21:35:32 [kv_cache_utils.py:829] Overriding num_gpu_blocks=0 with num_gpu_blocks_override=512
+(EngineCore pid=3097605) INFO 05-08 21:35:32 [gpu_model_runner.py:5876] Profiling CUDA graph memory: PIECEWISE=51 (largest=512), FULL=51 (largest=512)
+(EngineCore pid=3097605) INFO 05-08 21:35:35 [gpu_model_runner.py:5955] Estimated CUDA graph memory: 0.84 GiB total
+(EngineCore pid=3097605) INFO 05-08 21:35:35 [gpu_worker.py:436] Available KV cache memory: 62.01 GiB
+(EngineCore pid=3097605) INFO 05-08 21:35:35 [gpu_worker.py:470] In v0.19, CUDA graph memory profiling will be enabled by default (VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1), which more accurately accounts for CUDA graph memory during KV cache allocation. To try it now, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1 and increase --gpu-memory-utilization from 0.9000 to 0.9091 to maintain the same effective KV cache size.
+(EngineCore pid=3097605) INFO 05-08 21:35:35 [kv_cache_utils.py:1319] GPU KV cache size: 507,936 tokens
+(EngineCore pid=3097605) INFO 05-08 21:35:35 [kv_cache_utils.py:1324] Maximum concurrency for 262,144 tokens per request: 7.65x
+(EngineCore pid=3097605) 2026-05-08 21:35:35,768 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
+(EngineCore pid=3097605) 2026-05-08 21:35:35,779 - INFO - autotuner.py:268 - flashinfer.jit: [Autotuner]: Autotuning process ends
+(EngineCore pid=3097605) Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/51 [00:00<?, ?it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   8%|▊         | 4/51 [00:00<00:01, 33.55it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  16%|█▌        | 8/51 [00:00<00:01, 30.80it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  24%|██▎       | 12/51 [00:00<00:01, 31.60it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  31%|███▏      | 16/51 [00:00<00:01, 31.84it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  39%|███▉      | 20/51 [00:00<00:00, 32.72it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  47%|████▋     | 24/51 [00:00<00:00, 32.77it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  55%|█████▍    | 28/51 [00:00<00:00, 32.73it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  63%|██████▎   | 32/51 [00:00<00:00, 32.94it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  71%|███████   | 36/51 [00:01<00:00, 32.40it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  78%|███████▊  | 40/51 [00:01<00:00, 31.71it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  86%|████████▋ | 44/51 [00:01<00:00, 31.23it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  94%|█████████▍| 48/51 [00:01<00:00, 30.84it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 51/51 [00:01<00:00, 32.17it/s]
+(EngineCore pid=3097605) Capturing CUDA graphs (decode, FULL):   0%|          | 0/51 [00:00<?, ?it/s]Capturing CUDA graphs (decode, FULL):   2%|▏         | 1/51 [00:00<00:07,  6.56it/s]Capturing CUDA graphs (decode, FULL):   8%|▊         | 4/51 [00:00<00:02, 16.58it/s]Capturing CUDA graphs (decode, FULL):  14%|█▎        | 7/51 [00:00<00:02, 20.64it/s]Capturing CUDA graphs (decode, FULL):  20%|█▉        | 10/51 [00:00<00:01, 23.59it/s]Capturing CUDA graphs (decode, FULL):  27%|██▋       | 14/51 [00:00<00:01, 26.37it/s]Capturing CUDA graphs (decode, FULL):  35%|███▌      | 18/51 [00:00<00:01, 21.63it/s]Capturing CUDA graphs (decode, FULL):  43%|████▎     | 22/51 [00:00<00:01, 24.84it/s]Capturing CUDA graphs (decode, FULL):  51%|█████     | 26/51 [00:01<00:00, 27.62it/s]Capturing CUDA graphs (decode, FULL):  59%|█████▉    | 30/51 [00:01<00:00, 29.97it/s]Capturing CUDA graphs (decode, FULL):  67%|██████▋   | 34/51 [00:01<00:00, 31.84it/s]Capturing CUDA graphs (decode, FULL):  75%|███████▍  | 38/51 [00:01<00:00, 33.44it/s]Capturing CUDA graphs (decode, FULL):  82%|████████▏ | 42/51 [00:01<00:00, 34.82it/s]Capturing CUDA graphs (decode, FULL):  90%|█████████ | 46/51 [00:01<00:00, 35.85it/s]Capturing CUDA graphs (decode, FULL):  98%|█████████▊| 50/51 [00:01<00:00, 36.70it/s]Capturing CUDA graphs (decode, FULL): 100%|██████████| 51/51 [00:01<00:00, 27.43it/s]
+(EngineCore pid=3097605) INFO 05-08 21:35:39 [gpu_model_runner.py:6046] Graph capturing finished in 4 secs, took 1.06 GiB
+(EngineCore pid=3097605) INFO 05-08 21:35:39 [gpu_worker.py:597] CUDA graph pool memory: 1.06 GiB (actual), 0.84 GiB (estimated), difference: 0.22 GiB (20.4%).
+(EngineCore pid=3097605) INFO 05-08 21:35:40 [core.py:283] init engine (profile, create kv cache, warmup model) took 46.08 seconds
+(EngineCore pid=3097605) INFO 05-08 21:35:40 [vllm.py:790] Asynchronous scheduling is enabled.
+(APIServer pid=3097521) INFO 05-08 21:35:40 [api_server.py:590] Supported tasks: ['generate']
+(APIServer pid=3097521) INFO 05-08 21:35:41 [hf.py:314] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=3097521) INFO 05-08 21:35:46 [base.py:231] Multi-modal warmup completed in 4.744s
+(APIServer pid=3097521) INFO 05-08 21:35:46 [api_server.py:594] Starting vLLM server on http://0.0.0.0:8001
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:37] Available routes are:
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /openapi.json, Methods: GET, HEAD
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /docs, Methods: GET, HEAD
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: GET, HEAD
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /redoc, Methods: GET, HEAD
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /tokenize, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /detokenize, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /load, Methods: GET
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /version, Methods: GET
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /health, Methods: GET
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /metrics, Methods: GET
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/models, Methods: GET
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /ping, Methods: GET
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /ping, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /invocations, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/chat/completions/batch, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/responses, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/completions, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=3097521) INFO 05-08 21:35:46 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=3097521) INFO:     Started server process [3097521]
+(APIServer pid=3097521) INFO:     Waiting for application startup.
+(APIServer pid=3097521) INFO:     Application startup complete.
+(APIServer pid=3097521) INFO:     172.21.227.239:55526 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO:     172.21.227.239:55526 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35568 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35570 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35594 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35602 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35624 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35632 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35676 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35682 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35694 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35700 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35676 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35682 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35676 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35682 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35694 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35708 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35724 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35732 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35676 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35708 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35676 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35708 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:56138 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:56146 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35676 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:56138 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35676 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35676 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35618 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35578 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35644 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35646 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35660 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35642 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:35676 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:58810 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=3097521) ERROR 05-08 21:42:16 [serving.py:193] Error with model error=ErrorInfo(message='The model `qwen3.5_9b` does not exist.', type='NotFoundError', param='model', code=404)
+(APIServer pid=3097521) INFO:     172.21.227.239:36198 - "POST /v1/chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) ERROR 05-08 21:42:16 [serving.py:193] Error with model error=ErrorInfo(message='The model `qwen3.5_9b` does not exist.', type='NotFoundError', param='model', code=404)
+(APIServer pid=3097521) INFO:     172.21.227.239:36202 - "POST /v1/chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) ERROR 05-08 21:42:17 [serving.py:193] Error with model error=ErrorInfo(message='The model `qwen3.5_9b` does not exist.', type='NotFoundError', param='model', code=404)
+(APIServer pid=3097521) INFO:     172.21.227.239:36202 - "POST /v1/chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) ERROR 05-08 21:42:19 [serving.py:193] Error with model error=ErrorInfo(message='The model `qwen3.5_9b` does not exist.', type='NotFoundError', param='model', code=404)
+(APIServer pid=3097521) INFO:     172.21.227.239:36202 - "POST /v1/chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:44262 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO:     172.21.227.239:44262 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:59488 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:43:17 [loggers.py:259] Engine 000: Avg prompt throughput: 1.2 tokens/s, Avg generation throughput: 44.6 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:43:27 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:33804 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33832 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33834 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33846 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33848 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33862 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33872 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33924 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33940 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33952 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33956 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33924 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33940 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33952 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33956 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33924 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33940 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33804 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33832 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33834 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33848 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33804 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33924 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33940 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33804 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33924 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33804 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33834 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33924 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33804 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33804 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:46314 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33804 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33912 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33818 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33916 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:46314 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33804 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33880 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:33896 - "POST /chat/completions HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO 05-08 21:47:57 [loggers.py:259] Engine 000: Avg prompt throughput: 19187.8 tokens/s, Avg generation throughput: 2.3 tokens/s, Running: 3 reqs, Waiting: 5 reqs, GPU KV cache usage: 11.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:48:07 [loggers.py:259] Engine 000: Avg prompt throughput: 14177.0 tokens/s, Avg generation throughput: 6.3 tokens/s, Running: 4 reqs, Waiting: 4 reqs, GPU KV cache usage: 21.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:48:17 [loggers.py:259] Engine 000: Avg prompt throughput: 12494.2 tokens/s, Avg generation throughput: 8.8 tokens/s, Running: 5 reqs, Waiting: 3 reqs, GPU KV cache usage: 30.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:48:27 [loggers.py:259] Engine 000: Avg prompt throughput: 31672.3 tokens/s, Avg generation throughput: 13.3 tokens/s, Running: 7 reqs, Waiting: 1 reqs, GPU KV cache usage: 41.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:48:37 [loggers.py:259] Engine 000: Avg prompt throughput: 14507.1 tokens/s, Avg generation throughput: 16.1 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 51.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:48:47 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 11.9 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 57.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:48:57 [loggers.py:259] Engine 000: Avg prompt throughput: 22993.0 tokens/s, Avg generation throughput: 257.5 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 57.6%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:49:07 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 259.2 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 57.6%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:49:17 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 257.6 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 57.8%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:49:27 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 257.5 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 57.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:49:37 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 257.6 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:49:47 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 256.8 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:49:57 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 256.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:50:07 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 256.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:50:17 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 256.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.6%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:50:27 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 255.2 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.6%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:50:37 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 254.4 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.8%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44372 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:50:47 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 133.8 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 61.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:50:57 [loggers.py:259] Engine 000: Avg prompt throughput: 12274.9 tokens/s, Avg generation throughput: 264.5 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 61.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:51:07 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 290.4 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 61.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:51:17 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 289.6 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 62.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:51:27 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 288.8 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 62.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:51:37 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 288.8 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 62.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44336 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:51:47 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 120.9 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 60.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:51:57 [loggers.py:259] Engine 000: Avg prompt throughput: 12665.8 tokens/s, Avg generation throughput: 260.7 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 60.6%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44318 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:52:07 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 246.1 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 54.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:52:17 [loggers.py:259] Engine 000: Avg prompt throughput: 12425.8 tokens/s, Avg generation throughput: 133.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 59.6%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44348 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:52:27 [loggers.py:259] Engine 000: Avg prompt throughput: 12985.1 tokens/s, Avg generation throughput: 108.4 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 54.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:52:37 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 270.4 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 54.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:52:47 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 269.6 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 54.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44338 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:52:57 [loggers.py:259] Engine 000: Avg prompt throughput: 13943.2 tokens/s, Avg generation throughput: 99.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 53.6%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44354 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:53:07 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 301.2 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 47.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44370 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:53:17 [loggers.py:259] Engine 000: Avg prompt throughput: 11010.9 tokens/s, Avg generation throughput: 51.1 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 49.6%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:53:27 [loggers.py:259] Engine 000: Avg prompt throughput: 14065.6 tokens/s, Avg generation throughput: 203.3 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 51.8%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:53:37 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 289.6 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 52.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:53:47 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 289.6 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 52.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:53:57 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 288.8 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 52.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:54:07 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 288.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 52.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44338 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:54:17 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 118.4 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 52.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:54:27 [loggers.py:259] Engine 000: Avg prompt throughput: 15467.5 tokens/s, Avg generation throughput: 230.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 53.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44348 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:54:37 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 167.9 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 51.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:54:47 [loggers.py:259] Engine 000: Avg prompt throughput: 10851.5 tokens/s, Avg generation throughput: 269.3 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 52.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44372 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:54:57 [loggers.py:259] Engine 000: Avg prompt throughput: 12275.6 tokens/s, Avg generation throughput: 108.3 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 51.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44336 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:55:07 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 73.6 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 53.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:55:17 [loggers.py:259] Engine 000: Avg prompt throughput: 23530.6 tokens/s, Avg generation throughput: 93.3 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 57.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44372 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:55:27 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 177.5 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 55.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:44318 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:55:37 [loggers.py:259] Engine 000: Avg prompt throughput: 13731.6 tokens/s, Avg generation throughput: 121.7 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 54.8%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:55:47 [loggers.py:259] Engine 000: Avg prompt throughput: 12427.2 tokens/s, Avg generation throughput: 179.1 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 57.8%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:55:57 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 268.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 57.9%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:56:07 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 268.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:56:17 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 268.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.2%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:56:27 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 268.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 58.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:52970 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO:     172.21.227.239:52970 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 Not Found
+(APIServer pid=3097521) INFO:     172.21.227.239:44338 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO:     172.21.227.239:52970 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=3097521) INFO 05-08 21:56:37 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 231.2 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 52.7%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:56:47 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 14.0 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 60.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:56:57 [loggers.py:259] Engine 000: Avg prompt throughput: 23451.2 tokens/s, Avg generation throughput: 172.2 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 62.3%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:57:07 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 242.4 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 62.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:57:17 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 245.6 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 62.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:57:27 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 8.8 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO 05-08 21:57:37 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=3097521) INFO:     172.21.227.239:47578 - "GET /v1/models HTTP/1.1" 200 OK
+[2026-05-08T22:03:04.020] error: *** JOB 4491191 ON uc3n082 CANCELLED AT 2026-05-08T22:03:04 DUE TO TIME LIMIT ***
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n082
+Job ID: 4491191
+Cluster: uc3
+User/Group: ul_ekd37/ul_student
+State: TIMEOUT (exit code 0)
+Nodes: 1
+Cores per node: 48
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 1-00:10:24 core-walltime
+Job Wall-clock time: 00:30:13
+Memory Utilized: 4.76 GB
+Memory Efficiency: 2.52% of 188.77 GB (188.77 GB/node)

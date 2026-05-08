@@ -24,7 +24,7 @@ export XDG_CACHE_HOME=/tmp/cache
 wait_for_server() {
   local url=$1
   local max_attempts=${2:-30}
-  local interval=${3:-2}
+  local interval=${3:-10}
 
   echo "Waiting for server at $url..."
   for ((i=1; i<=max_attempts; i++)); do
@@ -52,4 +52,4 @@ wait_for_server "http://localhost:8001/health"
 
 python3 -m pip install -q pillow dspy transformers==5.5.0
 
-pyhton3 gepa/qwen3.5-gepa.py --data_dir $DATAPATH
+python3 gepa/qwen3.5-gepa.py --data_dir=$DATAPATH
