@@ -222,7 +222,7 @@ if __name__ == "__main__":
     entire_dataset = [
             {
                 "input": "/no-think" + entry["question_answer"][0]["question"], 
-                "answer": entry["question_answer"][0]["answer"],
+                "answer": str(entry["question_answer"][0]["answer"]),
                 "additional_context": {"image": entry["filename"]}
             } 
             for entry in data
