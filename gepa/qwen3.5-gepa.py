@@ -3,8 +3,7 @@ import json
 import random
 import base64
 import argparse
-import dspy
-from dspy.teleprompt import GEPA
+import gepa
 from io import BytesIO
 from PIL import Image
 
@@ -154,7 +153,7 @@ def get_clean_image(image_path):
         rgb_image = ensure_rgb(img)
     base64_image = encode_image_from_bytes(rgb_image)
 
-    return dspy.Image(url=f"data:image/png;base64,{base64_image}")
+    return base64_image
 
 def get_qa(img_file_name, json_dir):
     """
@@ -190,31 +189,6 @@ def get_qa(img_file_name, json_dir):
                           'answer': entry['answer']} for entry in result]
     return questions_answers
 
-class VQA(dspy.Signature):
-    """Answer the question about the image with one word only."""
-    question: str = dspy.InputField()
-    image: dspy.Image = dspy.InputField(desc="Image input")
-    answer: str = dspy.OutputField(desc="Answer with 0 or 1 only")
-
-def metric(gold, pred, pred_trace=None, trace=None , pred_name=None):
-
-    correct_answer = int(gold.answer)
-    try:
-        llm_answer = int(pred.answer)
-    except ValueError as _:
-        feedback_text = f"The final answer must be a '1' or a '0'. You responded with '{pred.answer}', which couldn't be parsed as a python integer. Please ensure your answer is a valid integer without any additional text or formatting."
-        feedback_text += f" The correct answer is '{correct_answer}'."
-        return dspy.Prediction(score=0, feedback=feedback_text)
-
-    score = int(correct_answer == llm_answer)
-    feedback_text = ""
-
-    if score == 1:
-        feedback_text = f"Your answer is correct. The correct answer is '{correct_answer}'."
-    else:
-        feedback_text = f"Your answer is incorrect. The correct answer is '{correct_answer}'."
-
-    return dspy.Prediction(score=score, feedback=feedback_text)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test run Script")
@@ -230,16 +204,6 @@ if __name__ == "__main__":
     vlm_model= "openai/qwen3.5-9b"
     reflective_model= "openai/qwen3.5-9b"
 
-    vlm = dspy.LM(model=vlm_model,
-                  api_base="http://localhost:8001/v1",
-                  api_key="EMPTY",
-                   timeout=30,  # add timeout so it fails fast instead of hanging)
-                  )
-
-    dspy.configure(lm=vlm)
-    reflective_llm =dspy.LM(model=reflective_model,
-                api_base="http://localhost:8001/v1",
-                api_key="EMPTY")
     # ──────────────────────────────────────────────────────────────────────────────
     #  Paths and Experiment Selection
     # ──────────────────────────────────────────────────────────────────────────────
@@ -251,10 +215,10 @@ if __name__ == "__main__":
 
     random.seed(2026)
 
-    entire_dataset= [{"question": entry["question_answer"][0]["question"], "answer": entry["question_answer"][0]["answer"], "image": entry["filename"]} for entry in data]
+    entire_dataset= [{"question": entry["question_answer"][0]["question"], "answer": entry["question_answer"][0]["answer"], "additional_context": {"image": entry["filename"]}} for entry in data]
     dataset = random.choices(entire_dataset, k=200)
 
-    images = [entry["image"] for entry in dataset]
+    images = [entry["additional_context"]["image"] for entry in dataset]
     with open("excluded_images.txt", "w", encoding="utf-8") as f:
         f.writelines([img + "\n" for img in images])
 
@@ -263,26 +227,24 @@ if __name__ == "__main__":
         rgb_image = get_clean_image(img_dir)
 
         for i, entry  in enumerate(dataset):
-            if entry["image"] == img:
-                dataset[i]["image"] = rgb_image
+            if entry["additional_context"]["image"] == img:
+                dataset[i]["additional_context"]["image"] = rgb_image
                 break
+    seed_prompt = {
+        "system_prompt": "You are presented with CT scans. Answer the questions concisly with either a '1' or '0'. Don't give any explanations."
+    }
+
+    # Run optimization
+    result = gepa.api.optimize(
+        seed_candidate=seed_prompt,
+        trainset=dataset,
+        task_lm=vlm_model,      # Model to optimize
+        reflection_lm=vlm_model,      # Model for reflection
+        max_metric_calls=5,                # Budget
+    )
+
+    # Get the optimized prompt and best score
+    print("Best prompt:", result.best_candidate['system_prompt'])
+    print("Best score:", result.val_aggregate_scores[result.best_idx])
 
 
-    trainset = [dspy.Example(question=entry["question"], image=entry["image"], answer=entry["answer"]).with_inputs("question", "image") for entry in dataset]
-
-    predictor = dspy.Predict(VQA)
-    result = predictor(question="Is there a person in the image?", image=trainset[0].image)
-    print(result)
-
-    optimizer = GEPA(
-            metric=metric,
-            reflection_lm=reflective_llm,
-            max_full_evals=1,
-            num_threads=1,
-            )
-
-    optimized_program = optimizer.compile(
-            dspy.Predict(VQA),
-            trainset=trainset[:20],
-            )
-    optimized_program.save("optimized.json")
