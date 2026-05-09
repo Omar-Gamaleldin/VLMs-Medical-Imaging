@@ -242,7 +242,7 @@ if __name__ == "__main__":
     result = gepa.api.optimize(
         seed_candidate=seed_prompt,
         trainset=dataset[:160],
-        valset=dataset[160:]
+        valset=dataset[160:],
         task_lm=vlm_model,      # Model to optimize
         reflection_lm=vlm_model,      # Model for reflection
         max_metric_calls=1,                # Budget
