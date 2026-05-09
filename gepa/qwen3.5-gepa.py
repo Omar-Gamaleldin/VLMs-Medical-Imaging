@@ -270,7 +270,7 @@ if __name__ == "__main__":
         valset=dataset[160:],
         task_lm=vlm_model,      # Model to optimize
         reflection_lm=vlm_model,      # Model for reflection
-        max_metric_calls=10,                # Budget
+        max_metric_calls=500,                # Budget
         evaluator=BinaryAnswerEvaluator()
     )
 
