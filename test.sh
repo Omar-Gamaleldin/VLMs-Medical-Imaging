@@ -46,7 +46,8 @@ wait_for_server() {
 	--mm-processor-cache-type shm \
 	--reasoning-parser qwen3 \
 	--enable-prefix-caching \
-	--served-model-name qwen3.5-9b\ ) &
+	--served-model-name qwen3.5-9b \
+) &
 
 wait_for_server "http://localhost:8001/health"
 curl http://localhost:8001/v1/models
