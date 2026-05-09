@@ -4,6 +4,10 @@ import random
 import base64
 import argparse
 import litellm
+from gepa.adapters.default_adapter.default_adapter import (
+    DefaultDataInst,
+    EvaluationResult,
+)
 import gepa
 from io import BytesIO
 from PIL import Image
@@ -190,6 +194,19 @@ def get_qa(img_file_name, json_dir):
                           'answer': entry['answer']} for entry in result]
     return questions_answers
 
+class BinaryAnswerEvaluator:
+    def __call__(self, data: DefaultDataInst, response: str) -> EvaluationResult:
+        expected = str(data["answer"])  # cast int 0/1 to "0"/"1"
+        is_correct = expected in response
+        score = 1.0 if is_correct else 0.0
+        if is_correct:
+            feedback = f"Correct. Response contained the expected answer '{expected}'."
+        else:
+            feedback = (
+                f"Incorrect. Expected '{expected}' but got: '{response}'. "
+                f"Respond with only '1' or '0'."
+            )
+        return EvaluationResult(score=score, feedback=feedback)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test run Script")
@@ -254,6 +271,7 @@ if __name__ == "__main__":
         task_lm=vlm_model,      # Model to optimize
         reflection_lm=vlm_model,      # Model for reflection
         max_metric_calls=1,                # Budget
+        evaluator=BinaryAnswerEvaluator()
     )
 
     # Get the optimized prompt and best score
