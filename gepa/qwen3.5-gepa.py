@@ -3,6 +3,7 @@ import json
 import random
 import base64
 import argparse
+import litellm
 import gepa
 from io import BytesIO
 from PIL import Image
@@ -203,6 +204,9 @@ if __name__ == "__main__":
 
     vlm_model= "openai/qwen3.5-9b"
     reflective_model= "openai/qwen3.5-9b"
+
+    litellm.api_base = "http://localhost:8001/v1"
+    os.environ["OPENAI_API_KEY"] = "dummy"
 
     # ──────────────────────────────────────────────────────────────────────────────
     #  Paths and Experiment Selection
