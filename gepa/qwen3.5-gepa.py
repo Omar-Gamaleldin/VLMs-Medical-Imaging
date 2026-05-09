@@ -219,7 +219,15 @@ if __name__ == "__main__":
 
     random.seed(2026)
 
-    entire_dataset= [{"input": entry["question_answer"][0]["question"], "answer": entry["question_answer"][0]["answer"], "additional_context": {"image": entry["filename"]}} for entry in data]
+    entire_dataset = [
+            {
+                "input": "/no-think" + entry["question_answer"][0]["question"], 
+                "answer": entry["question_answer"][0]["answer"],
+                "additional_context": {"image": entry["filename"]}
+            } 
+            for entry in data
+        ]
+
     dataset = random.choices(entire_dataset, k=200)
 
     images = [entry["additional_context"]["image"] for entry in dataset]
