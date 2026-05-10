@@ -9,6 +9,7 @@ from gepa.adapters.default_adapter.default_adapter import (
     DefaultDataInst,
     EvaluationResult,
 )
+from gepa.utils.stop_condition import NoImprovementStopper, TimeoutStopCondition
 import gepa
 from io import BytesIO
 from PIL import Image
@@ -200,7 +201,7 @@ def get_qa(img_file_name, json_dir):
 # ──────────────────────────────────────────────────────────────────────────────
 
 VLM_MODEL= "openai/qwen3.5-9b"
-REFLECTIVE_MODEL= "openai/qwen3.5-9b"
+REFLECTIVE_MODEL= "openai/qwen3.6-27b-fp8"
 
 class BinaryAnswerEvaluator:
     def __call__(self, data: DefaultDataInst, response: str) -> EvaluationResult:
@@ -215,20 +216,6 @@ class BinaryAnswerEvaluator:
                 f"Respond with only '1' or '0'."
             )
         return EvaluationResult(score=score, feedback=feedback)
-
-
-def chat_callable(messages) -> str:
-    resp = litellm.completion(
-        model=VLM_MODEL,
-        messages=messages,
-        api_base="http://localhost:8001/v1",
-        api_key="dummy",
-        stream=False
-    )
-    content = resp.choices[0].message.content
-    if content is None:
-        content = getattr(resp.choices[0].message, "reasoning_content", "") or ""
-    return content.strip()
 
 
 def reflection_lm_callable(prompt) -> str:
@@ -298,8 +285,14 @@ if __name__ == "__main__":
     }
 
     adapter = DefaultAdapter(
-        model=chat_callable,
+        model=VLM_MODEL,
         evaluator=BinaryAnswerEvaluator(),
+        litellm_batch_completion_kwargs={
+            "api_base": "http://localhost:8001/v1",
+            "api_key": "dummy",
+            "stream": False,
+            "extra_body": {"chat_template_kwargs": {"enable_thinking": False}},
+        }
     )
 
     # Run optimization
@@ -307,11 +300,10 @@ if __name__ == "__main__":
         seed_candidate=seed_prompt,
         trainset=dataset[:160],
         valset=dataset[160:],
-        task_lm=chat_callable,                  # Model to optimize
-        reflection_lm=reflection_lm_callable,   # Model for reflection
-        evaluator=BinaryAnswerEvaluator()
+        adapter=adapter,
+        reflection_lm=REFLECTIVE_MODEL,   # Model for reflection
         max_metric_calls=2190,                  # up to 50 iterations
-        stop_callbacks=TimeoutStopCondition(seconds=3 * 3600),
+        stop_callbacks=[TimeoutStopCondition(timeout_seconds=2 * 3600), NoImprovementStopper(max_iterations_without_improvement=10)]
     )
 
     # Get the optimized prompt and best score

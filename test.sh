@@ -49,9 +49,21 @@ wait_for_server() {
 	--served-model-name qwen3.5-9b \
 ) &
 
-wait_for_server "http://localhost:8001/health"
-curl http://localhost:8001/v1/models
+(vllm serve models/Qwen3.6-27B-FP8 \
+	--port 8002 \
+	--mm-encoder-tp-mode data \
+	--mm-processor-cache-type shm \
+	--reasoning-parser qwen3 \
+	--enable-prefix-caching \
+	--served-model-name qwen3.6-27b-fp8 \
+) &
 
-python3 -m pip install -q pillow dspy transformers==5.5.0
+wait_for_server "http://localhost:8001/health" &
+wait_for_server "http://localhost:8002/health"
+
+curl http://localhost:8001/v1/models
+curl http://localhost:8002/v1/models
+
+python3 -m pip install -q pillow gepa transformers==5.5.0
 
 python3 gepa/qwen3.5-gepa.py --data_dir=$DATAPATH
