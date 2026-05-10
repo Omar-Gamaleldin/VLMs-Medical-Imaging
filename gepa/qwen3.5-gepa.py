@@ -5,6 +5,7 @@ import base64
 import argparse
 import litellm
 from gepa.adapters.default_adapter.default_adapter import (
+    DefaultAdapter,
     DefaultDataInst,
     EvaluationResult,
 )
@@ -194,6 +195,13 @@ def get_qa(img_file_name, json_dir):
                           'answer': entry['answer']} for entry in result]
     return questions_answers
 
+# ──────────────────────────────────────────────────────────────────────────────
+#  Setting up GEPA Classes and Funstions
+# ──────────────────────────────────────────────────────────────────────────────
+
+VLM_MODEL= "openai/qwen3.5-9b"
+REFLECTIVE_MODEL= "openai/qwen3.5-9b"
+
 class BinaryAnswerEvaluator:
     def __call__(self, data: DefaultDataInst, response: str) -> EvaluationResult:
         expected = str(data["answer"])  # cast int 0/1 to "0"/"1"
@@ -208,30 +216,52 @@ class BinaryAnswerEvaluator:
             )
         return EvaluationResult(score=score, feedback=feedback)
 
+
+def chat_callable(messages) -> str:
+    resp = litellm.completion(
+        model=VLM_MODEL,
+        messages=messages,
+        api_base="http://localhost:8001/v1",
+        api_key="dummy",
+        stream=False
+    )
+    content = resp.choices[0].message.content
+    if content is None:
+        content = getattr(resp.choices[0].message, "reasoning_content", "") or ""
+    return content.strip()
+
+
+def reflection_lm_callable(prompt) -> str:
+    messages = [{"role": "user", "content": prompt}] if isinstance(prompt, str) else prompt
+    resp = litellm.completion(
+        model=REFLECTIVE_MODEL,
+        messages=messages,
+        api_base="http://localhost:8001/v1",
+        api_key="dummy",
+    )
+    content = resp.choices[0].message.content
+    if content is None:                        # addition
+        content = getattr(resp.choices[0].message, "reasoning_content", "") or ""
+    return content.strip()
+
+
 if __name__ == "__main__":
+    # ──────────────────────────────────────────────────────────────────────────────
+    #  Parsing Directories
+    # ──────────────────────────────────────────────────────────────────────────────
     parser = argparse.ArgumentParser(description="Test run Script")
     parser.add_argument("--data_dir", type=str, required=True, help="Path to dataset")
     args = parser.parse_args()
 
     data_dir = os.path.join(args.data_dir, "RQ1")
     images_dir = os.path.join(data_dir, "images")
-    # ──────────────────────────────────────────────────────────────────────────────
-    #  Model
-    # ──────────────────────────────────────────────────────────────────────────────
-
-    vlm_model= "openai/qwen3.5-9b"
-    reflective_model= "openai/qwen3.5-9b"
-
-    litellm.api_base = "http://localhost:8001/v1"
-    os.environ["OPENAI_API_KEY"] = "dummy"
+    qa_path = os.path.join(data_dir, "qa.json")
 
     # ──────────────────────────────────────────────────────────────────────────────
-    #  Paths and Experiment Selection
+    #  Setting up subset of MIRP Benchmark
     # ──────────────────────────────────────────────────────────────────────────────
 
-    final_path = os.path.join(data_dir, "qa.json")
-
-    with open(final_path, "r", encoding="utf8") as file:
+    with open(qa_path, "r", encoding="utf8") as file:
         data = json.load(file)
 
     random.seed(2026)
@@ -259,18 +289,27 @@ if __name__ == "__main__":
             if entry["additional_context"]["image"] == img:
                 dataset[i]["additional_context"]["image"] = rgb_image
                 break
+
+    # ──────────────────────────────────────────────────────────────────────────────
+    # Initializing GEPA Optimisation
+    # ──────────────────────────────────────────────────────────────────────────────
     seed_prompt = {
         "system_prompt": "You are presented with CT scans. Answer the questions concisly with either a '1' or '0'. Don't give any explanations."
     }
 
+    adapter = DefaultAdapter(
+        model=chat_callable,
+        evaluator=BinaryAnswerEvaluator(),
+    )
+
     # Run optimization
     result = gepa.api.optimize(
         seed_candidate=seed_prompt,
-        trainset=dataset[:160],
-        valset=dataset[160:],
-        task_lm=vlm_model,      # Model to optimize
-        reflection_lm=vlm_model,      # Model for reflection
-        max_metric_calls=500,                # Budget
+        trainset=dataset[:10],
+        valset=dataset[10:12],
+        task_lm=chat_callable,                  # Model to optimize
+        reflection_lm=reflection_lm_callable,   # Model for reflection
+        max_metric_calls=50,                   # Budget
         evaluator=BinaryAnswerEvaluator()
     )
 
