@@ -305,12 +305,13 @@ if __name__ == "__main__":
     # Run optimization
     result = gepa.api.optimize(
         seed_candidate=seed_prompt,
-        trainset=dataset[:10],
-        valset=dataset[10:12],
+        trainset=dataset[:160],
+        valset=dataset[160:],
         task_lm=chat_callable,                  # Model to optimize
         reflection_lm=reflection_lm_callable,   # Model for reflection
-        max_metric_calls=50,                   # Budget
         evaluator=BinaryAnswerEvaluator()
+        max_metric_calls=2190,                  # up to 50 iterations
+        stop_callbacks=TimeoutStopCondition(seconds=3 * 3600),
     )
 
     # Get the optimized prompt and best score
