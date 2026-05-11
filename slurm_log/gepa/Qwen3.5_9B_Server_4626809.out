@@ -1,0 +1,15 @@
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc3n082
+Job ID: 4626809
+Cluster: uc3
+User/Group: ul_ekd37/ul_student
+State: CANCELLED (exit code 0)
+Nodes: 1
+Cores per node: 96
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 00:11:12 core-walltime
+Job Wall-clock time: 00:00:07
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 377.54 GB (377.54 GB/node)

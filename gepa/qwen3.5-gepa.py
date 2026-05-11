@@ -201,7 +201,7 @@ def get_qa(img_file_name, json_dir):
 # ──────────────────────────────────────────────────────────────────────────────
 
 VLM_MODEL= "openai/qwen3.5-9b"
-REFLECTIVE_MODEL= "openai/qwen3.6-27b-fp8"
+REFLECTIVE_MODEL= "openai/qwen3.6-27b"
 
 class BinaryAnswerEvaluator:
     def __call__(self, data: DefaultDataInst, response: str) -> EvaluationResult:
@@ -223,14 +223,10 @@ def reflection_lm_callable(prompt) -> str:
     resp = litellm.completion(
         model=REFLECTIVE_MODEL,
         messages=messages,
-        api_base="http://localhost:8001/v1",
+        api_base="http://localhost:8002/v1",  # 27B server
         api_key="dummy",
     )
-    content = resp.choices[0].message.content
-    if content is None:                        # addition
-        content = getattr(resp.choices[0].message, "reasoning_content", "") or ""
-    return content.strip()
-
+    return (resp.choices[0].message.content or "").strip()
 
 if __name__ == "__main__":
     # ──────────────────────────────────────────────────────────────────────────────
@@ -240,9 +236,13 @@ if __name__ == "__main__":
     parser.add_argument("--data_dir", type=str, required=True, help="Path to dataset")
     args = parser.parse_args()
 
-    data_dir = os.path.join(args.data_dir, "RQ1")
-    images_dir = os.path.join(data_dir, "images")
-    qa_path = os.path.join(data_dir, "qa.json")
+    experiment = "RQ2"
+    image_name = "images_dots"
+    qa_file = "qa_dots.json"
+
+    data_dir = os.path.join(args.data_dir, experiment)
+    images_dir = os.path.join(data_dir, image_name)
+    qa_path = os.path.join(data_dir, qa_file)
 
     # ──────────────────────────────────────────────────────────────────────────────
     #  Setting up subset of MIRP Benchmark
@@ -255,7 +255,7 @@ if __name__ == "__main__":
 
     entire_dataset = [
             {
-                "input": "/no-think" + entry["question_answer"][0]["question"], 
+                "input": entry["question_answer"][0]["question"], 
                 "answer": str(entry["question_answer"][0]["answer"]),
                 "additional_context": {"image": entry["filename"]}
             } 
@@ -265,7 +265,7 @@ if __name__ == "__main__":
     dataset = random.choices(entire_dataset, k=200)
 
     images = [entry["additional_context"]["image"] for entry in dataset]
-    with open("excluded_images.txt", "w", encoding="utf-8") as f:
+    with open(f"qwen_excluded_images_{experiment}_{image_name}.txt", "w", encoding="utf-8") as f:
         f.writelines([img + "\n" for img in images])
 
     for img in images:
@@ -301,9 +301,9 @@ if __name__ == "__main__":
         trainset=dataset[:160],
         valset=dataset[160:],
         adapter=adapter,
-        reflection_lm=REFLECTIVE_MODEL,   # Model for reflection
+        reflection_lm=reflection_lm_callable,   # Model for reflection
         max_metric_calls=2190,                  # up to 50 iterations
-        stop_callbacks=[TimeoutStopCondition(timeout_seconds=2 * 3600), NoImprovementStopper(max_iterations_without_improvement=10)]
+        stop_callbacks=[ NoImprovementStopper(max_iterations_without_improvement=10)]
     )
 
     # Get the optimized prompt and best score

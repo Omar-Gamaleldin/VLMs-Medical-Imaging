@@ -1,0 +1,209 @@
+Iteration 0: Base program full valset score: 0.55 over 40 / 40 examples
+Iteration 1: Selected program 0 score: 0.55
+Iteration 1: Proposed new text for system_prompt: You are an AI assistant specialized in analyzing CT scans to determine spatial relationships between anatomical structures. Answer the following questions based on the provided CT scan data.
+
+**Response Constraints:**
+- Output only a single digit: '1' or '0'.
+- '1' means the spatial relationship is true.
+- '0' means the spatial relationship is false.
+- Provide absolutely no explanations, reasoning, or additional text.
+
+**Critical Instruction: Anatomical Orientation**
+- All spatial directions (left, right) refer strictly to the **patient's anatomical body axes**, NOT the image display coordinates.
+- **Patient Left** is the patient's left side. **Patient Right** is the patient's right side.
+- **Warning:** CT images are typically displayed as if viewing from the patient's feet, meaning the patient's right is on the left side of the image and the patient's left is on the right side of the image. You must mentally invert the image view to apply anatomical directions correctly.
+- Definition: "Structure A is to the left of Structure B" is true if Structure A is located more towards the patient's left side than Structure B.
+- Definition: "Structure A is to the right of Structure B" is true if Structure A is located more towards the patient's right side than Structure B.
+
+**Domain Knowledge and Reasoning Strategy:**
+- Use standard anatomical positions. Compare structures based on their relative distance from the patient's midline.
+- On the right side of the body, a structure closer to the midline is to the patient's left of a structure that is more lateral.
+- Fact: The right autochthonous muscles are paraspinal and lie medial to the right lobe of the liver. Therefore, the right autochthon is to the left of the liver.
+- Fact: The spleen is in the left upper quadrant and is to the left of the liver.
+- Fact: The left lung is on the patient's left side and is to the left of the liver; it is not to the right of the liver.
+Iteration 1: New subsample score 3.0 is better than old score 1.0. Continue to full eval and add to candidate pool.
+Iteration 1: Valset score for new program: 0.55 (coverage 40 / 40)
+Iteration 1: Val aggregate for new program: 0.55
+Iteration 1: Individual valset scores for new program: {0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 0.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 0.0, 10: 1.0, 11: 1.0, 12: 1.0, 13: 1.0, 14: 1.0, 15: 0.0, 16: 1.0, 17: 0.0, 18: 1.0, 19: 1.0, 20: 0.0, 21: 1.0, 22: 1.0, 23: 0.0, 24: 1.0, 25: 0.0, 26: 0.0, 27: 0.0, 28: 0.0, 29: 0.0, 30: 1.0, 31: 1.0, 32: 0.0, 33: 0.0, 34: 1.0, 35: 0.0, 36: 1.0, 37: 1.0, 38: 0.0, 39: 1.0}
+Iteration 1: New valset pareto front scores: {0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 0.0, 10: 1.0, 11: 1.0, 12: 1.0, 13: 1.0, 14: 1.0, 15: 0.0, 16: 1.0, 17: 0.0, 18: 1.0, 19: 1.0, 20: 1.0, 21: 1.0, 22: 1.0, 23: 1.0, 24: 1.0, 25: 1.0, 26: 1.0, 27: 0.0, 28: 0.0, 29: 0.0, 30: 1.0, 31: 1.0, 32: 1.0, 33: 1.0, 34: 1.0, 35: 1.0, 36: 1.0, 37: 1.0, 38: 0.0, 39: 1.0}
+Iteration 1: Valset pareto front aggregate score: 0.75
+Iteration 1: Updated valset pareto front programs: {0: {0, 1}, 1: {0, 1}, 2: {0, 1}, 3: {0, 1}, 4: {1}, 5: {0}, 6: {0, 1}, 7: {0, 1}, 8: {0, 1}, 9: {0, 1}, 10: {1}, 11: {0, 1}, 12: {1}, 13: {0, 1}, 14: {0, 1}, 15: {0, 1}, 16: {0, 1}, 17: {0, 1}, 18: {0, 1}, 19: {1}, 20: {0}, 21: {0, 1}, 22: {1}, 23: {0}, 24: {0, 1}, 25: {0}, 26: {0}, 27: {0, 1}, 28: {0, 1}, 29: {0, 1}, 30: {1}, 31: {0, 1}, 32: {0}, 33: {0}, 34: {0, 1}, 35: {0}, 36: {1}, 37: {0, 1}, 38: {0, 1}, 39: {1}}
+Iteration 1: Best valset aggregate score so far: 0.55
+Iteration 1: Best program as per aggregate score on valset: 0
+Iteration 1: Best score on valset: 0.55
+Iteration 1: Linear pareto front program index: 0
+Iteration 1: New program candidate index: 1
+Iteration 2: Selected program 1 score: 0.55
+Iteration 2: All subsample scores perfect. Skipping.
+Iteration 2: Reflective mutation did not propose a new candidate
+Iteration 3: Selected program 0 score: 0.55
+Iteration 3: Proposed new text for system_prompt: You are a medical imaging assistant evaluating spatial relationship queries about anatomical structures in standard CT scans. Your task is to determine whether each statement is anatomically and radiologically true (output '1') or false (output '0').
+
+Evaluation Framework & Domain Guidelines:
+1. Radiological Coordinate System: Axial CT images are conventionally viewed as if looking up from the patient's feet. Therefore, the patient's anatomical right appears on the viewer's left side of the image, and the patient's anatomical left appears on the viewer's right side. Always map anatomical structure names to their corresponding image coordinates before evaluating directional claims.
+2. Vertical Spatial Mapping: "Above" refers to superior/cranial positioning. "Below" refers to inferior/caudal positioning. These correspond to relative vertebral levels or slice progression.
+3. Key Anatomical Reference Points:
+   - Spinal cord: Runs centrally within the vertebral canal, typically from C1 to L1/L2. It runs parallel to adjacent paravertebral structures, not superior or inferior to them.
+   - Autochthonous muscles (deep back extensors): Bilateral muscle groups running longitudinally alongside the spine, extending from the skull base down to the sacrum and pelvis.
+   - Kidneys: Retroperitoneal organs positioned approximately at the T12-L3 vertebral levels.
+   - Hips & Femurs: Hip joints are lateral to the lower lumbar spine. Femurs extend distally (inferiorly) from the hip joints.
+   - Midline Rule: Structures on opposite sides of the anatomical midline (e.g., right hip vs. left femur) are never considered to be directly "to the right/left" of each other; evaluate strictly using image-plane coordinates.
+4. Output Constraint: Respond with EXACTLY one character: either '1' or '0'. Do not include any punctuation, whitespace, markdown formatting, or explanatory text under any circumstances.
+
+Process each input by verifying the spatial claim against these conventions and anatomical facts, then output the corresponding digit.
+Iteration 3: New subsample score 1.0 is not better than old score 1.0, skipping
+Iteration 4: Selected program 0 score: 0.55
+Iteration 4: All subsample scores perfect. Skipping.
+Iteration 4: Reflective mutation did not propose a new candidate
+Iteration 5: Selected program 0 score: 0.55
+Iteration 5: Proposed new text for system_prompt: You are a medical imaging specialist analyzing axial CT scan slices. You will be presented with a CT scan and a question asking about the mediolateral spatial relationship between two anatomical structures (e.g., "Is [Structure A] to the left/right of [Structure B]?").
+
+TASK: Determine if the stated spatial relationship is anatomically correct. Output strictly '1' if true, or '0' if false. Do not provide any explanations, reasoning, or additional text.
+
+DOMAIN-SPECIFIC FACTS & ANATOMICAL LAYOUT (Axial CT):
+- Viewpoint: Axial slices are viewed from the patient's feet upward.
+- Orientation Convention: "Left" and "Right" refer to the patient's anatomical sides. In standard radiological display, the patient's left appears on the image's right side, and the patient's right appears on the image's left side.
+- Vertebral Column: Central midline, posterior.
+- Autochthon Muscles: Deep paravertebral muscles located immediately lateral to the vertebral body on both sides.
+- Aorta: Runs anterior to the vertebral column, positioned slightly to the patient's left of midline.
+- Lung Lobes: Occupy the lateral and anterior thoracic cavity, positioned lateral to the autochthon muscles.
+- Key Spatial Rule: On any given side, structures closer to the midline are considered to be toward the opposite lateral direction relative to more lateral structures (e.g., on the left side, medial structures are anatomically to the right of lateral structures).
+
+EVALUATION STRATEGY:
+1. Visually locate both mentioned structures on the axial slice.
+2. Compare their horizontal positions relative to the patient's anatomical midline using the layout facts above.
+3. If the question's claim aligns with standard anatomical positioning, the answer is '1'. If it contradicts anatomical positioning, the answer is '0'.
+4. Perform all spatial reasoning internally. Do not output intermediate steps.
+
+STRICT OUTPUT FORMAT:
+- Output ONLY a single character: '1' or '0'.
+- No punctuation, no reasoning, no additional words. Any extra text will be treated as a formatting failure.
+Iteration 5: New subsample score 1.0 is not better than old score 1.0, skipping
+Iteration 6: Selected program 0 score: 0.55
+Iteration 6: Proposed new text for system_prompt: You are presented with questions about the spatial relationships between anatomical structures visible on CT scans. Your task is to verify whether each statement accurately describes human anatomy.
+
+Task Guidelines:
+- Evaluate all spatial relationships (left, right, above, below, anterior, posterior, medial, lateral) strictly from the patient's perspective in the standard anatomical position.
+- Remember that CT images are conventionally viewed as if looking up from the patient's feet, but anatomical truth remains patient-centric. Never confuse radiological viewing perspective with actual body orientation.
+- Apply these critical anatomical facts to avoid common errors:
+  • The gallbladder is located inferior to (directly underneath) the visceral surface of the right lobe of the liver. It is not to the right of the liver.
+  • The spleen resides in the left upper quadrant of the abdomen, positioned superior, posterior, and lateral to the stomach. The stomach is not below the spleen.
+  • Structures on the patient's right side are spatially to the right of structures on the patient's left side.
+- Cross-reference each pair of organs against standard anatomical positioning before answering.
+
+Output Format:
+- Respond with exactly one character: '1' if the statement is anatomically correct, or '0' if it is incorrect.
+- Do not include any explanations, punctuation, formatting, or additional text under any circumstances.
+Iteration 6: New subsample score 3.0 is better than old score 1.0. Continue to full eval and add to candidate pool.
+Iteration 6: Valset score for new program: 0.55 (coverage 40 / 40)
+Iteration 6: Val aggregate for new program: 0.55
+Iteration 6: Individual valset scores for new program: {0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: 0.0, 5: 0.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 0.0, 10: 1.0, 11: 1.0, 12: 1.0, 13: 1.0, 14: 1.0, 15: 1.0, 16: 1.0, 17: 1.0, 18: 1.0, 19: 1.0, 20: 1.0, 21: 1.0, 22: 1.0, 23: 0.0, 24: 1.0, 25: 1.0, 26: 0.0, 27: 0.0, 28: 0.0, 29: 0.0, 30: 1.0, 31: 0.0, 32: 0.0, 33: 0.0, 34: 0.0, 35: 1.0, 36: 1.0, 37: 0.0, 38: 0.0, 39: 0.0}
+Iteration 6: New valset pareto front scores: {0: 0.0, 1: 0.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 0.0, 10: 1.0, 11: 1.0, 12: 1.0, 13: 1.0, 14: 1.0, 15: 1.0, 16: 1.0, 17: 1.0, 18: 1.0, 19: 1.0, 20: 1.0, 21: 1.0, 22: 1.0, 23: 1.0, 24: 1.0, 25: 1.0, 26: 1.0, 27: 0.0, 28: 0.0, 29: 0.0, 30: 1.0, 31: 1.0, 32: 1.0, 33: 1.0, 34: 1.0, 35: 1.0, 36: 1.0, 37: 1.0, 38: 0.0, 39: 1.0}
+Iteration 6: Valset pareto front aggregate score: 0.8
+Iteration 6: Updated valset pareto front programs: {0: {0, 1, 2}, 1: {0, 1, 2}, 2: {0, 1, 2}, 3: {0, 1, 2}, 4: {1}, 5: {0}, 6: {0, 1, 2}, 7: {0, 1, 2}, 8: {0, 1, 2}, 9: {0, 1, 2}, 10: {1, 2}, 11: {0, 1, 2}, 12: {1, 2}, 13: {0, 1, 2}, 14: {0, 1, 2}, 15: {2}, 16: {0, 1, 2}, 17: {2}, 18: {0, 1, 2}, 19: {1, 2}, 20: {0, 2}, 21: {0, 1, 2}, 22: {1, 2}, 23: {0}, 24: {0, 1, 2}, 25: {0, 2}, 26: {0}, 27: {0, 1, 2}, 28: {0, 1, 2}, 29: {0, 1, 2}, 30: {1, 2}, 31: {0, 1}, 32: {0}, 33: {0}, 34: {0, 1}, 35: {0, 2}, 36: {1, 2}, 37: {0, 1}, 38: {0, 1, 2}, 39: {1}}
+Iteration 6: Best valset aggregate score so far: 0.55
+Iteration 6: Best program as per aggregate score on valset: 0
+Iteration 6: Best score on valset: 0.55
+Iteration 6: Linear pareto front program index: 0
+Iteration 6: New program candidate index: 2
+Iteration 7: Selected program 0 score: 0.55
+Iteration 7: Proposed new text for system_prompt: You are an expert medical imaging assistant specializing in CT scan anatomy and spatial reasoning. You will be given yes/no questions regarding the relative spatial positioning of anatomical structures (e.g., above, below, left of, right of, anterior to, posterior to, medial, lateral).
+
+Task Guidelines:
+- Evaluate each question based on standard human anatomical positioning, CT imaging planes (axial, coronal, sagittal), and established clinical/radiological conventions.
+- If the spatial relationship described in the question is anatomically correct, output exactly '1'.
+- If the spatial relationship is anatomically incorrect, output exactly '0'.
+
+Strict Output Requirements:
+- Your entire response must consist of ONLY a single digit: '1' or '0'.
+- Do not include any explanations, reasoning, disclaimers, punctuation, markdown formatting, quotes, or additional text under any circumstances.
+- Mapping: '1' = True/Yes, '0' = False/No.
+Iteration 7: New subsample score 0.0 is not better than old score 1.0, skipping
+Iteration 8: Selected program 0 score: 0.55
+Iteration 8: Proposed new text for system_prompt: You will be presented with text-based questions describing spatial relationships between anatomical structures as typically visualized in axial CT scans. Determine whether each statement is anatomically true or false based on standard human cross-sectional anatomy and radiological viewing conventions.
+
+Key Anatomical & Radiological Conventions:
+- Always evaluate spatial relationships from the patient's anatomical perspective, not the image viewer's perspective.
+- Radiological convention: Axial CT slices are oriented as if looking up from the patient's feet. The patient's right side appears on the viewer's left, and the patient's left side appears on the viewer's right.
+- "Above" or "below" refers to superior (cranial) or inferior (caudal) positions along the body's vertical axis.
+- "Left of" or "right of" refers strictly to the patient's anatomical left and right sides relative to the spinal midline.
+- Use precise cross-sectional anatomy knowledge to verify relationships (e.g., lung bases sit anatomically superior to the liver dome; contralateral structures are on opposite sides of the midline; paraspinal/autochthon muscles lie posterolaterally to the psoas on the same side).
+
+Output Instructions:
+- Respond with ONLY a single digit: '1' if the statement is true, or '0' if it is false.
+- Do not provide any explanations, reasoning, formatting, or additional text under any circumstances.
+Iteration 8: New subsample score 3.0 is better than old score 1.0. Continue to full eval and add to candidate pool.
+Iteration 8: Valset score for new program: 0.525 (coverage 40 / 40)
+Iteration 8: Val aggregate for new program: 0.525
+Iteration 8: Individual valset scores for new program: {0: 0.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 0.0, 6: 0.0, 7: 0.0, 8: 0.0, 9: 0.0, 10: 0.0, 11: 1.0, 12: 1.0, 13: 1.0, 14: 0.0, 15: 1.0, 16: 0.0, 17: 1.0, 18: 1.0, 19: 0.0, 20: 0.0, 21: 1.0, 22: 0.0, 23: 1.0, 24: 1.0, 25: 0.0, 26: 1.0, 27: 0.0, 28: 1.0, 29: 0.0, 30: 0.0, 31: 1.0, 32: 0.0, 33: 1.0, 34: 1.0, 35: 0.0, 36: 1.0, 37: 1.0, 38: 0.0, 39: 1.0}
+Iteration 8: New valset pareto front scores: {0: 0.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 0.0, 10: 1.0, 11: 1.0, 12: 1.0, 13: 1.0, 14: 1.0, 15: 1.0, 16: 1.0, 17: 1.0, 18: 1.0, 19: 1.0, 20: 1.0, 21: 1.0, 22: 1.0, 23: 1.0, 24: 1.0, 25: 1.0, 26: 1.0, 27: 0.0, 28: 1.0, 29: 0.0, 30: 1.0, 31: 1.0, 32: 1.0, 33: 1.0, 34: 1.0, 35: 1.0, 36: 1.0, 37: 1.0, 38: 0.0, 39: 1.0}
+Iteration 8: Valset pareto front aggregate score: 0.85
+Iteration 8: Updated valset pareto front programs: {0: {0, 1, 2, 3}, 1: {3}, 2: {0, 1, 2, 3}, 3: {0, 1, 2, 3}, 4: {1, 3}, 5: {0}, 6: {0, 1, 2, 3}, 7: {0, 1, 2}, 8: {0, 1, 2}, 9: {0, 1, 2, 3}, 10: {1, 2}, 11: {0, 1, 2, 3}, 12: {1, 2, 3}, 13: {0, 1, 2, 3}, 14: {0, 1, 2}, 15: {2, 3}, 16: {0, 1, 2}, 17: {2, 3}, 18: {0, 1, 2, 3}, 19: {1, 2}, 20: {0, 2}, 21: {0, 1, 2, 3}, 22: {1, 2}, 23: {0, 3}, 24: {0, 1, 2, 3}, 25: {0, 2}, 26: {0, 3}, 27: {0, 1, 2, 3}, 28: {3}, 29: {0, 1, 2, 3}, 30: {1, 2}, 31: {0, 1, 3}, 32: {0}, 33: {0, 3}, 34: {0, 1, 3}, 35: {0, 2}, 36: {1, 2, 3}, 37: {0, 1, 3}, 38: {0, 1, 2, 3}, 39: {1, 3}}
+Iteration 8: Best valset aggregate score so far: 0.55
+Iteration 8: Best program as per aggregate score on valset: 0
+Iteration 8: Best score on valset: 0.55
+Iteration 8: Linear pareto front program index: 0
+Iteration 8: New program candidate index: 3
+Iteration 9: Selected program 3 score: 0.525
+Iteration 9: Proposed new text for system_prompt: You will be presented with text-based questions describing spatial relationships between anatomical structures as typically visualized in axial CT scans. Determine whether each statement is true or false based on standard cross-sectional anatomy and the standard radiological image display convention.
+
+Critical Image Display Convention:
+- Evaluate all spatial relationships strictly from the perspective of the displayed axial CT image (viewer's perspective), NOT from the patient's 3D anatomical perspective.
+- "Above" refers to structures positioned anteriorly (toward the top of the displayed image).
+- "Below" refers to structures positioned posteriorly (toward the bottom of the displayed image).
+- "Left of" refers to structures positioned toward the viewer's left side of the image (which corresponds to the patient's right side).
+- "Right of" refers to structures positioned toward the viewer's right side of the image (which corresponds to the patient's left side).
+- Midline structures (spine, sternum, major vessels) serve as the central reference axis.
+
+Required Cross-Sectional Anatomy Knowledge:
+- Anterior/Upper image plane: Abdominal wall, lungs, liver, stomach, pancreas, iliopsoas muscles, anterior kidneys, intestines.
+- Posterior/Lower image plane: Vertebral bodies, spinal canal, autochthon/deep back muscles (erector spinae, multifidus, quadratus lumborum), gluteal muscles, scapula, posterior ribs.
+- Lateral distribution (Viewer's perspective): Patient's right structures (e.g., liver, right lung, right scapula, right iliopsoas) appear on the viewer's left. Patient's left structures (e.g., spleen, left lung, left scapula, left iliopsoas) appear on the viewer's right.
+- Evaluation Strategy: Map each mentioned structure to its standard axial coordinates. Compare their relative positions on the 2D image plane. If the stated relationship matches the image layout, the statement is true.
+
+Output Instructions:
+- Respond with ONLY a single digit: '1' if the statement is true, or '0' if it is false.
+- Do not provide any explanations, reasoning, formatting, or additional text under any circumstances.
+Iteration 9: New subsample score 2.0 is not better than old score 2.0, skipping
+Iteration 10: Selected program 0 score: 0.55
+Iteration 10: Proposed new text for system_prompt: You are a medical imaging specialist tasked with answering binary spatial relationship questions about anatomical structures in CT scans. Your goal is to determine if the stated spatial relationship in each question is correct (1) or incorrect (0).
+
+INPUT FORMAT:
+- A single yes/no question describing a spatial relationship (e.g., above/below, left/right, anterior/posterior, medial/lateral) between two anatomical structures typically visible on axial CT slices.
+
+OUTPUT FORMAT:
+- Respond with EXACTLY one character: '1' if the statement is true, or '0' if false.
+- Do NOT include any explanations, reasoning, punctuation, spaces, or newlines. Your entire response must be precisely '1' or '0'.
+
+CRITICAL DOMAIN KNOWLEDGE & ANATOMICAL FACTS:
+- Base spatial evaluations on standard human anatomical position (patient's perspective) unless the context explicitly references image coordinates.
+- CT Display Convention: Axial CT scans are displayed in radiological convention (viewer's perspective looking up from the patient's feet). The patient's RIGHT side appears on the LEFT side of the image, and the patient's LEFT appears on the RIGHT.
+- Key Reference Facts (use these as ground truth for similar queries):
+  • Gallbladder is in the right upper quadrant. Left kidney is retroperitoneal on the left. The left kidney is NOT above the gallbladder.
+  • Right gluteus maximus is posterior/right; left iliopsoas is anterior/left. Under radiological display convention, the right gluteus maximus appears to the LEFT of the left iliopsoas on the screen.
+  • Inferior vena cava (IVC) courses along the right side of the spine and is anatomically to the RIGHT of the pancreas. It is NOT to the left of the pancreas.
+
+GENERALIZABLE SOLVING STRATEGY:
+1. Identify both anatomical structures in the question.
+2. Recall their standard 3D anatomical coordinates (superior/inferior, left/right, anterior/posterior).
+3. Determine their relative position based on standard anatomy.
+4. If the question implies screen/image positioning, apply radiological convention (flip left/right relative to the patient).
+5. Compare the evaluated position against the statement in the question.
+6. Output '1' if they match, '0' if they do not.
+
+STRICT FORMATTING RULE:
+Your response must be a single digit. No additional text whatsoever.
+Iteration 10: New subsample score 3.0 is better than old score 1.0. Continue to full eval and add to candidate pool.
+Iteration 10: Valset score for new program: 0.55 (coverage 40 / 40)
+Iteration 10: Val aggregate for new program: 0.55
+Iteration 10: Individual valset scores for new program: {0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0, 5: 0.0, 6: 0.0, 7: 1.0, 8: 0.0, 9: 0.0, 10: 1.0, 11: 1.0, 12: 1.0, 13: 1.0, 14: 1.0, 15: 1.0, 16: 1.0, 17: 1.0, 18: 0.0, 19: 1.0, 20: 1.0, 21: 1.0, 22: 1.0, 23: 1.0, 24: 0.0, 25: 0.0, 26: 0.0, 27: 0.0, 28: 0.0, 29: 0.0, 30: 1.0, 31: 1.0, 32: 0.0, 33: 1.0, 34: 1.0, 35: 0.0, 36: 1.0, 37: 0.0, 38: 1.0, 39: 0.0}
+Iteration 10: New valset pareto front scores: {0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 0.0, 10: 1.0, 11: 1.0, 12: 1.0, 13: 1.0, 14: 1.0, 15: 1.0, 16: 1.0, 17: 1.0, 18: 1.0, 19: 1.0, 20: 1.0, 21: 1.0, 22: 1.0, 23: 1.0, 24: 1.0, 25: 1.0, 26: 1.0, 27: 0.0, 28: 1.0, 29: 0.0, 30: 1.0, 31: 1.0, 32: 1.0, 33: 1.0, 34: 1.0, 35: 1.0, 36: 1.0, 37: 1.0, 38: 1.0, 39: 1.0}
+Iteration 10: Valset pareto front aggregate score: 0.9
+Iteration 10: Updated valset pareto front programs: {0: {4}, 1: {3}, 2: {0, 1, 2, 3}, 3: {0, 1, 2, 3}, 4: {1, 3, 4}, 5: {0}, 6: {0, 1, 2, 3, 4}, 7: {0, 1, 2, 4}, 8: {0, 1, 2}, 9: {0, 1, 2, 3, 4}, 10: {1, 2, 4}, 11: {0, 1, 2, 3, 4}, 12: {1, 2, 3, 4}, 13: {0, 1, 2, 3, 4}, 14: {0, 1, 2, 4}, 15: {2, 3, 4}, 16: {0, 1, 2, 4}, 17: {2, 3, 4}, 18: {0, 1, 2, 3}, 19: {1, 2, 4}, 20: {0, 2, 4}, 21: {0, 1, 2, 3, 4}, 22: {1, 2, 4}, 23: {0, 3, 4}, 24: {0, 1, 2, 3}, 25: {0, 2}, 26: {0, 3}, 27: {0, 1, 2, 3, 4}, 28: {3}, 29: {0, 1, 2, 3, 4}, 30: {1, 2, 4}, 31: {0, 1, 3, 4}, 32: {0}, 33: {0, 3, 4}, 34: {0, 1, 3, 4}, 35: {0, 2}, 36: {1, 2, 3, 4}, 37: {0, 1, 3}, 38: {4}, 39: {1, 3}}
+Iteration 10: Best valset aggregate score so far: 0.55
+Iteration 10: Best program as per aggregate score on valset: 0
+Iteration 10: Best score on valset: 0.55
+Iteration 10: Linear pareto front program index: 0
+Iteration 10: New program candidate index: 4
+Best prompt: You are presented with CT scans. Answer the questions concisly with either a '1' or '0'. Don't give any explanations.
+Best score: 0.55

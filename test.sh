@@ -5,7 +5,7 @@
 #SBATCH --output=slurm_log/gepa/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
 #SBATCH --container-name=vllm_qwen3.5
 #SBATCH --job-name=Qwen3.5_9B_Server
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:2
 
 cd $HOME/VLMs-Medical-Imaging
 
@@ -40,7 +40,7 @@ wait_for_server() {
   return 1
 }
 
-(vllm serve models/Qwen3.5-9B \
+(CUDA_VISIBLE_DEVICES=0 vllm serve models/Qwen3.5-9B \
 	--port 8001 \
 	--mm-encoder-tp-mode data \
 	--mm-processor-cache-type shm \
@@ -49,21 +49,21 @@ wait_for_server() {
 	--served-model-name qwen3.5-9b \
 ) &
 
-(vllm serve models/Qwen3.6-27B-FP8 \
+(CUDA_VISIBLE_DEVICES=1 vllm serve models/Qwen3.6-27B \
 	--port 8002 \
 	--mm-encoder-tp-mode data \
 	--mm-processor-cache-type shm \
 	--reasoning-parser qwen3 \
 	--enable-prefix-caching \
-	--served-model-name qwen3.6-27b-fp8 \
+	--served-model-name qwen3.6-27b \
 ) &
 
-wait_for_server "http://localhost:8001/health" &
-wait_for_server "http://localhost:8002/health"
-
+wait_for_server "http://localhost:8001/health" 
 curl http://localhost:8001/v1/models
+
+wait_for_server "http://localhost:8002/health"
 curl http://localhost:8002/v1/models
 
 python3 -m pip install -q pillow gepa transformers==5.5.0
 
-python3 gepa/qwen3.5-gepa.py --data_dir=$DATAPATH
+python3 -u gepa/qwen3.5-gepa.py --data_dir=$DATAPATH &> python_logs/log_${SLURM_JOB_ID}.out
