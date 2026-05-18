@@ -266,7 +266,7 @@ if __name__ == "__main__":
     #  Model
     # ──────────────────────────────────────────────────────────────────────────────
 
-    model_dir = "models/Qwen3.5-35B-A3B"
+    model_dir = "models/Qwen3.5-9B"
 
     sampling_params = SamplingParams(max_tokens=2)
 #structured_outputs=StructuredOutputsParams(choice=["0","1"])
@@ -284,10 +284,10 @@ if __name__ == "__main__":
     
     dataset_dir = os.path.join(args.data_dir)
 
-    RESULTS_ROOT = 'results/qwen3.5_35B_A3B'  # path for results directory
+    RESULTS_ROOT = 'control/results/qwen3.5'  # path for results directory
     CHUNK_SIZE = 500
 
-    experiments = ['AS']  # select the experiments here: 'RQ1', 'RQ2', 'RQ3', 'AS'
+    experiments = ['RQ1', 'RQ2', 'RQ3', 'AS']  # select the experiments here: 'RQ1', 'RQ2', 'RQ3', 'AS'
     # ──────────────────────────────────────────────────────────────────────────────
 
     for exp in experiments:
