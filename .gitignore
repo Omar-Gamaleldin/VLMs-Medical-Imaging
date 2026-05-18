@@ -1,4 +1,5 @@
 models/*
-slurm_jobs/*
+slurm_log/*
+python_logs/*
 
 excluded_images.txt
