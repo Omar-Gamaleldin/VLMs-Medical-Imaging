@@ -4,13 +4,16 @@
 #SBATCH --container-mounts=/etc/slurm/task_prolog:/etc/slurm/task_prolog,/scratch:/scratch,/usr/lib64/slurm:/usr/lib64/slurm,/usr/lib64/libhwloc.so:/usr/lib64/libhwloc.so,/usr/lib64/libhwloc.so.15:/usr/lib64/libhwloc.so.15,/pfs/work9/workspace/scratch/ul_ekd37-gepa-optimization:/pfs/work9/workspace/scratch/ul_ekd37-gepa-optimization
 #SBATCH --container-mount-home
 #SBATCH --output=slurm_log/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
+#SBATCH --job-name=MedGemma_Control
+#SBATCH --gres:gpu=1
+#SBATCH 
 
 # Get Data form Workspace to GPU Node -------------------------------
 # set the workspace path. To figure out this path, you can run $(ws_find <workspace_name>) in the terminal (i.e. $(ws_find synthetic_data)) and copy the path
 export WORKSPACE_PATH=/pfs/work9/workspace/scratch/ul_ekd37-gepa-optimization
 
 # Extract compressed input dataset on local SSD
-tar -C $TMPDIR/ -xvzf $WORKSPACE_PATH/dataset.tgz
+tar -C $TMPDIR/ -xzf $WORKSPACE_PATH/dataset.tgz
 
 export DATAPATH=$TMPDIR/dataset
 #-------
@@ -37,5 +40,5 @@ nvidia-smi
 pip install torch pillow transformers accelerate
 
 # Example to start my code: (Change that!)
-python 2_inference_code/medgemma.py \
+python control/medgemma.py \
 	--data_dir=$DATAPATH
