@@ -5,6 +5,7 @@ import time
 import random
 import base64
 import argparse
+os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
 from vllm import LLM
 from vllm.sampling_params import SamplingParams, StructuredOutputsParams
 from io import BytesIO
@@ -269,7 +270,6 @@ if __name__ == "__main__":
     model_dir = "models/Qwen3.5-9B"
 
     sampling_params = SamplingParams(max_tokens=2)
-#structured_outputs=StructuredOutputsParams(choice=["0","1"])
     llm = LLM(
         model=model_dir,
         gpu_memory_utilization=0.95,  # Maximale GPU-Nutzung

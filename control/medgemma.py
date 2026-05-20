@@ -251,7 +251,7 @@ if __name__ == "__main__":
     # ──────────────────────────────────────────────────────────────────────────────
     dataset_dir = os.path.join(args.data_dir)
 
-    RESULTS_ROOT = 'control/results/med-gemma'  # path for results directory
+    RESULTS_ROOT = 'control/results/medgemma'  # path for results directory
 
     experiments = ['RQ2','RQ1','RQ3','AS']  # select the experiments here: 'RQ1', 'RQ2', 'RQ3', 'AS'e
     # ──────────────────────────────────────────────────────────────────────────────

@@ -5,7 +5,7 @@
 #SBATCH --container-mount-home
 #SBATCH --output=slurm_log/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
 #SBATCH --job-name=MedGemma_Control
-#SBATCH --gres:gpu=1
+#SBATCH --gres=gpu:1
 #SBATCH 
 
 # Get Data form Workspace to GPU Node -------------------------------
@@ -35,10 +35,12 @@ echo "Using $DOME_MEMSET MiB RAM"
 echo "================================================================================"
 nvidia-smi
 
+python -m venv ~/venvs/medgemma_control
+source ~/venvs/medgemma_control/bin/activate
 
 # Here you can add some pip installs
-pip install torch pillow transformers accelerate
+pip install torch pillow transformers accelerate 
 
 # Example to start my code: (Change that!)
-python control/medgemma.py \
+python -u control/medgemma.py \
 	--data_dir=$DATAPATH

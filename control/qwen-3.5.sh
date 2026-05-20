@@ -5,9 +5,13 @@
 #SBATCH --container-mount-home
 #SBATCH --output=slurm_log/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
 #SBATCH --container-name=vllm_qwen3.5
+#SBATCH --gres=gpu:1
+#SBATCH --job-name=Qwen3.5_Control
+
+cd $HOME/VLMs-Medical-Imaging
 
 # Get Data form Workspace to GPU Node -------------------------------
-export WORKSPACE_PATH=/pfs/work9/workspace/scratch/ul_ekd37-test-run
+export WORKSPACE_PATH=/pfs/work9/workspace/scratch/ul_ekd37-gepa-optimization
 
 # Extract compressed input dataset on local SSD (removed -v for speed)
 echo "Extracting dataset..."
@@ -23,15 +27,15 @@ export XDG_CACHE_HOME=/tmp/cache
 echo "================================================================================"
 echo "Running on $(hostname)"
 echo "Job ID: $SLURM_JOB_ID"
-echo "The job time limit is: $(scontrol show job $SLURM_JOB_ID | grep -oP 'TimeLimit=\K\S+')"
 echo "================================================================================"
 nvidia-smi
 
-# Fix dependency conflicts and install required packages
-echo "Cleaning and installing dependencies..."
-python3 -m pip install -q pillow transformers==5.5.0
+# python3 -m venv ~/venvs/qwen3.5_control
+# source ~/venvs/qwen3.5_control/bin/activate
+
+pip3 install pillow transformers==5.5.0
 
 # Start inference
 echo "Starting Qwen 3.5 Inference..."
-python3 control/qwen.py --data_dir=$DATAPATH
+python3 -u control/qwen.py --data_dir=$DATAPATH
 	
