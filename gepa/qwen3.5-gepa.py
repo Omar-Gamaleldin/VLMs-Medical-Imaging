@@ -9,7 +9,7 @@ from gepa.adapters.default_adapter.default_adapter import (
     DefaultDataInst,
     EvaluationResult,
 )
-from gepa.utils.stop_condition import NoImprovementStopper, TimeoutStopCondition
+from gepa.utils.stop_condition import NoImprovementStopper
 import gepa
 from io import BytesIO
 from PIL import Image
@@ -265,7 +265,7 @@ if __name__ == "__main__":
     dataset = random.choices(entire_dataset, k=200)
 
     images = [entry["additional_context"]["image"] for entry in dataset]
-    with open(f"qwen_excluded_images_{experiment}_{image_name}.txt", "w", encoding="utf-8") as f:
+    with open(f"gepa/qwen_excluded_images_{experiment}_{image_name}.txt", "w", encoding="utf-8") as f:
         f.writelines([img + "\n" for img in images])
 
     for img in images:
@@ -303,7 +303,6 @@ if __name__ == "__main__":
         adapter=adapter,
         reflection_lm=reflection_lm_callable,   # Model for reflection
         max_metric_calls=2190,                  # up to 50 iterations
-        stop_callbacks=[ NoImprovementStopper(max_iterations_without_improvement=10)]
     )
 
     # Get the optimized prompt and best score
