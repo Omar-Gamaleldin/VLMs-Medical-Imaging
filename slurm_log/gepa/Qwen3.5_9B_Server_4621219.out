@@ -1,935 +1,0 @@
-Extracting dataset...
-Waiting for server at http://localhost:8002/health...
-Waiting for server at http://localhost:8001/health...
-Attempt 1/30 — retrying in 10s...
-Attempt 1/30 — retrying in 10s...
-Attempt 2/30 — retrying in 10s...
-Attempt 2/30 — retrying in 10s...
-Attempt 3/30 — retrying in 10s...
-Attempt 3/30 — retrying in 10s...
-Attempt 4/30 — retrying in 10s...
-Attempt 4/30 — retrying in 10s...
-(APIServer pid=781396) INFO 05-10 22:19:46 [utils.py:299] 
-(APIServer pid=781396) INFO 05-10 22:19:46 [utils.py:299]        █     █     █▄   ▄█
-(APIServer pid=781396) INFO 05-10 22:19:46 [utils.py:299]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.19.0
-(APIServer pid=781396) INFO 05-10 22:19:46 [utils.py:299]   █▄█▀ █     █     █     █  model   models/Qwen3.6-27B-FP8
-(APIServer pid=781396) INFO 05-10 22:19:46 [utils.py:299]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
-(APIServer pid=781396) INFO 05-10 22:19:46 [utils.py:299] 
-(APIServer pid=781395) INFO 05-10 22:19:46 [utils.py:299] 
-(APIServer pid=781395) INFO 05-10 22:19:46 [utils.py:299]        █     █     █▄   ▄█
-(APIServer pid=781395) INFO 05-10 22:19:46 [utils.py:299]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.19.0
-(APIServer pid=781395) INFO 05-10 22:19:46 [utils.py:299]   █▄█▀ █     █     █     █  model   models/Qwen3.5-9B
-(APIServer pid=781395) INFO 05-10 22:19:46 [utils.py:299]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
-(APIServer pid=781395) INFO 05-10 22:19:46 [utils.py:299] 
-(APIServer pid=781396) INFO 05-10 22:19:46 [utils.py:233] non-default args: {'model_tag': 'models/Qwen3.6-27B-FP8', 'port': 8002, 'model': 'models/Qwen3.6-27B-FP8', 'served_model_name': ['qwen3.6-27b-fp8'], 'reasoning_parser': 'qwen3', 'enable_prefix_caching': True, 'mm_processor_cache_type': 'shm', 'mm_encoder_tp_mode': 'data'}
-(APIServer pid=781395) INFO 05-10 22:19:46 [utils.py:233] non-default args: {'model_tag': 'models/Qwen3.5-9B', 'port': 8001, 'model': 'models/Qwen3.5-9B', 'served_model_name': ['qwen3.5-9b'], 'reasoning_parser': 'qwen3', 'enable_prefix_caching': True, 'mm_processor_cache_type': 'shm', 'mm_encoder_tp_mode': 'data'}
-Attempt 5/30 — retrying in 10s...
-Attempt 5/30 — retrying in 10s...
-Attempt 6/30 — retrying in 10s...
-Attempt 6/30 — retrying in 10s...
-(APIServer pid=781395) INFO 05-10 22:20:07 [model.py:549] Resolved architecture: Qwen3_5ForConditionalGeneration
-(APIServer pid=781395) INFO 05-10 22:20:07 [model.py:1678] Using max model len 262144
-(APIServer pid=781395) INFO 05-10 22:20:07 [scheduler.py:238] Chunked prefill is enabled with max_num_batched_tokens=8192.
-(APIServer pid=781395) WARNING 05-10 22:20:07 [config.py:441] Mamba cache mode is set to 'align' for Qwen3_5ForConditionalGeneration by default when prefix caching is enabled
-(APIServer pid=781395) INFO 05-10 22:20:07 [config.py:461] Warning: Prefix caching in Mamba cache 'align' mode is currently enabled. Its support for Mamba layers is experimental. Please report any issues you may observe.
-(APIServer pid=781396) INFO 05-10 22:20:07 [model.py:549] Resolved architecture: Qwen3_5ForConditionalGeneration
-(APIServer pid=781396) INFO 05-10 22:20:07 [model.py:1678] Using max model len 262144
-(APIServer pid=781395) `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
-(APIServer pid=781396) INFO 05-10 22:20:07 [scheduler.py:238] Chunked prefill is enabled with max_num_batched_tokens=8192.
-(APIServer pid=781396) WARNING 05-10 22:20:07 [config.py:441] Mamba cache mode is set to 'align' for Qwen3_5ForConditionalGeneration by default when prefix caching is enabled
-(APIServer pid=781396) INFO 05-10 22:20:07 [config.py:461] Warning: Prefix caching in Mamba cache 'align' mode is currently enabled. Its support for Mamba layers is experimental. Please report any issues you may observe.
-(APIServer pid=781395) INFO 05-10 22:20:07 [config.py:281] Setting attention block size to 528 tokens to ensure that attention page size is >= mamba page size.
-(APIServer pid=781395) INFO 05-10 22:20:07 [config.py:312] Padding mamba page size by 0.76% to ensure that mamba page size and attention page size are exactly equal.
-(APIServer pid=781395) INFO 05-10 22:20:07 [vllm.py:790] Asynchronous scheduling is enabled.
-(APIServer pid=781396) `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
-(APIServer pid=781396) INFO 05-10 22:20:08 [config.py:281] Setting attention block size to 784 tokens to ensure that attention page size is >= mamba page size.
-(APIServer pid=781396) INFO 05-10 22:20:08 [config.py:312] Padding mamba page size by 0.13% to ensure that mamba page size and attention page size are exactly equal.
-(APIServer pid=781396) INFO 05-10 22:20:08 [vllm.py:790] Asynchronous scheduling is enabled.
-(APIServer pid=781396) INFO 05-10 22:20:08 [compilation.py:290] Enabled custom fusions: norm_quant, act_quant
-Attempt 7/30 — retrying in 10s...
-Attempt 7/30 — retrying in 10s...
-(APIServer pid=781396) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
-(APIServer pid=781395) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
-Attempt 8/30 — retrying in 10s...
-Attempt 8/30 — retrying in 10s...
-Attempt 9/30 — retrying in 10s...
-Attempt 9/30 — retrying in 10s...
-(EngineCore pid=782565) INFO 05-10 22:20:33 [core.py:105] Initializing a V1 LLM engine (v0.19.0) with config: model='models/Qwen3.5-9B', speculative_config=None, tokenizer='models/Qwen3.5-9B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=262144, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='qwen3', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=qwen3.5-9b, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_images_per_batch': 0, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
-(EngineCore pid=782559) INFO 05-10 22:20:33 [core.py:105] Initializing a V1 LLM engine (v0.19.0) with config: model='models/Qwen3.6-27B-FP8', speculative_config=None, tokenizer='models/Qwen3.6-27B-FP8', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=262144, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=fp8, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='qwen3', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=qwen3.6-27b-fp8, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['+quant_fp8', 'none', '+quant_fp8'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_images_per_batch': 0, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
-(EngineCore pid=782559) `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
-(EngineCore pid=782565) `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
-(EngineCore pid=782565) INFO 05-10 22:20:35 [parallel_state.py:1400] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.21.224.85:51727 backend=nccl
-(EngineCore pid=782565) INFO 05-10 22:20:35 [parallel_state.py:1716] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
-(EngineCore pid=782559) INFO 05-10 22:20:35 [parallel_state.py:1400] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.21.224.85:33495 backend=nccl
-(EngineCore pid=782559) INFO 05-10 22:20:35 [parallel_state.py:1716] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
-(EngineCore pid=782565) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
-(EngineCore pid=782559) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
-Attempt 10/30 — retrying in 10s...
-Attempt 10/30 — retrying in 10s...
-(EngineCore pid=782565) INFO 05-10 22:20:41 [gpu_model_runner.py:4735] Starting to load model models/Qwen3.5-9B...
-(EngineCore pid=782559) INFO 05-10 22:20:41 [gpu_model_runner.py:4735] Starting to load model models/Qwen3.6-27B-FP8...
-(EngineCore pid=782559) INFO 05-10 22:20:41 [cuda.py:390] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(EngineCore pid=782565) INFO 05-10 22:20:41 [cuda.py:390] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
-(EngineCore pid=782559) INFO 05-10 22:20:41 [mm_encoder_attention.py:230] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(EngineCore pid=782565) INFO 05-10 22:20:41 [mm_encoder_attention.py:230] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
-(EngineCore pid=782565) INFO 05-10 22:20:41 [gdn_linear_attn.py:139] Using FlashInfer GDN prefill kernel
-(EngineCore pid=782565) INFO 05-10 22:20:41 [gdn_linear_attn.py:140] FlashInfer GDN prefill kernel is JIT-compiled; first run may take a while to compile. Set `--gdn-prefill-backend triton` to avoid JIT compile time.
-(EngineCore pid=782559) INFO 05-10 22:20:41 [__init__.py:261] Selected CutlassFP8ScaledMMLinearKernel for Fp8LinearMethod
-(EngineCore pid=782559) INFO 05-10 22:20:41 [deep_gemm.py:115] DeepGEMM E8M0 enabled on current platform.
-(EngineCore pid=782559) INFO 05-10 22:20:44 [gdn_linear_attn.py:139] Using FlashInfer GDN prefill kernel
-(EngineCore pid=782559) INFO 05-10 22:20:44 [gdn_linear_attn.py:140] FlashInfer GDN prefill kernel is JIT-compiled; first run may take a while to compile. Set `--gdn-prefill-backend triton` to avoid JIT compile time.
-(EngineCore pid=782565) INFO 05-10 22:20:44 [cuda.py:334] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
-(EngineCore pid=782565) INFO 05-10 22:20:44 [flash_attn.py:596] Using FlashAttention version 3
-(EngineCore pid=782559) INFO 05-10 22:20:44 [cuda.py:334] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
-(EngineCore pid=782559) INFO 05-10 22:20:44 [flash_attn.py:596] Using FlashAttention version 3
-(EngineCore pid=782565) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-(EngineCore pid=782565) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-(EngineCore pid=782565) Loading safetensors checkpoint shards:   0% Completed | 0/4 [00:00<?, ?it/s]
-(EngineCore pid=782559) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
-(EngineCore pid=782559) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
-(EngineCore pid=782559) Loading safetensors checkpoint shards:   0% Completed | 0/66 [00:00<?, ?it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:   2% Completed | 1/66 [00:00<00:41,  1.56it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:   3% Completed | 2/66 [00:01<00:40,  1.59it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:   5% Completed | 3/66 [00:01<00:37,  1.68it/s]
-(EngineCore pid=782565) Loading safetensors checkpoint shards:  25% Completed | 1/4 [00:02<00:08,  2.76s/it]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:   6% Completed | 4/66 [00:02<00:41,  1.48it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:   8% Completed | 5/66 [00:03<00:40,  1.52it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:   9% Completed | 6/66 [00:03<00:38,  1.54it/s]
-Attempt 11/30 — retrying in 10s...
-Attempt 11/30 — retrying in 10s...
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  11% Completed | 7/66 [00:04<00:38,  1.55it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  12% Completed | 8/66 [00:05<00:39,  1.46it/s]
-(EngineCore pid=782565) Loading safetensors checkpoint shards:  50% Completed | 2/4 [00:05<00:05,  2.86s/it]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  14% Completed | 9/66 [00:05<00:38,  1.50it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  15% Completed | 10/66 [00:06<00:35,  1.58it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  17% Completed | 11/66 [00:07<00:34,  1.60it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  18% Completed | 12/66 [00:07<00:34,  1.55it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  20% Completed | 13/66 [00:08<00:33,  1.57it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  21% Completed | 14/66 [00:09<00:32,  1.59it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  23% Completed | 15/66 [00:09<00:30,  1.65it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  24% Completed | 16/66 [00:10<00:32,  1.53it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  26% Completed | 17/66 [00:10<00:31,  1.56it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  27% Completed | 18/66 [00:11<00:30,  1.56it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  29% Completed | 19/66 [00:12<00:29,  1.58it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  30% Completed | 20/66 [00:12<00:30,  1.49it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  32% Completed | 21/66 [00:13<00:29,  1.53it/s]
-Attempt 12/30 — retrying in 10s...
-Attempt 12/30 — retrying in 10s...
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  33% Completed | 22/66 [00:14<00:28,  1.56it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  35% Completed | 23/66 [00:14<00:26,  1.59it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  36% Completed | 24/66 [00:15<00:27,  1.51it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  38% Completed | 25/66 [00:16<00:26,  1.55it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  39% Completed | 26/66 [00:16<00:25,  1.57it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  41% Completed | 27/66 [00:17<00:24,  1.60it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  42% Completed | 28/66 [00:18<00:24,  1.55it/s]
-(EngineCore pid=782565) Loading safetensors checkpoint shards:  75% Completed | 3/4 [00:18<00:07,  7.35s/it]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  44% Completed | 29/66 [00:18<00:23,  1.58it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  45% Completed | 30/66 [00:19<00:21,  1.64it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  47% Completed | 31/66 [00:19<00:21,  1.63it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  48% Completed | 32/66 [00:20<00:22,  1.54it/s]
-(EngineCore pid=782565) Loading safetensors checkpoint shards: 100% Completed | 4/4 [00:20<00:00,  5.45s/it]
-(EngineCore pid=782565) Loading safetensors checkpoint shards: 100% Completed | 4/4 [00:20<00:00,  5.23s/it]
-(EngineCore pid=782565) 
-(EngineCore pid=782565) INFO 05-10 22:21:05 [default_loader.py:384] Loading weights took 21.02 seconds
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  50% Completed | 33/66 [00:21<00:20,  1.57it/s]
-(EngineCore pid=782565) INFO 05-10 22:21:06 [gpu_model_runner.py:4820] Model loading took 17.66 GiB memory and 24.064239 seconds
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  52% Completed | 34/66 [00:21<00:19,  1.65it/s]
-(EngineCore pid=782565) INFO 05-10 22:21:06 [gpu_model_runner.py:5753] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  53% Completed | 35/66 [00:22<00:18,  1.64it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  55% Completed | 36/66 [00:23<00:19,  1.56it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  56% Completed | 37/66 [00:23<00:17,  1.63it/s]
-Attempt 13/30 — retrying in 10s...
-Attempt 13/30 — retrying in 10s...
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  58% Completed | 38/66 [00:24<00:17,  1.62it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  59% Completed | 39/66 [00:24<00:16,  1.66it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  61% Completed | 40/66 [00:25<00:16,  1.54it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  62% Completed | 41/66 [00:26<00:15,  1.58it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  64% Completed | 42/66 [00:26<00:15,  1.60it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  65% Completed | 43/66 [00:27<00:14,  1.61it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  67% Completed | 44/66 [00:28<00:14,  1.48it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  68% Completed | 45/66 [00:28<00:13,  1.52it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  70% Completed | 46/66 [00:29<00:12,  1.55it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  71% Completed | 47/66 [00:29<00:11,  1.59it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  73% Completed | 48/66 [00:30<00:11,  1.50it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  74% Completed | 49/66 [00:31<00:10,  1.59it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  76% Completed | 50/66 [00:31<00:09,  1.61it/s]
-(EngineCore pid=782565) INFO 05-10 22:21:16 [backends.py:1051] Using cache directory: /tmp/cache/vllm/torch_compile_cache/0faff68895/rank_0_0/backbone for vLLM's torch.compile
-(EngineCore pid=782565) INFO 05-10 22:21:16 [backends.py:1111] Dynamo bytecode transform time: 6.93 s
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  77% Completed | 51/66 [00:32<00:09,  1.63it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  79% Completed | 52/66 [00:33<00:08,  1.58it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  80% Completed | 53/66 [00:33<00:08,  1.60it/s]
-Attempt 14/30 — retrying in 10s...
-Attempt 14/30 — retrying in 10s...
-(EngineCore pid=782565) INFO 05-10 22:21:18 [backends.py:372] Cache the graph of compile range (1, 8192) for later use
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  82% Completed | 54/66 [00:34<00:07,  1.62it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  83% Completed | 55/66 [00:34<00:06,  1.62it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  85% Completed | 56/66 [00:35<00:06,  1.54it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  86% Completed | 57/66 [00:36<00:05,  1.57it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  88% Completed | 58/66 [00:36<00:05,  1.57it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  89% Completed | 59/66 [00:37<00:04,  1.59it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  91% Completed | 60/66 [00:38<00:03,  1.51it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  92% Completed | 61/66 [00:38<00:03,  1.55it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  94% Completed | 62/66 [00:39<00:02,  1.58it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  95% Completed | 63/66 [00:40<00:01,  1.66it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards:  97% Completed | 64/66 [00:40<00:01,  1.61it/s]
-(EngineCore pid=782559) Loading safetensors checkpoint shards: 100% Completed | 66/66 [00:43<00:00,  1.05s/it]
-(EngineCore pid=782559) Loading safetensors checkpoint shards: 100% Completed | 66/66 [00:43<00:00,  1.51it/s]
-(EngineCore pid=782559) 
-(EngineCore pid=782559) INFO 05-10 22:21:28 [default_loader.py:384] Loading weights took 43.94 seconds
-Attempt 15/30 — retrying in 10s...
-Attempt 15/30 — retrying in 10s...
-(EngineCore pid=782559) INFO 05-10 22:21:35 [gpu_model_runner.py:4820] Model loading took 28.54 GiB memory and 52.960263 seconds
-(EngineCore pid=782559) INFO 05-10 22:21:35 [gpu_model_runner.py:5753] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
-(EngineCore pid=782565) INFO 05-10 22:21:38 [backends.py:390] Compiling a graph for compile range (1, 8192) takes 21.38 s
-Attempt 16/30 — retrying in 10s...
-Attempt 16/30 — retrying in 10s...
-(EngineCore pid=782565) INFO 05-10 22:21:39 [decorators.py:640] saved AOT compiled function to /tmp/cache/vllm/torch_compile_cache/torch_aot_compile/dadc17b2d23e64d017f905868e68164cb8cbe63aaf9b71d86ebcf7009f4e7535/rank_0_0/model
-(EngineCore pid=782565) INFO 05-10 22:21:39 [monitor.py:48] torch.compile took 29.53 s in total
-(EngineCore pid=782565) INFO 05-10 22:21:41 [monitor.py:76] Initial profiling/warmup run took 1.81 s
-(EngineCore pid=782559) INFO 05-10 22:21:45 [backends.py:1051] Using cache directory: /tmp/cache/vllm/torch_compile_cache/2ac3c0bcbe/rank_0_0/backbone for vLLM's torch.compile
-(EngineCore pid=782559) INFO 05-10 22:21:45 [backends.py:1111] Dynamo bytecode transform time: 8.01 s
-(EngineCore pid=782565) INFO 05-10 22:21:47 [kv_cache_utils.py:829] Overriding num_gpu_blocks=0 with num_gpu_blocks_override=512
-(EngineCore pid=782565) INFO 05-10 22:21:47 [gpu_model_runner.py:5876] Profiling CUDA graph memory: PIECEWISE=51 (largest=512), FULL=51 (largest=512)
-(EngineCore pid=782559) INFO 05-10 22:21:48 [backends.py:372] Cache the graph of compile range (1, 8192) for later use
-Attempt 17/30 — retrying in 10s...
-Attempt 17/30 — retrying in 10s...
-(EngineCore pid=782565) INFO 05-10 22:21:50 [gpu_model_runner.py:5955] Estimated CUDA graph memory: 0.84 GiB total
-(EngineCore pid=782565) INFO 05-10 22:21:50 [gpu_worker.py:436] Available KV cache memory: 30.44 GiB
-(EngineCore pid=782565) INFO 05-10 22:21:50 [gpu_worker.py:470] In v0.19, CUDA graph memory profiling will be enabled by default (VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1), which more accurately accounts for CUDA graph memory during KV cache allocation. To try it now, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1 and increase --gpu-memory-utilization from 0.9000 to 0.9091 to maintain the same effective KV cache size.
-(EngineCore pid=782565) INFO 05-10 22:21:50 [kv_cache_utils.py:1319] GPU KV cache size: 249,216 tokens
-(EngineCore pid=782565) INFO 05-10 22:21:50 [kv_cache_utils.py:1324] Maximum concurrency for 262,144 tokens per request: 3.75x
-(EngineCore pid=782565) 2026-05-10 22:21:50,637 - INFO - autotuner.py:262 - flashinfer.jit: [Autotuner]: Autotuning process starts ...
-(EngineCore pid=782565) 2026-05-10 22:21:50,649 - INFO - autotuner.py:268 - flashinfer.jit: [Autotuner]: Autotuning process ends
-(EngineCore pid=782565) Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/51 [00:00<?, ?it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   8%|▊         | 4/51 [00:00<00:01, 32.40it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  16%|█▌        | 8/51 [00:00<00:01, 29.79it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  24%|██▎       | 12/51 [00:00<00:01, 30.78it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  31%|███▏      | 16/51 [00:00<00:01, 30.92it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  39%|███▉      | 20/51 [00:00<00:01, 19.27it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  45%|████▌     | 23/51 [00:01<00:01, 17.02it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  53%|█████▎    | 27/51 [00:01<00:01, 20.40it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  61%|██████    | 31/51 [00:01<00:00, 23.26it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  69%|██████▊   | 35/51 [00:01<00:00, 25.39it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  75%|███████▍  | 38/51 [00:01<00:00, 26.31it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  80%|████████  | 41/51 [00:01<00:00, 27.10it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  88%|████████▊ | 45/51 [00:01<00:00, 27.93it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  94%|█████████▍| 48/51 [00:01<00:00, 28.40it/s]Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 51/51 [00:01<00:00, 25.67it/s]
-(EngineCore pid=782565) Capturing CUDA graphs (decode, FULL):   0%|          | 0/51 [00:00<?, ?it/s]Capturing CUDA graphs (decode, FULL):   2%|▏         | 1/51 [00:00<00:08,  6.06it/s]Capturing CUDA graphs (decode, FULL):   8%|▊         | 4/51 [00:00<00:03, 15.57it/s]Capturing CUDA graphs (decode, FULL):  14%|█▎        | 7/51 [00:00<00:02, 19.84it/s]Capturing CUDA graphs (decode, FULL):  20%|█▉        | 10/51 [00:00<00:01, 22.88it/s]Capturing CUDA graphs (decode, FULL):  27%|██▋       | 14/51 [00:00<00:01, 25.73it/s]Capturing CUDA graphs (decode, FULL):  35%|███▌      | 18/51 [00:00<00:01, 20.93it/s]Capturing CUDA graphs (decode, FULL):  43%|████▎     | 22/51 [00:01<00:01, 24.22it/s]Capturing CUDA graphs (decode, FULL):  51%|█████     | 26/51 [00:01<00:00, 27.06it/s]Capturing CUDA graphs (decode, FULL):  59%|█████▉    | 30/51 [00:01<00:00, 29.18it/s]Capturing CUDA graphs (decode, FULL):  67%|██████▋   | 34/51 [00:01<00:00, 30.92it/s]Capturing CUDA graphs (decode, FULL):  75%|███████▍  | 38/51 [00:01<00:00, 29.61it/s]Capturing CUDA graphs (decode, FULL):  82%|████████▏ | 42/51 [00:01<00:00, 31.83it/s]Capturing CUDA graphs (decode, FULL):  90%|█████████ | 46/51 [00:01<00:00, 33.43it/s]Capturing CUDA graphs (decode, FULL):  98%|█████████▊| 50/51 [00:01<00:00, 33.30it/s]Capturing CUDA graphs (decode, FULL): 100%|██████████| 51/51 [00:01<00:00, 25.86it/s]
-(EngineCore pid=782565) INFO 05-10 22:21:55 [gpu_model_runner.py:6046] Graph capturing finished in 5 secs, took 1.06 GiB
-(EngineCore pid=782565) INFO 05-10 22:21:55 [gpu_worker.py:597] CUDA graph pool memory: 1.06 GiB (actual), 0.84 GiB (estimated), difference: 0.22 GiB (20.4%).
-(EngineCore pid=782565) INFO 05-10 22:21:55 [core.py:283] init engine (profile, create kv cache, warmup model) took 49.15 seconds
-(EngineCore pid=782565) INFO 05-10 22:21:55 [vllm.py:790] Asynchronous scheduling is enabled.
-(APIServer pid=781395) INFO 05-10 22:21:56 [api_server.py:590] Supported tasks: ['generate']
-(APIServer pid=781395) INFO 05-10 22:21:57 [hf.py:314] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
-Attempt 18/30 — retrying in 10s...
-Attempt 18/30 — retrying in 10s...
-(APIServer pid=781395) INFO 05-10 22:22:02 [base.py:231] Multi-modal warmup completed in 5.226s
-(APIServer pid=781395) INFO 05-10 22:22:02 [api_server.py:594] Starting vLLM server on http://0.0.0.0:8001
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:37] Available routes are:
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /openapi.json, Methods: GET, HEAD
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /docs, Methods: GET, HEAD
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: GET, HEAD
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /redoc, Methods: GET, HEAD
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /tokenize, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /detokenize, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /load, Methods: GET
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /version, Methods: GET
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /health, Methods: GET
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /metrics, Methods: GET
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/models, Methods: GET
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /ping, Methods: GET
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /ping, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /invocations, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/chat/completions/batch, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/responses, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/completions, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/messages, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
-(APIServer pid=781395) INFO 05-10 22:22:02 [launcher.py:46] Route: /v1/completions/render, Methods: POST
-(APIServer pid=781395) INFO:     Started server process [781395]
-(APIServer pid=781395) INFO:     Waiting for application startup.
-(APIServer pid=781395) INFO:     Application startup complete.
-Attempt 19/30 — retrying in 10s...
-(APIServer pid=781395) INFO:     127.0.0.1:51002 - "GET /health HTTP/1.1" 200 OK
-Server is ready!
-Attempt 20/30 — retrying in 10s...
-(EngineCore pid=782559) INFO 05-10 22:22:20 [backends.py:390] Compiling a graph for compile range (1, 8192) takes 34.23 s
-(EngineCore pid=782559) INFO 05-10 22:22:23 [decorators.py:640] saved AOT compiled function to /tmp/cache/vllm/torch_compile_cache/torch_aot_compile/989a4c676db2bac1d7ab8df1c2e1748fdab98266fb6b20f5e431a46f90b87d1e/rank_0_0/model
-(EngineCore pid=782559) INFO 05-10 22:22:23 [monitor.py:48] torch.compile took 46.20 s in total
-Attempt 21/30 — retrying in 10s...
-Attempt 22/30 — retrying in 10s...
-(EngineCore pid=782559) INFO 05-10 22:22:47 [monitor.py:76] Initial profiling/warmup run took 23.38 s
-(EngineCore pid=782559) INFO 05-10 22:22:47 [kv_cache_utils.py:829] Overriding num_gpu_blocks=0 with num_gpu_blocks_override=512
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108] EngineCore failed to start.
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108] Traceback (most recent call last):
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1082, in run_engine_core
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     return func(*args, **kwargs)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 848, in __init__
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     super().__init__(
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 124, in __init__
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     kv_cache_config = self._initialize_kv_caches(vllm_config)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     return func(*args, **kwargs)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 247, in _initialize_kv_caches
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     available_gpu_memory = self.model_executor.determine_available_memory()
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/abstract.py", line 136, in determine_available_memory
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     return self.collective_rpc("determine_available_memory")
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/uniproc_executor.py", line 80, in collective_rpc
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     result = run_method(self.driver_worker, method, args, kwargs)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/serial_utils.py", line 510, in run_method
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     return func(*args, **kwargs)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     return func(*args, **kwargs)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_worker.py", line 381, in determine_available_memory
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     cudagraph_memory_estimate = self.model_runner.profile_cudagraph_memory()
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     return func(*args, **kwargs)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 5864, in profile_cudagraph_memory
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     self._init_minimal_kv_cache_for_profiling()
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 5815, in _init_minimal_kv_cache_for_profiling
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     self.initialize_kv_cache(minimal_config)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6797, in initialize_kv_cache
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     kv_caches = self.initialize_kv_cache_tensors(
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6718, in initialize_kv_cache_tensors
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     kv_cache_raw_tensors = self._allocate_kv_cache_tensors(kv_cache_config)
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6529, in _allocate_kv_cache_tensors
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]     tensor = torch.zeros(
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108]              ^^^^^^^^^^^^
-(EngineCore pid=782559) ERROR 05-10 22:22:48 [core.py:1108] torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.53 GiB. GPU 0 has a total capacity of 93.10 GiB of which 139.25 MiB is free. Including non-PyTorch memory, this process has 39.15 GiB memory in use. Process 782565 has 53.77 GiB memory in use. Of the allocated memory 38.03 GiB is allocated by PyTorch, and 400.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-(EngineCore pid=782559) Process EngineCore:
-(EngineCore pid=782559) Traceback (most recent call last):
-(EngineCore pid=782559)   File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
-(EngineCore pid=782559)     self.run()
-(EngineCore pid=782559)   File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
-(EngineCore pid=782559)     self._target(*self._args, **self._kwargs)
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1112, in run_engine_core
-(EngineCore pid=782559)     raise e
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1082, in run_engine_core
-(EngineCore pid=782559)     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
-(EngineCore pid=782559)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
-(EngineCore pid=782559)     return func(*args, **kwargs)
-(EngineCore pid=782559)            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 848, in __init__
-(EngineCore pid=782559)     super().__init__(
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 124, in __init__
-(EngineCore pid=782559)     kv_cache_config = self._initialize_kv_caches(vllm_config)
-(EngineCore pid=782559)                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
-(EngineCore pid=782559)     return func(*args, **kwargs)
-(EngineCore pid=782559)            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 247, in _initialize_kv_caches
-(EngineCore pid=782559)     available_gpu_memory = self.model_executor.determine_available_memory()
-(EngineCore pid=782559)                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/abstract.py", line 136, in determine_available_memory
-(EngineCore pid=782559)     return self.collective_rpc("determine_available_memory")
-(EngineCore pid=782559)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/uniproc_executor.py", line 80, in collective_rpc
-(EngineCore pid=782559)     result = run_method(self.driver_worker, method, args, kwargs)
-(EngineCore pid=782559)              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/serial_utils.py", line 510, in run_method
-(EngineCore pid=782559)     return func(*args, **kwargs)
-(EngineCore pid=782559)            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
-(EngineCore pid=782559)     return func(*args, **kwargs)
-(EngineCore pid=782559)            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_worker.py", line 381, in determine_available_memory
-(EngineCore pid=782559)     cudagraph_memory_estimate = self.model_runner.profile_cudagraph_memory()
-(EngineCore pid=782559)                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
-(EngineCore pid=782559)     return func(*args, **kwargs)
-(EngineCore pid=782559)            ^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 5864, in profile_cudagraph_memory
-(EngineCore pid=782559)     self._init_minimal_kv_cache_for_profiling()
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 5815, in _init_minimal_kv_cache_for_profiling
-(EngineCore pid=782559)     self.initialize_kv_cache(minimal_config)
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6797, in initialize_kv_cache
-(EngineCore pid=782559)     kv_caches = self.initialize_kv_cache_tensors(
-(EngineCore pid=782559)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6718, in initialize_kv_cache_tensors
-(EngineCore pid=782559)     kv_cache_raw_tensors = self._allocate_kv_cache_tensors(kv_cache_config)
-(EngineCore pid=782559)                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(EngineCore pid=782559)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6529, in _allocate_kv_cache_tensors
-(EngineCore pid=782559)     tensor = torch.zeros(
-(EngineCore pid=782559)              ^^^^^^^^^^^^
-(EngineCore pid=782559) torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.53 GiB. GPU 0 has a total capacity of 93.10 GiB of which 139.25 MiB is free. Including non-PyTorch memory, this process has 39.15 GiB memory in use. Process 782565 has 53.77 GiB memory in use. Of the allocated memory 38.03 GiB is allocated by PyTorch, and 400.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Attempt 23/30 — retrying in 10s...
-[rank0]:[W510 22:22:49.485970914 ProcessGroupNCCL.cpp:1553] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
-(APIServer pid=781396) Traceback (most recent call last):
-(APIServer pid=781396)   File "/usr/local/bin/vllm", line 10, in <module>
-(APIServer pid=781396)     sys.exit(main())
-(APIServer pid=781396)              ^^^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/cli/main.py", line 75, in main
-(APIServer pid=781396)     args.dispatch_function(args)
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/cli/serve.py", line 122, in cmd
-(APIServer pid=781396)     uvloop.run(run_server(args))
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/uvloop/__init__.py", line 96, in run
-(APIServer pid=781396)     return __asyncio.run(
-(APIServer pid=781396)            ^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/lib/python3.12/asyncio/runners.py", line 195, in run
-(APIServer pid=781396)     return runner.run(main)
-(APIServer pid=781396)            ^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
-(APIServer pid=781396)     return self._loop.run_until_complete(task)
-(APIServer pid=781396)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/uvloop/__init__.py", line 48, in wrapper
-(APIServer pid=781396)     return await main
-(APIServer pid=781396)            ^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 670, in run_server
-(APIServer pid=781396)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 684, in run_server_worker
-(APIServer pid=781396)     async with build_async_engine_client(
-(APIServer pid=781396)                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
-(APIServer pid=781396)     return await anext(self.gen)
-(APIServer pid=781396)            ^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 100, in build_async_engine_client
-(APIServer pid=781396)     async with build_async_engine_client_from_engine_args(
-(APIServer pid=781396)                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
-(APIServer pid=781396)     return await anext(self.gen)
-(APIServer pid=781396)            ^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/api_server.py", line 136, in build_async_engine_client_from_engine_args
-(APIServer pid=781396)     async_llm = AsyncLLM.from_vllm_config(
-(APIServer pid=781396)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/async_llm.py", line 225, in from_vllm_config
-(APIServer pid=781396)     return cls(
-(APIServer pid=781396)            ^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/async_llm.py", line 154, in __init__
-(APIServer pid=781396)     self.engine_core = EngineCoreClient.make_async_mp_client(
-(APIServer pid=781396)                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
-(APIServer pid=781396)     return func(*args, **kwargs)
-(APIServer pid=781396)            ^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 130, in make_async_mp_client
-(APIServer pid=781396)     return AsyncMPClient(*client_args)
-(APIServer pid=781396)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
-(APIServer pid=781396)     return func(*args, **kwargs)
-(APIServer pid=781396)            ^^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 887, in __init__
-(APIServer pid=781396)     super().__init__(
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 535, in __init__
-(APIServer pid=781396)     with launch_core_engines(
-(APIServer pid=781396)          ^^^^^^^^^^^^^^^^^^^^
-(APIServer pid=781396)   File "/usr/lib/python3.12/contextlib.py", line 144, in __exit__
-(APIServer pid=781396)     next(self.gen)
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py", line 998, in launch_core_engines
-(APIServer pid=781396)     wait_for_engine_startup(
-(APIServer pid=781396)   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py", line 1057, in wait_for_engine_startup
-(APIServer pid=781396)     raise RuntimeError(
-(APIServer pid=781396) RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
-Attempt 24/30 — retrying in 10s...
-Attempt 25/30 — retrying in 10s...
-Attempt 26/30 — retrying in 10s...
-Attempt 27/30 — retrying in 10s...
-Attempt 28/30 — retrying in 10s...
-Attempt 29/30 — retrying in 10s...
-Attempt 30/30 — retrying in 10s...
-Server did not become ready in time.
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0(APIServer pid=781395) INFO:     127.0.0.1:56216 - "GET /v1/models HTTP/1.1" 200 OK
-100   463  100   463    0     0  97350      0 --:--:-- --:--:-- --:--:--  113k
-{"object":"list","data":[{"id":"qwen3.5-9b","object":"model","created":1778444649,"owned_by":"vllm","root":"models/Qwen3.5-9B","parent":null,"max_model_len":262144,"permission":[{"id":"modelperm-ab41008b1db3c576","object":"model_permission","created":1778444649,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-curl: (7) Failed to connect to localhost port 8002 after 2 ms: Connection refused
-
-[notice] A new release of pip is available: 26.0.1 -> 26.1.1
-[notice] To update, run: python3 -m pip install --upgrade pip
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34268 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34270 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34310 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34316 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34320 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34330 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34342 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34268 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34270 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34310 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34320 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34330 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34316 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34342 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO 05-10 22:24:23 [loggers.py:259] Engine 000: Avg prompt throughput: 132.5 tokens/s, Avg generation throughput: 4.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.2%, Prefix cache hit rate: 0.0%
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34268 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34270 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34310 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34320 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34330 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34316 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34342 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34268 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34270 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34310 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34320 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34316 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34330 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34342 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34282 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34288 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-(APIServer pid=781395) INFO:     127.0.0.1:34302 - "POST /v1/chat/completions HTTP/1.1" 200 OK
-Iteration 0: Base program full valset score: 0.6 over 40 / 40 examples
-Iteration 1: Selected program 0 score: 0.6
-Iteration 1: All subsample scores perfect. Skipping.
-Iteration 1: Reflective mutation did not propose a new candidate
-Iteration 2: Selected program 0 score: 0.6
-
-[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
-LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
-
-
-[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
-
-Iteration 2: Exception during reflection/proposal: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 852, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 754, in completion
-    openai_client: OpenAI = self._get_openai_client(  # type: ignore
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 397, in _get_openai_client
-    _new_client = OpenAI(
-                  ^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/openai/_client.py", line 139, in __init__
-    raise OpenAIError(
-openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2707, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2679, in completion
-    response = openai_chat_completions.completion(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 863, in completion
-    raise OpenAIError(
-litellm.llms.openai.common_utils.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 261, in propose
-    new_texts = self.propose_new_texts(curr_prog, reflective_dataset, predictor_names_to_update)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 94, in propose_new_texts
-    new_texts[name] = InstructionProposalSignature.run(
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/base.py", line 48, in run
-    lm_out = lm(full_prompt).strip()
-             ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/api.py", line 248, in _reflection_lm
-    completion = litellm.completion(model=reflection_lm_name, messages=[{"role": "user", "content": prompt}])
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1772, in wrapper
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1593, in wrapper
-    result = original_function(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 4420, in completion
-    raise exception_type(
-          ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2456, in exception_type
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 510, in exception_type
-    raise AuthenticationError(
-litellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-Iteration 2: Reflective mutation did not propose a new candidate
-Iteration 3: Selected program 0 score: 0.6
-
-[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
-LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
-
-
-[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
-
-Iteration 3: Exception during reflection/proposal: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 852, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 754, in completion
-    openai_client: OpenAI = self._get_openai_client(  # type: ignore
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 397, in _get_openai_client
-    _new_client = OpenAI(
-                  ^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/openai/_client.py", line 139, in __init__
-    raise OpenAIError(
-openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2707, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2679, in completion
-    response = openai_chat_completions.completion(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 863, in completion
-    raise OpenAIError(
-litellm.llms.openai.common_utils.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 261, in propose
-    new_texts = self.propose_new_texts(curr_prog, reflective_dataset, predictor_names_to_update)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 94, in propose_new_texts
-    new_texts[name] = InstructionProposalSignature.run(
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/base.py", line 48, in run
-    lm_out = lm(full_prompt).strip()
-             ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/api.py", line 248, in _reflection_lm
-    completion = litellm.completion(model=reflection_lm_name, messages=[{"role": "user", "content": prompt}])
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1772, in wrapper
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1593, in wrapper
-    result = original_function(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 4420, in completion
-    raise exception_type(
-          ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2456, in exception_type
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 510, in exception_type
-    raise AuthenticationError(
-litellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-Iteration 3: Reflective mutation did not propose a new candidate
-Iteration 4: Selected program 0 score: 0.6
-Iteration 4: All subsample scores perfect. Skipping.
-Iteration 4: Reflective mutation did not propose a new candidate
-Iteration 5: Selected program 0 score: 0.6
-
-[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
-LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
-
-
-[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
-
-Iteration 5: Exception during reflection/proposal: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 852, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 754, in completion
-    openai_client: OpenAI = self._get_openai_client(  # type: ignore
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 397, in _get_openai_client
-    _new_client = OpenAI(
-                  ^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/openai/_client.py", line 139, in __init__
-    raise OpenAIError(
-openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2707, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2679, in completion
-    response = openai_chat_completions.completion(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 863, in completion
-    raise OpenAIError(
-litellm.llms.openai.common_utils.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 261, in propose
-    new_texts = self.propose_new_texts(curr_prog, reflective_dataset, predictor_names_to_update)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 94, in propose_new_texts
-    new_texts[name] = InstructionProposalSignature.run(
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/base.py", line 48, in run
-    lm_out = lm(full_prompt).strip()
-             ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/api.py", line 248, in _reflection_lm
-    completion = litellm.completion(model=reflection_lm_name, messages=[{"role": "user", "content": prompt}])
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1772, in wrapper
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1593, in wrapper
-    result = original_function(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 4420, in completion
-    raise exception_type(
-          ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2456, in exception_type
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 510, in exception_type
-    raise AuthenticationError(
-litellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-Iteration 5: Reflective mutation did not propose a new candidate
-Iteration 6: Selected program 0 score: 0.6
-
-[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
-LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
-
-
-[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
-
-Iteration 6: Exception during reflection/proposal: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 852, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 754, in completion
-    openai_client: OpenAI = self._get_openai_client(  # type: ignore
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 397, in _get_openai_client
-    _new_client = OpenAI(
-                  ^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/openai/_client.py", line 139, in __init__
-    raise OpenAIError(
-openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2707, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2679, in completion
-    response = openai_chat_completions.completion(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 863, in completion
-    raise OpenAIError(
-litellm.llms.openai.common_utils.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 261, in propose
-    new_texts = self.propose_new_texts(curr_prog, reflective_dataset, predictor_names_to_update)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 94, in propose_new_texts
-    new_texts[name] = InstructionProposalSignature.run(
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/base.py", line 48, in run
-    lm_out = lm(full_prompt).strip()
-             ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/api.py", line 248, in _reflection_lm
-    completion = litellm.completion(model=reflection_lm_name, messages=[{"role": "user", "content": prompt}])
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1772, in wrapper
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1593, in wrapper
-    result = original_function(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 4420, in completion
-    raise exception_type(
-          ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2456, in exception_type
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 510, in exception_type
-    raise AuthenticationError(
-litellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-Iteration 6: Reflective mutation did not propose a new candidate
-Iteration 7: Selected program 0 score: 0.6
-Iteration 7: All subsample scores perfect. Skipping.
-Iteration 7: Reflective mutation did not propose a new candidate
-Iteration 8: Selected program 0 score: 0.6
-Iteration 8: All subsample scores perfect. Skipping.
-Iteration 8: Reflective mutation did not propose a new candidate
-Iteration 9: Selected program 0 score: 0.6
-
-[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
-LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
-
-
-[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
-
-Iteration 9: Exception during reflection/proposal: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 852, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 754, in completion
-    openai_client: OpenAI = self._get_openai_client(  # type: ignore
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 397, in _get_openai_client
-    _new_client = OpenAI(
-                  ^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/openai/_client.py", line 139, in __init__
-    raise OpenAIError(
-openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2707, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2679, in completion
-    response = openai_chat_completions.completion(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 863, in completion
-    raise OpenAIError(
-litellm.llms.openai.common_utils.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 261, in propose
-    new_texts = self.propose_new_texts(curr_prog, reflective_dataset, predictor_names_to_update)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 94, in propose_new_texts
-    new_texts[name] = InstructionProposalSignature.run(
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/base.py", line 48, in run
-    lm_out = lm(full_prompt).strip()
-             ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/api.py", line 248, in _reflection_lm
-    completion = litellm.completion(model=reflection_lm_name, messages=[{"role": "user", "content": prompt}])
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1772, in wrapper
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1593, in wrapper
-    result = original_function(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 4420, in completion
-    raise exception_type(
-          ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2456, in exception_type
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 510, in exception_type
-    raise AuthenticationError(
-litellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-Iteration 9: Reflective mutation did not propose a new candidate
-Iteration 10: Selected program 0 score: 0.6
-
-[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
-LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
-
-
-[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
-
-Iteration 10: Exception during reflection/proposal: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 852, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 754, in completion
-    openai_client: OpenAI = self._get_openai_client(  # type: ignore
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 397, in _get_openai_client
-    _new_client = OpenAI(
-                  ^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/openai/_client.py", line 139, in __init__
-    raise OpenAIError(
-openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2707, in completion
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 2679, in completion
-    response = openai_chat_completions.completion(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/llms/openai/openai.py", line 863, in completion
-    raise OpenAIError(
-litellm.llms.openai.common_utils.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 261, in propose
-    new_texts = self.propose_new_texts(curr_prog, reflective_dataset, predictor_names_to_update)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/reflective_mutation.py", line 94, in propose_new_texts
-    new_texts[name] = InstructionProposalSignature.run(
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/proposer/reflective_mutation/base.py", line 48, in run
-    lm_out = lm(full_prompt).strip()
-             ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/gepa/api.py", line 248, in _reflection_lm
-    completion = litellm.completion(model=reflection_lm_name, messages=[{"role": "user", "content": prompt}])
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1772, in wrapper
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/utils.py", line 1593, in wrapper
-    result = original_function(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/main.py", line 4420, in completion
-    raise exception_type(
-          ^^^^^^^^^^^^^^^
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 2456, in exception_type
-    raise e
-  File "/home/ul/ul_student/ul_ekd37/.local/lib/python3.12/site-packages/litellm/litellm_core_utils/exception_mapping_utils.py", line 510, in exception_type
-    raise AuthenticationError(
-litellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
-
-Iteration 10: Reflective mutation did not propose a new candidate
-Best prompt: You are presented with CT scans. Answer the questions concisly with either a '1' or '0'. Don't give any explanations.
-Best score: 0.6
-
-============================= JOB FEEDBACK =============================
-
-NodeName=uc3n082
-Job ID: 4621219
-Cluster: uc3
-User/Group: ul_ekd37/ul_student
-State: COMPLETED (exit code 0)
-Nodes: 1
-Cores per node: 48
-CPU Utilized: 00:04:00
-CPU Efficiency: 1.27% of 05:14:24 core-walltime
-Job Wall-clock time: 00:06:33
-Memory Utilized: 6.98 GB
-Memory Efficiency: 3.70% of 188.77 GB (188.77 GB/node)
