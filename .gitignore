@@ -3,5 +3,6 @@ slurm_log/*
 python_logs/*
 control/results/qwen3.5/*
 control/results/medgemma/*
+control/results/Results*.xlsx
 
 *.txt
