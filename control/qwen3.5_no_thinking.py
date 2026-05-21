@@ -195,68 +195,6 @@ def get_qa(img_file_name, json_dir):
     return questions_answers
 
 
-def make_model_call(llm, questions_data, base64_image, additional_question):
-    """
-    Calls the model with a medical image and a question about its content.
-
-    Args:
-        llm (LLM): The loaded model.
-        questions_data (dict): A dictionary containing:
-            - 'question' (str): The question to ask about the image.
-            - 'answer' (str): The expected answer.
-        base64_image (str): The image base64-encoded.
-        additional_question (dict): A dictionary containing:
-            - 'question' (str): A sample question to demonstrate the response format.
-            - 'answer' (str): The expected response format ('1' or '0').
-
-    Returns:
-        list[dict]: A list containing a single dictionary with:
-            - 'question' (str): The question asked.
-            - 'model_answer' (str): The cleaned AI-generated answer.
-            - 'expected_answer' (str): The expected answer for comparison.
-            - 'entire_prompt' (str): The full prompt used in the API call.
-
-    The function constructs a strict yes/no prompt for the model, ensuring 
-    a binary response ('1' for Yes, '0' for No). It sends the image in base64 
-    format along with the textual question. The model response is then stored 
-    along with the original question and expected answer.
-    """
-    # List for results
-    results = []
-
-    prompt = (
-        "The image is a 2D axial slice of an abdominal CT scan with soft tissue windowing. "
-        "Answer strictly with '1' for Yes or '0' for No. No explanations, no additional text. "
-        "Your output must contain exactly one character: '1' or '0'."
-        "Ignore anatomical correctness; focus solely on what the image shows.\n"
-        "Example:\n"
-        # dynamic part of the prompt
-        f"Q: {additional_question['question']} A: {additional_question['answer']}\n"
-        "Now answer the real question:\n\n"
-        f"Q: {questions_data['question']}"
-    )
-
-    messages = [
-        {
-            "role": "user",
-            "content": [
-                {"type": "text", "text": prompt},
-                {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{base64_image}"}}
-            ]
-        },
-    ]
-
-    outputs = llm.chat(messages, sampling_params=sampling_params)
-
-    results.append({
-        "question": questions_data['question'],
-        "model_answer": outputs[0].outputs[0].text,
-        "expected_answer": questions_data['answer'],
-        "entire_prompt": prompt
-    })
-
-    return results
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test run Script")
@@ -399,15 +337,6 @@ if __name__ == "__main__":
                             "expected_answer": question_data[0]['answer'],
                             "entire_prompt": prompt
                         })
-
-                        # results_call = make_model_call(llm,
-                        #                                question_data[0], base64_image,
-                        #                                additional_question=additional_question[0])
-
-                        # dataset_results.append({
-                        #     "file_name": image,
-                        #     "results_call": results_call
-                        # })
 
                     outputs = llm.chat(batch_messages, sampling_params=sampling_params, chat_template_kwargs={"enable_thinking": False})
                     print(outputs[0].outputs)
