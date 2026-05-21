@@ -64,6 +64,7 @@ curl http://localhost:8001/v1/models
 wait_for_server "http://localhost:8002/health"
 curl http://localhost:8002/v1/models
 
+mkdir -p python_logs
 python3 -m pip install -q pillow gepa transformers==5.5.0
 
 python3 -u gepa/qwen3.5-gepa.py --data_dir=$DATAPATH &> python_logs/log_${SLURM_JOB_ID}.out
