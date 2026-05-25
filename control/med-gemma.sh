@@ -6,7 +6,9 @@
 #SBATCH --output=slurm_log/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
 #SBATCH --job-name=MedGemma_Control
 #SBATCH --gres=gpu:1
-#SBATCH 
+#SBATCH --container-name=vllm_qwen3.5
+
+cd $HOME/VLMs-Medical-Imaging
 
 # Get Data form Workspace to GPU Node -------------------------------
 # set the workspace path. To figure out this path, you can run $(ws_find <workspace_name>) in the terminal (i.e. $(ws_find synthetic_data)) and copy the path
@@ -35,12 +37,10 @@ echo "Using $DOME_MEMSET MiB RAM"
 echo "================================================================================"
 nvidia-smi
 
-python -m venv ~/venvs/medgemma_control
-source ~/venvs/medgemma_control/bin/activate
 
 # Here you can add some pip installs
-pip install torch pillow transformers accelerate 
+python3 -m pip install pillow transformers==5.5.0
 
 # Example to start my code: (Change that!)
-python -u control/medgemma.py \
+python3 -u control/medgemma.py \
 	--data_dir=$DATAPATH
