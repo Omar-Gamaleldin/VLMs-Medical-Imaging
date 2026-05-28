@@ -221,7 +221,7 @@ if __name__ == "__main__":
     dataset_dir = os.path.join(args.data_dir)
 
     RESULTS_ROOT = 'control/results/medgemma1.5'  # path for results directory
-    CHUNK_SIZE = 500
+    CHUNK_SIZE = 50
 
     experiments = ['RQ1', 'RQ2', 'RQ3', 'AS']  # select the experiments here: 'RQ1', 'RQ2', 'RQ3', 'AS'
     # ──────────────────────────────────────────────────────────────────────────────
