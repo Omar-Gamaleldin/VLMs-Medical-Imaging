@@ -208,7 +208,6 @@ if __name__ == "__main__":
     )
     llm = LLM(
         model=model_dir,
-        sampling_params=sampling_params_thinking,
         gpu_memory_utilization=0.95,  # Maximale GPU-Nutzung
         trust_remote_code=True
     )
@@ -337,7 +336,8 @@ if __name__ == "__main__":
                             "entire_prompt": prompt
                         })
 
-                    outputs = llm.chat(batch_messages )
+                    outputs = llm.chat(batch_messages,sampling_params=sampling_params_thinking )
+        
                     print(outputs[0].outputs)
 
                     for metadata, model_output in zip(batch_metadata, outputs):
