@@ -6,7 +6,7 @@ import random
 import base64
 import argparse
 os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
-from vllm import LLM
+from vllm import LLM, SamplingParams
 from io import BytesIO
 from PIL import Image
 
@@ -203,9 +203,12 @@ if __name__ == "__main__":
     # ──────────────────────────────────────────────────────────────────────────────
 
     model_dir = "models/Qwen3.5-9B"
-
+    sampling_params_thinking = SamplingParams(
+        max_tokens=2048,  # adjust after pilot
+    )
     llm = LLM(
         model=model_dir,
+        sampling_params=sampling_params_thinking,
         gpu_memory_utilization=0.95,  # Maximale GPU-Nutzung
         trust_remote_code=True
     )
