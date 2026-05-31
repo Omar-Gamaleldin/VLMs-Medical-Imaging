@@ -311,7 +311,8 @@ if __name__ == "__main__":
 
                         prompt = (
                             "The image is a 2D axial slice of an abdominal CT scan with soft tissue windowing. "
-                            "Answer strictly with '1' for Yes or '0' for No. No explanations, no additional text. "
+                            "Your reasoning should be only about 10 sentences."
+                            "Answer strictly with '1' for Yes or '0' for No."
                             "Your output must contain exactly one character: '1' or '0'."
                             "Ignore anatomical correctness; focus solely on what the image shows.\n"
                             "Example:\n"
