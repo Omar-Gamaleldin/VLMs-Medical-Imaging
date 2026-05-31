@@ -311,8 +311,7 @@ if __name__ == "__main__":
 
                         prompt = (
                             "The image is a 2D axial slice of an abdominal CT scan with soft tissue windowing. "
-                            "Your reasoning should be only about 10 sentences."
-                            "Answer strictly with '1' for Yes or '0' for No."
+                            "Answer strictly with '1' for Yes or '0' for No. No explanations, no additional text. "
                             "Your output must contain exactly one character: '1' or '0'."
                             "Ignore anatomical correctness; focus solely on what the image shows.\n"
                             "Example:\n"
@@ -340,7 +339,7 @@ if __name__ == "__main__":
                             "entire_prompt": prompt
                         })
 
-                    outputs = llm.chat(batch_messages,sampling_params=sampling_params_thinking, chat_template_kwargs={"enable_thinking": True} )
+                    outputs = llm.chat(batch_messages,sampling_params=sampling_params_thinking, chat_template_kwargs={"enable_thinking": False} )
                     print(outputs[0].outputs)
 
                     for metadata, model_output in zip(batch_metadata, outputs):
