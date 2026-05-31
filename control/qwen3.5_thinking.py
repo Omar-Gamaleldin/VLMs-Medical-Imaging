@@ -204,7 +204,9 @@ if __name__ == "__main__":
 
     model_dir = "models/Qwen3.5-9B"
     sampling_params_thinking = SamplingParams(
-        max_tokens=2048,  # adjust after pilot
+        max_tokens=4096,  # adjust after pilot
+        presence_penalty=1.5,
+        repetition_penalty=1.0,
     )
     llm = LLM(
         model=model_dir,
@@ -222,7 +224,7 @@ if __name__ == "__main__":
     dataset_dir = os.path.join(args.data_dir)
 
     RESULTS_ROOT = 'control/results/qwen3.5_thinking'  # path for results directory
-    CHUNK_SIZE = 500
+    CHUNK_SIZE = 100
 
     experiments = ['RQ1', 'RQ2', 'RQ3', 'AS']  # select the experiments here: 'RQ1', 'RQ2', 'RQ3', 'AS'
     # ──────────────────────────────────────────────────────────────────────────────
