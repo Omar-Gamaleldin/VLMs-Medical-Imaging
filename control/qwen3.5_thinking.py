@@ -215,7 +215,7 @@ if __name__ == "__main__":
         gpu_memory_utilization=0.95,  # Maximale GPU-Nutzung
         trust_remote_code=True,
         reasoning_parser="qwen3",
-        reason_config={"reasoning_start_str": "<think>", "reasoning_end_str": "I have to give the solution based on the reasoning directly now.</think>"}
+        reasoning_config={"reasoning_start_str": "<think>", "reasoning_end_str": "I have to give the solution based on the reasoning directly now.</think>"}
     )
     print("Finished loading the model")
     # ──────────────────────────────────────────────────────────────────────────────
