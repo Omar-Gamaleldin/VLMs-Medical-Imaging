@@ -342,7 +342,7 @@ if __name__ == "__main__":
                             "entire_prompt": prompt
                         })
 
-                    outputs = llm.chat(batch_messages,sampling_params=sampling_params_thinking, chat_template_kwargs={"enable_thinking": False} )
+                    outputs = llm.chat(batch_messages,sampling_params=sampling_params_thinking, chat_template_kwargs={"enable_thinking": True} )
                     print(outputs[0].outputs)
 
                     for metadata, model_output in zip(batch_metadata, outputs):
