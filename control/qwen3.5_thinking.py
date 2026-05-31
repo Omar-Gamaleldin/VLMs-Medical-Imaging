@@ -207,12 +207,15 @@ if __name__ == "__main__":
         max_tokens=4096,  # adjust after pilot
         presence_penalty=1.5,
         repetition_penalty=1.0,
+        thinking_token_budget=1024
     )
+
     llm = LLM(
         model=model_dir,
         gpu_memory_utilization=0.95,  # Maximale GPU-Nutzung
         trust_remote_code=True,
-        reasoning_parser="qwen3"
+        reasoning_parser="qwen3",
+        reason_config={"reasoning_start_str": "<think>", "reasoning_end_str": "I have to give the solution based on the reasoning directly now.</think>"}
     )
     print("Finished loading the model")
     # ──────────────────────────────────────────────────────────────────────────────
