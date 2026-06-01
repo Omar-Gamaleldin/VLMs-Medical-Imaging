@@ -351,7 +351,7 @@ if __name__ == "__main__":
                             "file_name": metadata["file_name"],
                             "results_call" : [{
                                 "question": metadata["question"],
-                                "model_answer": model_output.outputs[0].text[out_length] if out_length != 0 else "",
+                                "model_answer": model_output.outputs[0].text[out_length-1] if out_length != 0 else "",
                                 "expected_answer": metadata["expected_answer"],
                                 "entire_prompt": metadata["entire_prompt"]
                                 }]
