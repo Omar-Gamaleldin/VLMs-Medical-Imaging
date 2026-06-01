@@ -346,15 +346,16 @@ if __name__ == "__main__":
                     print(outputs[0].outputs)
 
                     for metadata, model_output in zip(batch_metadata, outputs):
-                            dataset_results.append({
-                                "file_name": metadata["file_name"],
-                                "results_call" : [{
-                                    "question": metadata["question"],
-                                    "model_answer": model_output.outputs[0].text,
-                                    "expected_answer": metadata["expected_answer"],
-                                    "entire_prompt": metadata["entire_prompt"]
-                                    }]
-                            })
+                        out_length = len(model_output.outputs[0].text)
+                        dataset_results.append({
+                            "file_name": metadata["file_name"],
+                            "results_call" : [{
+                                "question": metadata["question"],
+                                "model_answer": model_output.outputs[0].text[out_length] if out_length != 0 else "",
+                                "expected_answer": metadata["expected_answer"],
+                                "entire_prompt": metadata["entire_prompt"]
+                                }]
+                        })
 
                 results_file_name = f"{exp}_{selected_qa.replace('.json', '')}_{mo_file_name_appendix}_add_run_{j}.json"
 
