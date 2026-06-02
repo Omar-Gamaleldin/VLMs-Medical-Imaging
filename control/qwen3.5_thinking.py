@@ -207,7 +207,7 @@ if __name__ == "__main__":
         max_tokens=4096,  # adjust after pilot
         presence_penalty=1.5,
         repetition_penalty=1.0,
-        thinking_token_budget=2048
+        thinking_token_budget=1024
     )
 
     llm = LLM(

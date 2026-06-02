@@ -6,7 +6,7 @@
 #SBATCH --output=slurm_log/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
 #SBATCH --container-name=vllm_qwen3.5
 #SBATCH --gres=gpu:1
-#SBATCH --job-name=Qwen3.5_Control
+#SBATCH --job-name=Qwen3.5_Thinking_Control
 
 cd $HOME/VLMs-Medical-Imaging
 
