@@ -207,7 +207,7 @@ if __name__ == "__main__":
         max_tokens=4096,  # adjust after pilot
         presence_penalty=1.5,
         repetition_penalty=1.0,
-        thinking_token_budget=1024
+        thinking_token_budget=2048
     )
 
     llm = LLM(
@@ -215,7 +215,7 @@ if __name__ == "__main__":
         gpu_memory_utilization=0.95,  # Maximale GPU-Nutzung
         trust_remote_code=True,
         reasoning_parser="qwen3",
-        reasoning_config={"reasoning_start_str": "<think>", "reasoning_end_str": "I have to give the solution based on the reasoning directly now.</think>"}
+        reasoning_config={"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"}
     )
     print("Finished loading the model")
     # ──────────────────────────────────────────────────────────────────────────────
@@ -227,7 +227,7 @@ if __name__ == "__main__":
     dataset_dir = os.path.join(args.data_dir)
 
     RESULTS_ROOT = 'control/results/qwen3.5_thinking'  # path for results directory
-    CHUNK_SIZE = 100
+    CHUNK_SIZE = 500
 
     experiments = ['RQ1', 'RQ2', 'RQ3', 'AS']  # select the experiments here: 'RQ1', 'RQ2', 'RQ3', 'AS'
     # ──────────────────────────────────────────────────────────────────────────────
