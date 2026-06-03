@@ -204,7 +204,7 @@ if __name__ == "__main__":
 
     model_dir = "models/Qwen3.5-9B"
     sampling_params_thinking = SamplingParams(
-        max_tokens=5,
+        max_tokens=2048,
         presence_penalty=1.5,
         repetition_penalty=1.0,
         thinking_token_budget=1024
