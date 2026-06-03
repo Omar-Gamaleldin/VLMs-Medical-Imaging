@@ -353,6 +353,7 @@ if __name__ == "__main__":
                             "results_call" : [{
                                 "question": metadata["question"],
                                 "model_answer": model_output.outputs[0].text,
+                                "tokens_used": len(model_output.outputs[0].token_ids),
                                 "expected_answer": metadata["expected_answer"],
                                 "entire_prompt": metadata["entire_prompt"]
                                 }]
