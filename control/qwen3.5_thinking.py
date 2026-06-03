@@ -204,7 +204,7 @@ if __name__ == "__main__":
 
     model_dir = "models/Qwen3.5-9B"
     sampling_params_thinking = SamplingParams(
-        max_tokens=4096,  # adjust after pilot
+        max_tokens=5,
         presence_penalty=1.5,
         repetition_penalty=1.0,
         thinking_token_budget=1024
@@ -346,12 +346,13 @@ if __name__ == "__main__":
                     print(outputs[0].outputs)
 
                     for metadata, model_output in zip(batch_metadata, outputs):
-                        out_length = len(model_output.outputs[0].text)
+                        #out_length = len(model_output.outputs[0].text)
+
                         dataset_results.append({
                             "file_name": metadata["file_name"],
                             "results_call" : [{
                                 "question": metadata["question"],
-                                "model_answer": model_output.outputs[0].text[out_length-1] if out_length != 0 else "",
+                                "model_answer": model_output.outputs[0].text,
                                 "expected_answer": metadata["expected_answer"],
                                 "entire_prompt": metadata["entire_prompt"]
                                 }]
