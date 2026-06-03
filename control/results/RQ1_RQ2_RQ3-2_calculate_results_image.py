@@ -199,7 +199,7 @@ def group_by_base(files: List[str]) -> Dict[str, List[str]]:
 def main():
     # Update the paths below to your local setup
     # ── Paths  ─────────────────────────────────────
-    answer_files_dir = "./qwen3.5/"
+    answer_files_dir = "./medgemma1.5/"
     # Needs to contain 3 json files with the model answers for each of the 3 runs. They should end with ..._run_0.json, ..._run_1.json, ..._run_2.json.
     # Each element of all 3 json files should have this structure:
     #  {

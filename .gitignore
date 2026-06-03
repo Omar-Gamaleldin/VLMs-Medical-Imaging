@@ -2,7 +2,9 @@ models/*
 slurm_log/*
 python_logs/*
 control/results/qwen3.5/*
+control/results/qwen3.5_thinking/*
 control/results/medgemma1.5/*
+control/results/answers/*
 control/results/Results*.xlsx
 
 *.txt
