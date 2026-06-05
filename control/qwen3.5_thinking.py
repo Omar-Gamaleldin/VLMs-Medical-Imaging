@@ -213,11 +213,11 @@ if __name__ == "__main__":
 
     output_strucure = StructuredOutputsParams(json=QA.model_json_schema())
     sampling_params_thinking = SamplingParams(
-        max_tokens=1028,
+        max_tokens=4096,
         structured_outputs=output_strucure,
         repetition_penalty=1.0,
-        presence_penalty=1.5,
-        thinking_token_budget=1024
+        presence_penalty=0.0,
+        thinking_token_budget=2048
     )
 
     llm = LLM(
@@ -225,7 +225,7 @@ if __name__ == "__main__":
         gpu_memory_utilization=0.95,  # Maximale GPU-Nutzung
         trust_remote_code=True,
         reasoning_parser="qwen3",
-        reasoning_config=ReasoningConfig()
+        reasoning_config=ReasoningConfig(reasoning_parser="qwen3")
     )
     print("Finished loading the model")
     # ──────────────────────────────────────────────────────────────────────────────
@@ -353,15 +353,20 @@ if __name__ == "__main__":
                         })
 
                     outputs = llm.chat(batch_messages,sampling_params=sampling_params_thinking, chat_template_kwargs={"enable_thinking": True} )
-                    print(outputs[0].outputs)
+                    for out in outputs[:2]:  # check first 2
+                        print("RAW TEXT:", repr(out.outputs[0].text))
+                        print("FINISH REASON:", out.outputs[0].finish_reason)
 
                     for metadata, model_output in zip(batch_metadata, outputs):
+                        output = model_output.outputs[0]
+                        thinking_content = output.reasoning_content if hasattr(output, 'reasoning_content') else None
 
                         dataset_results.append({
                             "file_name": metadata["file_name"],
                             "results_call" : [{
                                 "question": metadata["question"],
-                                "model_answer": model_output.outputs[0].text,
+                                "model_answer": output.text,
+                                "thinking": thinking_content,
                                 "tokens_used": len(model_output.outputs[0].token_ids),
                                 "expected_answer": metadata["expected_answer"],
                                 "entire_prompt": metadata["entire_prompt"]
