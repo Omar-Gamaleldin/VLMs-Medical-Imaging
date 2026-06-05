@@ -213,8 +213,10 @@ if __name__ == "__main__":
 
     output_strucure = StructuredOutputsParams(json=QA.model_json_schema())
     sampling_params_thinking = SamplingParams(
-        max_tokens=2048,
+        max_tokens=1028,
         structured_outputs=output_strucure,
+        repetition_penalty=1.0,
+        presence_penalty=1.5,
         thinking_token_budget=1024
     )
 
