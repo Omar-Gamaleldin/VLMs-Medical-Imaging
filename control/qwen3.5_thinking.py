@@ -235,7 +235,7 @@ if __name__ == "__main__":
     RESULTS_ROOT = 'control/results/qwen3.5_thinking'  # path for results directory
     CHUNK_SIZE = 500
 
-    experiments = ['RQ1', 'RQ2', 'RQ3', 'AS']  # select the experiments here: 'RQ1', 'RQ2', 'RQ3', 'AS'
+    experiments = ['RQ1']  # select the experiments here: 'RQ1', 'RQ2', 'RQ3', 'AS'
     # ──────────────────────────────────────────────────────────────────────────────
 
     for exp in experiments:
@@ -275,7 +275,7 @@ if __name__ == "__main__":
 
             random.seed(2025)
 
-            N = len(png_images)  # number or len(png_images)
+            N = 500 #len(png_images)   number or len(png_images)
 
             if N > len(png_images):
                 print(f'The selected amount of images {N} is bigger than the available images {len(png_images)}.')
@@ -352,7 +352,6 @@ if __name__ == "__main__":
                     print(outputs[0].outputs)
 
                     for metadata, model_output in zip(batch_metadata, outputs):
-                        #out_length = len(model_output.outputs[0].text)
 
                         dataset_results.append({
                             "file_name": metadata["file_name"],
