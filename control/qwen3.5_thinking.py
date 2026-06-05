@@ -6,7 +6,9 @@ import random
 import base64
 import argparse
 os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
+from pydantic import BaseModel
 from vllm import LLM, SamplingParams
+from vllm.sampling_params import StructuredOutputsParams
 from io import BytesIO
 from PIL import Image
 
@@ -203,10 +205,14 @@ if __name__ == "__main__":
     # ──────────────────────────────────────────────────────────────────────────────
 
     model_dir = "models/Qwen3.5-9B"
+    class QA(BaseModel):
+        reason: str
+        answer: str
+
+    output_strucure = StructuredOutputsParams(json=QA.model_json_schema())
     sampling_params_thinking = SamplingParams(
         max_tokens=2048,
-        presence_penalty=1.5,
-        repetition_penalty=1.0,
+        structured_outputs=output_strucure,
         thinking_token_budget=1024
     )
 
