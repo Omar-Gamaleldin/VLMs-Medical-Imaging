@@ -207,17 +207,15 @@ if __name__ == "__main__":
     # ──────────────────────────────────────────────────────────────────────────────
 
     model_dir = "models/Qwen3.5-9B"
-    class QA(BaseModel):
-        reason: str
-        answer: str
 
-    output_strucure = StructuredOutputsParams(json=QA.model_json_schema())
     sampling_params_thinking = SamplingParams(
         max_tokens=4096,
-        structured_outputs=output_strucure,
         repetition_penalty=1.0,
         presence_penalty=0.0,
-        thinking_token_budget=2048
+        thinking_token_budget=2048,
+        stop=["</think>"],
+        include_stop_str_in_output=True,
+        
     )
 
     llm = LLM(
