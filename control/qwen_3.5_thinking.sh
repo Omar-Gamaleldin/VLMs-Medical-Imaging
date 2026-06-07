@@ -38,7 +38,6 @@ vllm serve models/Qwen3.5-9B \
     --gpu-memory-utilization 0.95 \
     --max-model-len 32768 \
     --max-num-seqs 64 \
-    --enable-reasoning \
     --reasoning-parser qwen3 \
     --enable-chunked-prefill \
     --max-num-batched-tokens 32768 \
