@@ -5,126 +5,33 @@ import time
 import random
 import base64
 import argparse
+import asyncio
+import aiohttp
 
-from vllm.config import ReasoningConfig
-os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
-from pydantic import BaseModel
-from vllm import LLM, SamplingParams
-from vllm.sampling_params import StructuredOutputsParams
 from io import BytesIO
 from PIL import Image
 
 
+# ──────────────────────────────────────────────────────────────────────────────
+#  Image helpers (unchanged)
+# ──────────────────────────────────────────────────────────────────────────────
+
 def encode_image_from_bytes(image):
-    """
-    Encodes an image object into a base64-encoded PNG string.
-
-    Args:
-        image (PIL.Image.Image): The image to encode.
-
-    Returns:
-        str: Base64-encoded string representation of the image.
-
-    Example:
-        ```python
-        from PIL import Image
-        import base64
-
-        img = Image.open("example.png")
-        encoded_string = encode_image_from_bytes(img)
-        print(encoded_string)
-        ```
-    """
     buffered = BytesIO()
     image.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode("utf-8")
 
 
 def is_grayscale(image):
-    """
-    Checks if a given image is in grayscale mode.
-
-    Args:
-        image (PIL.Image.Image): The image to check.
-
-    Returns:
-        bool: True if the image is grayscale, False otherwise.
-
-    The function checks whether the image mode is either "L" (8-bit grayscale) 
-    or "I;16" (16-bit grayscale).
-
-    Example:
-        ```python
-        from PIL import Image
-
-        img = Image.open("example.png")
-        if is_grayscale(img):
-            print("The image is grayscale.")
-        else:
-            print("The image is in color.")
-        ```
-    """
     return image.mode in ["L", "I;16"]
 
 
 def normalize_16bit_to_8bit(image):
-    """
-    Normalizes a 16-bit grayscale image to an 8-bit grayscale image.
-
-    Args:
-        image (PIL.Image.Image): A 16-bit grayscale image (mode "I;16").
-
-    Returns:
-        PIL.Image.Image: An 8-bit grayscale image (mode "L").
-
-    The function scales pixel values from the 16-bit range (0-65535) to the 
-    8-bit range (0-255) by dividing each pixel by 256 and then converting 
-    the image to mode "L".
-
-    Example:
-        ```python
-        from PIL import Image
-
-        img_16bit = Image.open("example_16bit.png")
-        img_8bit = normalize_16bit_to_8bit(img_16bit)
-        img_8bit.save("example_8bit.png")
-        ```
-    """
-    normalized_image = image.point(
-        lambda x: (x / 256))
+    normalized_image = image.point(lambda x: (x / 256))
     return normalized_image.convert("L")
 
 
 def ensure_rgb(image):
-    """
-    Ensures that the given image is in RGB mode.
-
-    Args:
-        image (PIL.Image.Image): The input image.
-
-    Returns:
-        PIL.Image.Image: The image converted to RGB mode.
-
-    This function handles different image modes as follows:
-    - If the image is in "I;16" mode (16-bit grayscale), it is first normalized 
-      to 8-bit grayscale and then converted to RGB.
-    - If the image is grayscale ("L") or has an alpha channel ("RGBA"), 
-      it is directly converted to RGB.
-    - If the image is already in "RGB" mode, a copy is returned.
-    - If the image mode is unsupported, a `ValueError` is raised.
-
-    Example:
-        ```python
-        from PIL import Image
-
-        img = Image.open("example.png")
-        rgb_img = ensure_rgb(img)
-        rgb_img.show()
-        ```
-
-    Raises:
-        ValueError: If the image mode is not supported.
-    """
     if image.mode == "I;16":
         return normalize_16bit_to_8bit(image).convert("RGB")
     elif is_grayscale(image) or image.mode == "RGBA":
@@ -136,126 +43,97 @@ def ensure_rgb(image):
 
 
 def get_clean_image(image_path):
-    """
-    Loads an image, ensures it is in RGB mode, and encodes it as a base64 string.
-
-    Args:
-        image_path (str): The file path to the image.
-
-    Returns:
-        str: The base64-encoded representation of the image.
-
-    This function performs the following steps:
-    1. Opens the image from the given path.
-    2. Converts it to RGB mode if necessary using `ensure_rgb()`.
-    3. Encodes the processed image into a base64 string using `encode_image_from_bytes()`.
-
-    Example:
-        ```python
-        encoded_image = get_clean_image("example.png")
-        print(encoded_image)
-        ```
-    """
     with Image.open(image_path) as img:
         rgb_image = ensure_rgb(img)
-    base64_image = encode_image_from_bytes(rgb_image)
-
-    return base64_image
+    return encode_image_from_bytes(rgb_image)
 
 
 def get_qa(img_file_name, json_dir):
-    """
-    Retrieves the question-answer pairs for a given image file from a JSON dataset.
-
-    Args:
-        img_file_name (str): The filename of the image for which QA pairs are required.
-        json_dir (str): The path to the JSON file containing question-answer data.
-
-    Returns:
-        list[dict]: A list of dictionaries, each containing a 'question' and an 'answer'.
-
-    The function performs the following steps:
-    1. Loads the JSON file from the provided directory.
-    2. Finds the entry that matches the given image filename.
-    3. Extracts and returns the associated question-answer pairs.
-
-    Example:
-        ```python
-        qa_pairs = get_qa("image_001.jpg", "questions.json")
-        for qa in qa_pairs:
-            print(f"Q: {qa['question']}\nA: {qa['answer']}")
-        ```
-    """
     with open(json_dir, 'r', encoding='utf-8') as file:
         data = json.load(file)
-
     target_filename = img_file_name
     result = next((entry['question_answer']
                    for entry in data if entry['filename'] == target_filename), None)
+    return [{'question': entry['question'], 'answer': entry['answer']} for entry in result]
 
-    questions_answers = [{'question': entry['question'],
-                          'answer': entry['answer']} for entry in result]
-    return questions_answers
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  Server inference helpers
+# ──────────────────────────────────────────────────────────────────────────────
+
+SERVER_URL = "http://localhost:8001/v1/chat/completions"
+MODEL_NAME = "models/Qwen3.5-9B"  # must match --served-model-name on the server
+
+
+async def send_single(session: aiohttp.ClientSession, semaphore: asyncio.Semaphore,
+                      messages: list, thinking_budget: int = 2048) -> dict:
+    """Send one chat request to the vLLM server and return the parsed response."""
+    payload = {
+        "model": MODEL_NAME,
+        "messages": messages,
+        "max_tokens": 4096,
+        # Qwen3 thinking budget via extra_body
+        "chat_template_kwargs": {"enable_thinking": True},
+        "thinking": {"type": "enabled", "budget_tokens": thinking_budget},
+    }
+
+    async with semaphore:
+        async with session.post(SERVER_URL, json=payload) as resp:
+            resp.raise_for_status()
+            return await resp.json()
+
+
+async def run_batch(batch_messages: list[list], max_concurrent: int = 32) -> list[dict]:
+    """Send all messages in parallel (up to max_concurrent at a time)."""
+    semaphore = asyncio.Semaphore(max_concurrent)
+    connector = aiohttp.TCPConnector(limit=max_concurrent)
+    timeout = aiohttp.ClientTimeout(total=300)  # 5 min per request
+
+    async with aiohttp.ClientSession(connector=connector, timeout=timeout) as session:
+        tasks = [send_single(session, semaphore, msgs) for msgs in batch_messages]
+        return await asyncio.gather(*tasks)
+
+
+def parse_output(response: dict) -> tuple[str, str | None]:
+    """Extract (text, reasoning_content) from a /v1/chat/completions response."""
+    choice = response["choices"][0]
+    message = choice["message"]
+    text = message.get("content", "") or ""
+    # The vLLM online server puts thinking in reasoning_content when
+    # --enable-reasoning / reasoning-parser is active
+    reasoning = message.get("reasoning_content", None)
+    return text, reasoning
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+#  Main
+# ──────────────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Test run Script")
+    parser = argparse.ArgumentParser(description="Test run Script (server mode)")
     parser.add_argument("--data_dir", type=str, required=True, help="Path to dataset")
+    parser.add_argument("--max_concurrent", type=int, default=32,
+                        help="Max parallel requests to the vLLM server (default: 32)")
     args = parser.parse_args()
 
-    # ──────────────────────────────────────────────────────────────────────────────
-    #  Model
-    # ──────────────────────────────────────────────────────────────────────────────
+    dataset_dir = args.data_dir
 
-    model_dir = "models/Qwen3.5-9B"
-
-    sampling_params_thinking = SamplingParams(
-        max_tokens=4096,
-        repetition_penalty=1.0,
-        presence_penalty=0.0,
-        thinking_token_budget=2048,
-        stop=["</think>"],
-        include_stop_str_in_output=True,
-        
-    )
-
-    llm = LLM(
-        model=model_dir,
-        gpu_memory_utilization=0.95,  # Maximale GPU-Nutzung
-        trust_remote_code=True,
-        reasoning_parser="qwen3",
-        reasoning_config=ReasoningConfig()
-    )
-    print("Finished loading the model")
-    # ──────────────────────────────────────────────────────────────────────────────
-
-    # ──────────────────────────────────────────────────────────────────────────────
-    #  Paths and Experiment Selection
-    # ──────────────────────────────────────────────────────────────────────────────
-    
-    dataset_dir = os.path.join(args.data_dir)
-
-    RESULTS_ROOT = 'control/results/qwen3.5_thinking'  # path for results directory
+    RESULTS_ROOT = 'control/results/qwen3.5_thinking'
     CHUNK_SIZE = 500
 
-    experiments = ['RQ1']  # select the experiments here: 'RQ1', 'RQ2', 'RQ3', 'AS'
-    # ──────────────────────────────────────────────────────────────────────────────
+    experiments = ['RQ1']
 
     for exp in experiments:
 
         if exp == 'RQ1':
             experiment_plan = {
-                'sub_experiment_1': {'img': 'images',
-                                     'qa': 'qa.json'}
+                'sub_experiment_1': {'img': 'images', 'qa': 'qa.json'}
             }
-
         else:
             experiment_plan = {
-                'sub_experiment_1': {'img': 'images_numbers',
-                                     'qa': 'qa_numbers.json'},
-                'sub_experiment_2': {'img': 'images_letters',
-                                     'qa': 'qa_letters.json'},
-                'sub_experiment_3': {'img': 'images_dots',
-                                     'qa': 'qa_dots.json'}
+                'sub_experiment_1': {'img': 'images_numbers',  'qa': 'qa_numbers.json'},
+                'sub_experiment_2': {'img': 'images_letters',  'qa': 'qa_letters.json'},
+                'sub_experiment_3': {'img': 'images_dots',     'qa': 'qa_dots.json'},
             }
 
         exp_dir = os.path.join(dataset_dir, exp)
@@ -263,62 +141,51 @@ if __name__ == "__main__":
         for sub_experiment, data in experiment_plan.items():
 
             selected_image = data['img']
-            selected_qa = data['qa']
+            selected_qa    = data['qa']
 
-            qa_file_path = os.path.join(exp_dir, selected_qa)
+            qa_file_path      = os.path.join(exp_dir, selected_qa)
+            image_files_path  = os.path.join(exp_dir, selected_image)
 
-            image_files_path = os.path.join(exp_dir, selected_image)
+            with open(qa_file_path, 'r', encoding='utf-8') as f:
+                json_data = json.load(f)
 
-            with open(qa_file_path, 'r', encoding='utf-8') as file:
-                data = json.load(file)
-
-            png_images = [entry['filename']
-                          for entry in data if 'filename' in entry]
+            png_images = [entry['filename'] for entry in json_data if 'filename' in entry]
 
             random.seed(2025)
-
-            N = 500 #len(png_images)   number or len(png_images)
+            N = 500
 
             if N > len(png_images):
-                print(f'The selected amount of images {N} is bigger than the available images {len(png_images)}.')
+                print(f'Selected N={N} > available {len(png_images)}. Exiting.')
                 sys.exit(0)
             elif N == len(png_images):
-                print(f'The selected amount of images {N} is equal to the available images {len(png_images)}. Not picking random, using whole dataset instead.')
+                print(f'Using whole dataset ({N} images).')
                 mo_file_name_appendix = 'all_images'
-                png_images = png_images
             else:
-                print(f'Using random pick with {N} images.')
+                print(f'Random pick: {N} images.')
                 png_images = random.sample(png_images, N)
                 mo_file_name_appendix = f'random_pick_{N}_images'
 
-            for j in range(3):  # how many runs ?
+            for j in range(3):
                 start_time = time.time()
-
                 dataset_results = []
 
                 for i in range(0, len(png_images), CHUNK_SIZE):
+                    chunk = png_images[i: i + CHUNK_SIZE]
+                    print(f"{exp} Run {j} | chunk {i // CHUNK_SIZE + 1}: "
+                          f"images {i}–{i + len(chunk) - 1}")
+
                     batch_messages = []
                     batch_metadata = []
-
-                    chunk = png_images[i : i + CHUNK_SIZE]
-                    print(f"{exp} Run {j} Processing chunk {i//CHUNK_SIZE + 1}: images {i} to {i + len(chunk)}")
 
                     for image in chunk:
                         question_data = get_qa(image, qa_file_path)
 
-                        other_images = [
-                            img for img in chunk if img != image]
-                        if other_images:
-                            random_other_image = random.choice(other_images)
-                            additional_question = get_qa(
-                                random_other_image, qa_file_path)
-                        else:
-                            additional_question = None
+                        other_images = [img for img in chunk if img != image]
+                        additional_question = get_qa(random.choice(other_images), qa_file_path) \
+                            if other_images else None
 
-                        original_image_path = os.path.join(
-                            image_files_path, image)
-
-                        base64_image = get_clean_image(original_image_path)
+                        base64_image = get_clean_image(
+                            os.path.join(image_files_path, image))
 
                         prompt = (
                             "The image is a 2D axial slice of an abdominal CT scan with soft tissue windowing. "
@@ -326,7 +193,6 @@ if __name__ == "__main__":
                             "Your output must contain exactly one character: '1' or '0'."
                             "Ignore anatomical correctness; focus solely on what the image shows.\n"
                             "Example:\n"
-                            # dynamic part of the prompt
                             f"Q: {additional_question[0]['question']} A: {additional_question[0]['answer']}\n"
                             "Now answer the real question:\n\n"
                             f"Q: {question_data[0]['question']}"
@@ -337,9 +203,10 @@ if __name__ == "__main__":
                                 "role": "user",
                                 "content": [
                                     {"type": "text", "text": prompt},
-                                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{base64_image}"}}
+                                    {"type": "image_url",
+                                     "image_url": {"url": f"data:image/png;base64,{base64_image}"}}
                                 ]
-                            },
+                            }
                         ]
 
                         batch_messages.append(msg)
@@ -347,41 +214,47 @@ if __name__ == "__main__":
                             "file_name": image,
                             "question": question_data[0]['question'],
                             "expected_answer": question_data[0]['answer'],
-                            "entire_prompt": prompt
+                            "entire_prompt": prompt,
                         })
 
-                    outputs = llm.chat(batch_messages,sampling_params=sampling_params_thinking, chat_template_kwargs={"enable_thinking": True} )
-                    for out in outputs[:2]:  # check first 2
-                        print("RAW TEXT:", repr(out.outputs[0].text))
-                        print("FINISH REASON:", out.outputs[0].finish_reason)
+                    # ── Fire the whole chunk concurrently ──────────────────────
+                    responses = asyncio.run(
+                        run_batch(batch_messages, max_concurrent=args.max_concurrent)
+                    )
 
-                    for metadata, model_output in zip(batch_metadata, outputs):
-                        output = model_output.outputs[0]
-                        thinking_content = output.reasoning_content if hasattr(output, 'reasoning_content') else None
+                    # Debug: show first 2 raw responses
+                    for resp in responses[:2]:
+                        text, reasoning = parse_output(resp)
+                        print("RAW TEXT:", repr(text))
+                        print("REASONING:", repr(reasoning[:200]) if reasoning else None)
+                        print("FINISH REASON:", resp["choices"][0]["finish_reason"])
+
+                    for metadata, response in zip(batch_metadata, responses):
+                        text, reasoning = parse_output(response)
+                        tokens_used = response.get("usage", {}).get("completion_tokens", 0)
 
                         dataset_results.append({
                             "file_name": metadata["file_name"],
-                            "results_call" : [{
-                                "question": metadata["question"],
-                                "model_answer": output.text,
-                                "thinking": thinking_content,
-                                "tokens_used": len(model_output.outputs[0].token_ids),
+                            "results_call": [{
+                                "question":        metadata["question"],
+                                "model_answer":    text,
+                                "thinking":        reasoning,
+                                "tokens_used":     tokens_used,
                                 "expected_answer": metadata["expected_answer"],
-                                "entire_prompt": metadata["entire_prompt"]
-                                }]
+                                "entire_prompt":   metadata["entire_prompt"],
+                            }]
                         })
 
-                results_file_name = f"{exp}_{selected_qa.replace('.json', '')}_{mo_file_name_appendix}_add_run_{j}.json"
-
-                save_name = os.path.join(
-                    RESULTS_ROOT, results_file_name)
-
-                # Ensure the directory exists
+                results_file_name = (
+                    f"{exp}_{selected_qa.replace('.json', '')}"
+                    f"_{mo_file_name_appendix}_add_run_{j}.json"
+                )
+                save_name = os.path.join(RESULTS_ROOT, results_file_name)
                 os.makedirs(os.path.dirname(save_name), exist_ok=True)
 
-                with open(save_name, 'w') as json_file:
-                    json.dump(dataset_results, json_file, indent=4)
-                end_time = time.time()
+                with open(save_name, 'w') as f:
+                    json.dump(dataset_results, f, indent=4)
 
-                elapsed_time = end_time - start_time
-                print(f"Runtime for {selected_qa.replace('.json', '')} with {selected_image} : {elapsed_time:.2f} seconds")
+                elapsed = time.time() - start_time
+                print(f"Runtime for {selected_qa.replace('.json', '')} "
+                      f"with {selected_image}: {elapsed:.2f}s")

@@ -30,10 +30,25 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "================================================================================"
 nvidia-smi
 
+vllm serve models/Qwen3.5-9B
+    --served-model-name "Qwen3.5-9B" \
+    --host 0.0.0.0 \
+    --port 8001 \
+    --default-chat-template-kwargs '{"enable_thinking": true}' \
+    --gpu-memory-utilization 0.95 \
+    --max-model-len 32768 \
+    --max-num-seqs 64 \
+    --enable-reasoning \
+    --reasoning-parser qwen3 \
+    --enable-chunked-prefill \
+    --max-num-batched-tokens 32768 \
+    --trust-remote-code \
+    --dtype bfloat16 \
+
 # python3 -m venv ~/venvs/qwen3.5_control
 # source ~/venvs/qwen3.5_control/bin/activate
 
-pip3 install pillow transformers==5.5.0
+python3 -m pip install pillow transformers==5.5.0
 
 # Start inference
 echo "Starting Qwen 3.5 Inference..."
