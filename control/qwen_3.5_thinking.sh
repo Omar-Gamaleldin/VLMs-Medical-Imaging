@@ -30,7 +30,7 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "================================================================================"
 nvidia-smi
 
-vllm serve models/Qwen3.5-9B
+vllm serve models/Qwen3.5-9B \
     --served-model-name "Qwen3.5-9B" \
     --host 0.0.0.0 \
     --port 8001 \
