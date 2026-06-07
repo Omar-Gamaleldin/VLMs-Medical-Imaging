@@ -45,12 +45,14 @@ vllm serve models/Qwen3.5-9B
     --trust-remote-code \
     --dtype bfloat16 &
 
+VLLM_PID=$!
+
 # ── Wait until the server is ready ───────────────────────────────────────────
 echo "Waiting for server to be ready..."
 MAX_WAIT=300   # seconds before giving up (model load can be slow)
 ELAPSED=0
  
-until curl -sf "http://localhost:$PORT/health" > /dev/null 2>&1; do
+until curl -sf "http://localhost:8001/health" > /dev/null 2>&1; do
     # Check the server process is still alive
     if ! kill -0 $VLLM_PID 2>/dev/null; then
         echo "ERROR: vLLM server process died. Check logs above."
