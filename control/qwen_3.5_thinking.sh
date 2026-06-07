@@ -43,11 +43,37 @@ vllm serve models/Qwen3.5-9B
     --enable-chunked-prefill \
     --max-num-batched-tokens 32768 \
     --trust-remote-code \
-    --dtype bfloat16 \
+    --dtype bfloat16 &
 
+# ── Wait until the server is ready ───────────────────────────────────────────
+echo "Waiting for server to be ready..."
+MAX_WAIT=300   # seconds before giving up (model load can be slow)
+ELAPSED=0
+ 
+until curl -sf "http://localhost:$PORT/health" > /dev/null 2>&1; do
+    # Check the server process is still alive
+    if ! kill -0 $VLLM_PID 2>/dev/null; then
+        echo "ERROR: vLLM server process died. Check logs above."
+        exit 1
+    fi
+ 
+    if [ $ELAPSED -ge $MAX_WAIT ]; then
+        echo "ERROR: Server did not become ready within ${MAX_WAIT}s."
+        kill $VLLM_PID
+        exit 1
+    fi
+ 
+    echo "  still loading... (${ELAPSED}s elapsed)"
+    sleep 10
+    ELAPSED=$((ELAPSED + 10))
+done
+ 
+echo "Server is ready after ${ELAPSED}s!"
+ 
+# ── Run the benchmark ─────────────────────────────────────────────────────────
+ 
 # python3 -m venv ~/venvs/qwen3.5_control
 # source ~/venvs/qwen3.5_control/bin/activate
-
 python3 -m pip install pillow transformers==5.5.0
 
 # Start inference
