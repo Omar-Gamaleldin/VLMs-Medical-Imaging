@@ -34,13 +34,13 @@ vllm serve models/Qwen3.5-9B \
     --served-model-name "Qwen3.5-9B" \
     --host 0.0.0.0 \
     --port 8001 \
-    --default-chat-template-kwargs '{"enable_thinking": true}' \
     --gpu-memory-utilization 0.95 \
     --max-model-len 32768 \
     --max-num-batched-tokens 32768 \
     --max-num-seqs 64 \
     --reasoning-parser qwen3 \
-    --tool-call-parser qwen3_coder \
+    --reasoning-config '{"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"}' \
+    --default-chat-template-kwargs '{"enable_thinking": true}' \
     --trust-remote-code \
     --dtype bfloat16 &
 

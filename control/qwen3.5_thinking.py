@@ -68,9 +68,9 @@ def send_batch(batch_messages: list, server_url: str, model_name: str,
     payload = {
         "model": model_name,
         "messages": batch_messages,   # list of conversations
-        "max_tokens": 5200,
+        "max_tokens": 8192,
         "chat_template_kwargs": {"enable_thinking": True},
-        "thinking": {"type": "enabled", "budget_tokens": thinking_budget},
+        "thinking_token_budget": 4096,
     }
 
     resp = requests.post(
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     parser.add_argument("--experiments",     type=str, nargs="+",
                         default=["RQ1"], choices=["RQ1", "RQ2", "RQ3", "AS"],
                         help="Which experiments to run (default: RQ1)")
-    parser.add_argument("--n_images",        type=int, default=500,
+    parser.add_argument("--n_images",        type=int, default=300,
                         help="Number of images to sample per experiment (default: 500)")
     parser.add_argument("--n_runs",          type=int, default=3,
                         help="Number of repeat runs per experiment (default: 3)")
@@ -244,7 +244,7 @@ if __name__ == "__main__":
                                 "question":        metadata["question"],
                                 "model_answer":    text,
                                 "thinking":        reasoning,
-                                "finish_reason":   finish_reason
+                                "finish_reason":   finish_reason,
                                 "expected_answer": metadata["expected_answer"],
                                 "entire_prompt":   metadata["entire_prompt"],
                             }]
