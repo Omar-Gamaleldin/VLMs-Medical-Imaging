@@ -83,7 +83,6 @@ def send_batch(batch_messages: list, server_url: str, model_name: str,
 
     # The endpoint returns one choice per conversation under data["choices"].
     # Wrap each back into a response-like dict so parse_output works uniformly.
-    print(data["choices"])
     return [{"choice": [choice], "usage": data.get("usage", {})}
             for choice in data["choices"]]
 
@@ -92,7 +91,7 @@ def parse_output(response: dict) -> tuple[str, str | None]:
     """Extract (text, reasoning_content) from a response dict."""
     message = response["choice"][0]["message"]
     text = message.get("content", "") or ""
-    reasoning = message.get("reasoning_content", None)
+    reasoning = message.get("reasoning", None)
     return text, reasoning
 
 
@@ -237,6 +236,7 @@ if __name__ == "__main__":
                     for metadata, response in zip(batch_metadata, responses):
                         text, reasoning = parse_output(response)
                         tokens_used = response.get("usage", {}).get("completion_tokens", 0)
+                        finish_reason = response.get("finish_reason", "")
 
                         dataset_results.append({
                             "file_name": metadata["file_name"],
@@ -244,7 +244,7 @@ if __name__ == "__main__":
                                 "question":        metadata["question"],
                                 "model_answer":    text,
                                 "thinking":        reasoning,
-                                "tokens_used":     tokens_used,
+                                "finish_reason":   finish_reason
                                 "expected_answer": metadata["expected_answer"],
                                 "entire_prompt":   metadata["entire_prompt"],
                             }]
