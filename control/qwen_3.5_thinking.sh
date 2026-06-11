@@ -40,7 +40,7 @@ vllm serve models/Qwen3.5-9B \
     --max-num-batched-tokens 32768 \
     --max-num-seqs 64 \
     --reasoning-parser qwen3 \
-    --tool-call-parser qwen3_coder
+    --tool-call-parser qwen3_coder \
     --trust-remote-code \
     --dtype bfloat16 &
 
