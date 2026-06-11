@@ -115,7 +115,7 @@ if __name__ == "__main__":
     parser.add_argument("--experiments",     type=str, nargs="+",
                         default=["RQ1", "RQ2", "RQ3", "AS"], choices=["RQ1", "RQ2", "RQ3", "AS"],
                         help="Which experiments to run (default: RQ1)")
-    parser.add_argument("--n_images",        type=int, default=300,
+    parser.add_argument("--n_images",        type=int, default=4878,
                         help="Number of images to sample per experiment (default: 4878)")
     parser.add_argument("--n_runs",          type=int, default=3,
                         help="Number of repeat runs per experiment (default: 3)")
