@@ -92,6 +92,7 @@ def parse_output(response: dict) -> tuple[str, str | None]:
     message = response["choices"][0]["message"]
     text = message.get("content", "") or ""
     reasoning = message.get("reasoning_content", None)
+    print(message)
     return text, reasoning
 
 
