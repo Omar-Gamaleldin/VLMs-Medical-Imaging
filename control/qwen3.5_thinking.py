@@ -115,7 +115,7 @@ if __name__ == "__main__":
     parser.add_argument("--experiments",     type=str, nargs="+",
                         default=["RQ1", "RQ2", "RQ3", "AS"], choices=["RQ1", "RQ2", "RQ3", "AS"],
                         help="Which experiments to run (default: RQ1)")
-    parser.add_argument("--n_images",        type=int, default=4878,
+    parser.add_argument("--n_images",        type=int, default=300,
                         help="Number of images to sample per experiment (default: 4878)")
     parser.add_argument("--n_runs",          type=int, default=3,
                         help="Number of repeat runs per experiment (default: 3)")
@@ -236,7 +236,7 @@ if __name__ == "__main__":
                     for metadata, response in zip(batch_metadata, responses):
                         text, reasoning = parse_output(response)
                         tokens_used = response.get("usage", {}).get("completion_tokens", 0)
-                        finish_reason = response.get("choice", {}).get("finish_reason", "")
+                        finish_reason = response.get("choice", [])[0].get("finish_reason", "")
 
                         dataset_results.append({
                             "file_name": metadata["file_name"],
