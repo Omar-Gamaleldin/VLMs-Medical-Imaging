@@ -113,16 +113,16 @@ if __name__ == "__main__":
                         default="Qwen3.5-9B",
                         help="Served model name — must match --served-model-name on the server")
     parser.add_argument("--experiments",     type=str, nargs="+",
-                        default=["RQ1"], choices=["RQ1", "RQ2", "RQ3", "AS"],
+                        default=["RQ1", "RQ2", "RQ3", "AS"], choices=["RQ1", "RQ2", "RQ3", "AS"],
                         help="Which experiments to run (default: RQ1)")
-    parser.add_argument("--n_images",        type=int, default=300,
-                        help="Number of images to sample per experiment (default: 500)")
+    parser.add_argument("--n_images",        type=int, default=4878,
+                        help="Number of images to sample per experiment (default: 4878)")
     parser.add_argument("--n_runs",          type=int, default=3,
                         help="Number of repeat runs per experiment (default: 3)")
     parser.add_argument("--chunk_size",      type=int, default=100,
                         help="Images per batch request (default: 100)")
     parser.add_argument("--thinking_budget", type=int, default=4096,
-                        help="Max thinking tokens per request (default: 2048)")
+                        help="Max thinking tokens per request (default: 4096)")
     args = parser.parse_args()
 
     # ── Experiment loop ───────────────────────────────────────────────────────
@@ -236,13 +236,13 @@ if __name__ == "__main__":
                     for metadata, response in zip(batch_metadata, responses):
                         text, reasoning = parse_output(response)
                         tokens_used = response.get("usage", {}).get("completion_tokens", 0)
-                        finish_reason = response.get("finish_reason", "")
+                        finish_reason = response.get("choice", {}).get("finish_reason", "")
 
                         dataset_results.append({
                             "file_name": metadata["file_name"],
                             "results_call": [{
                                 "question":        metadata["question"],
-                                "model_answer":    text,
+                                "model_answer":    text[len(text) - 1] if len(text) != 0 else "",
                                 "thinking":        reasoning,
                                 "finish_reason":   finish_reason,
                                 "expected_answer": metadata["expected_answer"],
@@ -250,6 +250,7 @@ if __name__ == "__main__":
                             }]
                         })
 
+                # Save results
                 results_file_name = (
                     f"{exp}_{selected_qa.replace('.json', '')}"
                     f"_{mo_file_name_appendix}_add_run_{j}.json"
