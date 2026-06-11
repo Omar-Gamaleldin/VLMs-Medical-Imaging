@@ -232,7 +232,7 @@ if __name__ == "__main__":
                         text, reasoning = parse_output(resp)
                         print("RAW TEXT:    ", repr(text))
                         print("REASONING:   ", repr(reasoning[:200]) if reasoning else None)
-                        print("FINISH REASON:", resp["choices"][0]["finish_reason"])
+                        print("FINISH REASON:", resp["choice"][0]["finish_reason"])
 
                     for metadata, response in zip(batch_metadata, responses):
                         text, reasoning = parse_output(response)
