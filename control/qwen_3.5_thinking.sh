@@ -37,10 +37,10 @@ vllm serve models/Qwen3.5-9B \
     --default-chat-template-kwargs '{"enable_thinking": true}' \
     --gpu-memory-utilization 0.95 \
     --max-model-len 32768 \
+    --max-num-batched-tokens 32768 \
     --max-num-seqs 64 \
     --reasoning-parser qwen3 \
-    --enable-chunked-prefill \
-    --max-num-batched-tokens 32768 \
+    --tool-call-parser qwen3_coder
     --trust-remote-code \
     --dtype bfloat16 &
 

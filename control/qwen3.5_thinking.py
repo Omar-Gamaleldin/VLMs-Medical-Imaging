@@ -59,7 +59,7 @@ def get_qa(img_file_name, json_dir):
 # ──────────────────────────────────────────────────────────────────────────────
 
 def send_batch(batch_messages: list, server_url: str, model_name: str,
-               thinking_budget: int = 2048) -> list[dict]:
+               thinking_budget: int = 4096) -> list[dict]:
     """
     POST all conversations in one request to /v1/chat/completions/batch.
     batch_messages: list of conversations, each conversation is a list of messages.
@@ -68,7 +68,7 @@ def send_batch(batch_messages: list, server_url: str, model_name: str,
     payload = {
         "model": model_name,
         "messages": batch_messages,   # list of conversations
-        "max_tokens": 4096,
+        "max_tokens": 5200,
         "chat_template_kwargs": {"enable_thinking": True},
         "thinking": {"type": "enabled", "budget_tokens": thinking_budget},
     }
@@ -83,16 +83,16 @@ def send_batch(batch_messages: list, server_url: str, model_name: str,
 
     # The endpoint returns one choice per conversation under data["choices"].
     # Wrap each back into a response-like dict so parse_output works uniformly.
-    return [{"choices": [choice], "usage": data.get("usage", {})}
+    print(data["choices"])
+    return [{"choice": [choice], "usage": data.get("usage", {})}
             for choice in data["choices"]]
 
 
 def parse_output(response: dict) -> tuple[str, str | None]:
     """Extract (text, reasoning_content) from a response dict."""
-    message = response["choices"][0]["message"]
+    message = response["choice"][0]["message"]
     text = message.get("content", "") or ""
     reasoning = message.get("reasoning_content", None)
-    print(message)
     return text, reasoning
 
 
@@ -120,9 +120,9 @@ if __name__ == "__main__":
                         help="Number of images to sample per experiment (default: 500)")
     parser.add_argument("--n_runs",          type=int, default=3,
                         help="Number of repeat runs per experiment (default: 3)")
-    parser.add_argument("--chunk_size",      type=int, default=500,
-                        help="Images per batch request (default: 500)")
-    parser.add_argument("--thinking_budget", type=int, default=2048,
+    parser.add_argument("--chunk_size",      type=int, default=100,
+                        help="Images per batch request (default: 100)")
+    parser.add_argument("--thinking_budget", type=int, default=4096,
                         help="Max thinking tokens per request (default: 2048)")
     args = parser.parse_args()
 
