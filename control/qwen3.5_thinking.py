@@ -113,10 +113,8 @@ if __name__ == "__main__":
                         default="Qwen3.5-9B",
                         help="Served model name — must match --served-model-name on the server")
     parser.add_argument("--experiments",     type=str, nargs="+",
-                        default=["RQ1", "RQ2", "RQ3", "AS"], choices=["RQ1", "RQ2", "RQ3", "AS"],
+                        default=["AS"], choices=["RQ1", "RQ2", "RQ3", "AS"],
                         help="Which experiments to run (default: RQ1)")
-    parser.add_argument("--n_images",        type=int, default=4878,
-                        help="Number of images to sample per experiment (default: 4878)")
     parser.add_argument("--n_runs",          type=int, default=3,
                         help="Number of repeat runs per experiment (default: 3)")
     parser.add_argument("--chunk_size",      type=int, default=100,
@@ -155,7 +153,7 @@ if __name__ == "__main__":
             png_images = [entry['filename'] for entry in json_data if 'filename' in entry]
 
             random.seed(2025)
-            N = args.n_images
+            N = len(png_images)
 
             if N > len(png_images):
                 print(f"Selected N={N} > available {len(png_images)}. Exiting.")

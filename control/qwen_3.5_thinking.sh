@@ -48,7 +48,7 @@ VLLM_PID=$!
 
 # ── Wait until the server is ready ───────────────────────────────────────────
 echo "Waiting for server to be ready..."
-MAX_WAIT=300   # seconds before giving up (model load can be slow)
+MAX_WAIT=600   # seconds before giving up (model load can be slow)
 ELAPSED=0
  
 until curl -sf "http://localhost:8001/health" > /dev/null 2>&1; do
