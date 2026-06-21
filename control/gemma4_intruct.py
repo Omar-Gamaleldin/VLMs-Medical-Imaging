@@ -205,7 +205,7 @@ if __name__ == "__main__":
     #  Model
     # ──────────────────────────────────────────────────────────────────────────────
 
-    model_dir = "models/gemma-4-26B-A4Bit"
+    model_dir = "models/gemma-4-26B-A4B-it"
 
     llm = LLM(
         model=model_dir,
@@ -337,7 +337,7 @@ if __name__ == "__main__":
                             "entire_prompt": prompt
                         })
 
-                    outputs = llm.chat(batch_messages, sampling_params=sampling_params, chat_template_kwargs={"enable_thinking": False})
+                    outputs = llm.chat(batch_messages)
                     print(outputs[0].outputs[0].text)
 
                     for metadata, model_output in zip(batch_metadata, outputs):
