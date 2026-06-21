@@ -58,8 +58,7 @@ def get_qa(img_file_name, json_dir):
 #  Batch inference via /v1/chat/completions/batch
 # ──────────────────────────────────────────────────────────────────────────────
 
-def send_batch(batch_messages: list, server_url: str, model_name: str,
-               thinking_budget: int = 4096) -> list[dict]:
+def send_batch(batch_messages: list, server_url: str, model_name: str) -> list[dict]:
     """
     POST all conversations in one request to /v1/chat/completions/batch.
     batch_messages: list of conversations, each conversation is a list of messages.
@@ -68,9 +67,9 @@ def send_batch(batch_messages: list, server_url: str, model_name: str,
     payload = {
         "model": model_name,
         "messages": batch_messages,   # list of conversations
-        "max_tokens": 8192,
+        "max_tokens": 4096,
         "chat_template_kwargs": {"enable_thinking": True},
-        "thinking_token_budget": 4096,
+        "thinking_token_budget": 2048,
     }
 
     resp = requests.post(
@@ -113,13 +112,13 @@ if __name__ == "__main__":
                         default="Qwen3.5-9B",
                         help="Served model name — must match --served-model-name on the server")
     parser.add_argument("--experiments",     type=str, nargs="+",
-                        default=["AS"], choices=["RQ1", "RQ2", "RQ3", "AS"],
+                        default=["RQ1", "RQ2", "RQ3", "AS"], choices=["RQ1", "RQ2", "RQ3", "AS"],
                         help="Which experiments to run (default: RQ1)")
     parser.add_argument("--n_runs",          type=int, default=3,
                         help="Number of repeat runs per experiment (default: 3)")
     parser.add_argument("--chunk_size",      type=int, default=100,
                         help="Images per batch request (default: 100)")
-    parser.add_argument("--thinking_budget", type=int, default=4096,
+    parser.add_argument("--thinking_budget", type=int, default=2048,
                         help="Max thinking tokens per request (default: 4096)")
     args = parser.parse_args()
 
@@ -221,7 +220,6 @@ if __name__ == "__main__":
                         batch_messages,
                         server_url=args.server_url,
                         model_name=args.model_name,
-                        thinking_budget=args.thinking_budget,
                     )
 
                     # Debug: show first 2 results
