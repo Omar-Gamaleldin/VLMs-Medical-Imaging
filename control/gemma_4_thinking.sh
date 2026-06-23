@@ -35,6 +35,7 @@ vllm serve models/gemma-4-26B-A4B-it \
     --port 8001 \
     --gpu-memory-utilization 0.95 \
     --max-num-batched-tokens 16384 \
+    --default-chat-template-kwargs '{"enable_thinking": true}' \
     --max-num-seqs 32 \
     --trust-remote-code \
     --dtype bfloat16 &
@@ -73,9 +74,9 @@ python3 -m pip install pillow transformers==5.5.0
 # Start inference
 echo "Starting Gemma 4 Inference..."
 python3 -u control/gemma4_thinking.py \
-	--data_dir=$DATAPATH
-	--results_dir="control/results/gemma4_4096"
-	--chunk_size=100
-	--experiments="RQ1" "RQ2" "RQ3" "AS"
-	--thinking_budget=4096
+	--data_dir=$DATAPATH \
+	--results_dir "control/results/gemma4_4096"\
+	--chunk_size 100 \
+	--experiments "RQ1" "RQ2" "RQ3" "AS" \
+	--thinking_budget 4096 
 	
