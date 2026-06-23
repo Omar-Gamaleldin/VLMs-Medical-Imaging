@@ -203,7 +203,7 @@ if __name__ == "__main__":
                         })
 
                     outputs = llm.chat(batch_messages)
-                    print("Answer: " + outputs[0].outputs)
+                    print(outputs[0].outputs)
 
                     for metadata, model_output in zip(batch_metadata, outputs):
                             dataset_results.append({
