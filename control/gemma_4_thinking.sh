@@ -36,7 +36,9 @@ vllm serve models/gemma-4-26B-A4B-it \
     --port 8001 \
     --gpu-memory-utilization 0.95 \
     --max-num-batched-tokens 16384 \
+    --reasoning-parser gemma4 \
     --default-chat-template-kwargs '{"enable_thinking": true}' \
+    --reasoning-config '{}' \
     --max-num-seqs 32 \
     --trust-remote-code \
     --dtype bfloat16 &

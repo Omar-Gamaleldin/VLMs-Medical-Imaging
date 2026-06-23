@@ -70,6 +70,7 @@ def send_batch(batch_messages: list, server_url: str, model_name: str, thinking_
         "max_tokens": thinking_tokens * 2,
         "chat_template_kwargs": {"enable_thinking": True},
         "thinking_token_budget": thinking_tokens,
+        "skip_special_tokens": False,
     }
 
     resp = requests.post(
