@@ -31,6 +31,7 @@ echo "==========================================================================
 nvidia-smi
 
 vllm serve models/gemma-4-26B-A4B-it \
+    --served-model-name "gemma-4-26B-A4B-it" \
     --host 0.0.0.0 \
     --port 8001 \
     --gpu-memory-utilization 0.95 \
