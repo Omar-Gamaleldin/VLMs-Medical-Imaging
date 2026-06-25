@@ -39,7 +39,7 @@ vllm serve models/gemma-4-26B-A4B-it \
     --reasoning-parser gemma4 \
     --default-chat-template-kwargs '{"enable_thinking": true}' \
     --reasoning-config '{}' \
-    --max-num-seqs 32 \
+    --max-num-seqs 100 \
     --trust-remote-code \
     --dtype bfloat16 &
 
@@ -78,8 +78,8 @@ python3 -m pip install pillow transformers==5.5.0
 echo "Starting Gemma 4 Inference..."
 python3 -u control/gemma4_thinking.py \
 	--data_dir=$DATAPATH \
-	--results_dir "control/results/gemma4_4096"\
+	--results_dir "control/results/gemma4_2048"\
 	--chunk_size 100 \
 	--experiments "RQ1" "RQ2" "RQ3" "AS" \
-	--thinking_budget 4096 
+	--thinking_budget 2048 
 	

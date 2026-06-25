@@ -67,9 +67,9 @@ def send_batch(batch_messages: list, server_url: str, model_name: str) -> list[d
     payload = {
         "model": model_name,
         "messages": batch_messages,   # list of conversations
-        "max_tokens": 8192*2,
+        "max_tokens": 6144 * 2,
         "chat_template_kwargs": {"enable_thinking": True},
-        "thinking_token_budget": 8192,
+        "thinking_token_budget": 6144,
     }
 
     resp = requests.post(
