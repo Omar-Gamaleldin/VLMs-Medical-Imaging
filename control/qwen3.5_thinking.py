@@ -112,7 +112,7 @@ if __name__ == "__main__":
                         default="Qwen3.5-9B",
                         help="Served model name — must match --served-model-name on the server")
     parser.add_argument("--experiments",     type=str, nargs="+",
-                        default=["RQ1", "RQ2"], choices=["RQ1", "RQ2", "RQ3", "AS"],
+                        default=["RQ3", "AS"], choices=["RQ1", "RQ2", "RQ3", "AS"],
                         help="Which experiments to run (default: RQ1)")
     parser.add_argument("--n_runs",          type=int, default=3,
                         help="Number of repeat runs per experiment (default: 3)")
