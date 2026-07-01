@@ -221,9 +221,9 @@ class BinaryAnswerEvaluator:
 def reflection_lm_callable(prompt) -> str:
     messages = [{"role": "user", "content": prompt}] if isinstance(prompt, str) else prompt
     resp = litellm.completion(
-        model=REFLECTIVE_MODEL,
+        model=args.reflective_model_name,
         messages=messages,
-        api_base="http://localhost:8002/v1",  # 27B server
+        api_base="http://localhost:8002/v1",
         api_key="dummy",
     )
     return (resp.choices[0].message.content or "").strip()
@@ -234,11 +234,15 @@ if __name__ == "__main__":
     # ──────────────────────────────────────────────────────────────────────────────
     parser = argparse.ArgumentParser(description="Test run Script")
     parser.add_argument("--data_dir", type=str, required=True, help="Path to dataset")
+    parser.add_argument("--training_size", type=int, required=True, help="Pareto dataset size")
+    parser.add_argument("--vlm_model_name", type=str, required=True, help="VLM model to be improved")
+    parser.add_argument("--reflective_model_name", type=str, required=True, help="LLM used for reflection")
+    parser.add_argument("--thining_budget", type=int, required=True, help="Number of Tokens used for thinking")
     args = parser.parse_args()
 
-    experiment = "RQ2"
-    image_name = "images_dots"
-    qa_file = "qa_dots.json"
+    experiment = "RQ1"
+    image_name = "images"
+    qa_file = "qa.json"
 
     data_dir = os.path.join(args.data_dir, experiment)
     images_dir = os.path.join(data_dir, image_name)
@@ -265,7 +269,7 @@ if __name__ == "__main__":
     dataset = random.choices(entire_dataset, k=200)
 
     images = [entry["additional_context"]["image"] for entry in dataset]
-    with open(f"gepa/qwen_excluded_images_{experiment}_{image_name}.txt", "w", encoding="utf-8") as f:
+    with open(f"gepa/{args.vlm_model_name}_{args.thinking_budget}_excluded_images_{experiment}_{image_name}.txt", "w", encoding="utf-8") as f:
         f.writelines([img + "\n" for img in images])
 
     for img in images:
@@ -285,7 +289,7 @@ if __name__ == "__main__":
     }
 
     adapter = DefaultAdapter(
-        model=VLM_MODEL,
+        model=args.vlm_model_name,
         evaluator=BinaryAnswerEvaluator(),
         litellm_batch_completion_kwargs={
             "api_base": "http://localhost:8001/v1",

@@ -2,9 +2,9 @@
 # Here you can add bash commands:
 #SBATCH --container-mounts=/etc/slurm/task_prolog:/etc/slurm/task_prolog,/scratch:/scratch,/usr/lib64/slurm:/usr/lib64/slurm,/usr/lib64/libhwloc.so:/usr/lib64/libhwloc.so,/usr/lib64/libhwloc.so.15:/usr/lib64/libhwloc.so.15,/pfs/work9/workspace/scratch/ul_ekd37-gepa-optimization/:/pfs/work9/workspace/scratch/ul_ekd37-gepa-optimization
 #SBATCH --container-mount-home
-#SBATCH --output=slurm_log/gepa/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
+#SBATCH --output=slurm_log/gepa/qwen3.5/%x_%j.out  # Output file for job logs %x for job-name and %j for job-id
 #SBATCH --container-name=vllm_qwen3.5
-#SBATCH --job-name=Qwen3.5_9B_Server
+#SBATCH --job-name=0_thinking
 #SBATCH --gres=gpu:2
 
 cd $HOME/VLMs-Medical-Imaging
@@ -49,13 +49,13 @@ wait_for_server() {
 	--served-model-name qwen3.5-9b \
 ) &
 
-(CUDA_VISIBLE_DEVICES=1 vllm serve models/Qwen3.6-27B \
+(CUDA_VISIBLE_DEVICES=1 vllm serve models/gemma-4-31b-it \
 	--port 8002 \
 	--mm-encoder-tp-mode data \
 	--mm-processor-cache-type shm \
-	--reasoning-parser qwen3 \
+	--reasoning-parser gemma4 \
 	--enable-prefix-caching \
-	--served-model-name qwen3.6-27b \
+	--served-model-name gemma-4-31b-it \
 ) &
 
 wait_for_server "http://localhost:8001/health" 
@@ -67,4 +67,9 @@ curl http://localhost:8002/v1/models
 mkdir -p python_logs
 python3 -m pip install -q pillow gepa transformers==5.5.0
 
-python3 -u gepa/qwen3.5-gepa.py --data_dir=$DATAPATH &> python_logs/log_${SLURM_JOB_ID}.out
+python3 -u gepa/qwen3.5-gepa.py \
+	--data_dir=$DATAPATH \
+	--training_size=1000 \
+	--vlm_model_name="openai/qwen3.5-9b" \
+	--reflective_model_name="openai/gemma-4-31b-it" &> python_logs/log_${SLURM_JOB_ID}.out
+
