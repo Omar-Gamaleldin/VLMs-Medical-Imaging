@@ -266,7 +266,7 @@ if __name__ == "__main__":
             for entry in data
         ]
 
-    dataset = random.choices(entire_dataset, k=200)
+    dataset = random.choices(entire_dataset, k=args.training_size)
 
     images = [entry["additional_context"]["image"] for entry in dataset]
     with open(f"gepa/{args.vlm_model_name}_{args.thinking_budget}_excluded_images_{experiment}_{image_name}.txt", "w", encoding="utf-8") as f:
@@ -302,11 +302,11 @@ if __name__ == "__main__":
     # Run optimization
     result = gepa.api.optimize(
         seed_candidate=seed_prompt,
-        trainset=dataset[:160],
-        valset=dataset[160:],
+        trainset=dataset[:args.training_size * 0.8],
+        valset=dataset[args.training_size * 0.8 :],
         adapter=adapter,
         reflection_lm=reflection_lm_callable,   # Model for reflection
-        max_metric_calls=2190,                  # up to 50 iterations
+        stop_callbacks=NoImprovementStopper(10),
     )
 
     # Get the optimized prompt and best score
