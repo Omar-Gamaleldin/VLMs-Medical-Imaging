@@ -302,8 +302,8 @@ if __name__ == "__main__":
     # Run optimization
     result = gepa.api.optimize(
         seed_candidate=seed_prompt,
-        trainset=dataset[:args.training_size * 0.8],
-        valset=dataset[args.training_size * 0.8 :],
+        trainset=dataset[:int(args.training_size * 0.8)],
+        valset=dataset[int(args.training_size * 0.8):],
         adapter=adapter,
         reflection_lm=reflection_lm_callable,   # Model for reflection
         stop_callbacks=NoImprovementStopper(10),
