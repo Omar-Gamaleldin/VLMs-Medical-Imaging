@@ -221,7 +221,7 @@ class BinaryAnswerEvaluator:
 def reflection_lm_callable(prompt) -> str:
     messages = [{"role": "user", "content": prompt}] if isinstance(prompt, str) else prompt
     resp = litellm.completion(
-        model=args.reflective_model_name,
+        model=os.path.join("openai/",args.reflective_model_name),
         messages=messages,
         api_base="http://localhost:8002/v1",
         api_key="dummy",
@@ -237,7 +237,7 @@ if __name__ == "__main__":
     parser.add_argument("--training_size", type=int, required=True, help="Pareto dataset size")
     parser.add_argument("--vlm_model_name", type=str, required=True, help="VLM model to be improved")
     parser.add_argument("--reflective_model_name", type=str, required=True, help="LLM used for reflection")
-    parser.add_argument("--thining_budget", type=int, required=True, help="Number of Tokens used for thinking")
+    parser.add_argument("--thinking_budget", type=int, required=True, help="Number of Tokens used for thinking")
     args = parser.parse_args()
 
     experiment = "RQ1"
@@ -289,7 +289,7 @@ if __name__ == "__main__":
     }
 
     adapter = DefaultAdapter(
-        model=args.vlm_model_name,
+        model=os.path.join("openai/", args.vlm_model_name),
         evaluator=BinaryAnswerEvaluator(),
         litellm_batch_completion_kwargs={
             "api_base": "http://localhost:8001/v1",

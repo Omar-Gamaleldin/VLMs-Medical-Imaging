@@ -47,15 +47,17 @@ wait_for_server() {
 	--reasoning-parser qwen3 \
 	--enable-prefix-caching \
 	--served-model-name qwen3.5-9b \
+	--default-chat-template-kwargs '{"enable_thinking": false}'
 ) &
 
-(CUDA_VISIBLE_DEVICES=1 vllm serve models/gemma-4-31b-it \
+(CUDA_VISIBLE_DEVICES=1 vllm serve models/gemma-4-31B-it \
 	--port 8002 \
+	--max-model-len 32768 \
 	--mm-encoder-tp-mode data \
 	--mm-processor-cache-type shm \
 	--reasoning-parser gemma4 \
 	--enable-prefix-caching \
-	--served-model-name gemma-4-31b-it \
+	--served-model-name "gemma-4-31B-it"
 ) &
 
 wait_for_server "http://localhost:8001/health" 
@@ -64,12 +66,14 @@ curl http://localhost:8001/v1/models
 wait_for_server "http://localhost:8002/health"
 curl http://localhost:8002/v1/models
 
-mkdir -p python_logs
+mkdir -p python_logs/qwen3.5
 python3 -m pip install -q pillow gepa transformers==5.5.0
 
-python3 -u gepa/qwen3.5-gepa.py \
+python3 -u gepa/gepa_optimize.py \
 	--data_dir=$DATAPATH \
 	--training_size=1000 \
-	--vlm_model_name="openai/qwen3.5-9b" \
-	--reflective_model_name="openai/gemma-4-31b-it" &> python_logs/log_${SLURM_JOB_ID}.out
+	--vlm_model_name="qwen3.5-9b" \
+	--reflective_model_name="gemma-4-31B-it" \
+	--thinking_budget=0 &> python_logs/qwen3.5/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.out
+
 

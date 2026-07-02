@@ -3,5 +3,6 @@ slurm_log/*
 python_logs/*
 control/results/*/
 control/results/Results*.xlsx
+*/__pycache__/*
 
 *.txt
