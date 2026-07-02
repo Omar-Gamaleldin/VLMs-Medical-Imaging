@@ -37,5 +37,9 @@ pip3 install pillow transformers==5.5.0
 
 # Start inference
 echo "Starting Qwen 3.5 Inference..."
-python3 -u control/qwen3.5_instruct.py --data_dir=$DATAPATH
+python3 -u control/qwen3.5_instruct.py \
+	--data_dir=$DATAPATH \
+	--prompt_file="qwen3.5_no_think_prompt.txt" \
+	--excluded_qs="qwen3.5-9b_0_excluded_images_RQ1_images.txt"
+
 	
