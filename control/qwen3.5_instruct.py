@@ -120,8 +120,10 @@ if __name__ == "__main__":
         excluded = []
         if args.excluded_qs != "":
             with open(excluded_dir , 'r', encoding='utf-8') as file:
-                excluded = file.readlines()
-            excluded = [file.removesuffix("\n") for file in excluded]
+                all_files = file.readlines()
+            print(f"Numberof images excluded: {len(all_files)}")
+            excluded = [file.strip() for file in excluded]
+            print(f"Numberof images excluded: {len(excluded)}")
 
         gepa_prompt = ""
         if args.prompt_file != "":
@@ -200,6 +202,7 @@ if __name__ == "__main__":
                             f"Q: {question_data[0]['question']}"
                         ) if args.prompt_file == "" else (
                             f"{gepa_prompt}"
+                            "Now answer the real question:\n\n"
                             f"Q: {question_data[0]['question']}"
                             )
                         msg = [
