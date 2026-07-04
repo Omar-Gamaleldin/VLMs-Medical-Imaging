@@ -121,6 +121,7 @@ if __name__ == "__main__":
         if args.excluded_qs != "":
             with open(excluded_dir , 'r', encoding='utf-8') as file:
                 excluded = file.readlines()
+            excluded = [file.removesuffix("\n") for file in excluded]
 
         gepa_prompt = ""
         if args.prompt_file != "":
@@ -197,8 +198,10 @@ if __name__ == "__main__":
                             f"Q: {additional_question[0]['question']} A: {additional_question[0]['answer']}\n"
                             "Now answer the real question:\n\n"
                             f"Q: {question_data[0]['question']}"
-                        ) if args.prompt_file == "" else gepa_prompt
-
+                        ) if args.prompt_file == "" else (
+                            f"{gepa_prompt}"
+                            f"Q: {question_data[0]['question']}"
+                            )
                         msg = [
                             {
                                 "role": "user",
