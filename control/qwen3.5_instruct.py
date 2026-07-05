@@ -122,7 +122,7 @@ if __name__ == "__main__":
             with open(excluded_dir , 'r', encoding='utf-8') as file:
                 all_files = file.readlines()
             print(f"Numberof images excluded: {len(all_files)}")
-            excluded = [file.strip() for file in excluded]
+            excluded = [file.strip() for file in all_files]
             print(f"Numberof images excluded: {len(excluded)}")
 
         gepa_prompt = ""
