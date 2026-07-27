@@ -266,7 +266,7 @@ if __name__ == "__main__":
             for entry in data
         ]
 
-    dataset = random.choices(entire_dataset, k=args.training_size)
+    dataset = random.sample(entire_dataset, k=args.training_size)
 
     images = [entry["additional_context"]["image"] for entry in dataset]
     with open(f"gepa/{args.vlm_model_name}_{args.thinking_budget}_excluded_images_{experiment}_{image_name}.txt", "w", encoding="utf-8") as f:
