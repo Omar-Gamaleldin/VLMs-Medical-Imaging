@@ -10,7 +10,12 @@ This repository contains the scripts and outputs used to evaluate vision-languag
 
 ## Requirements
 
-The project was run on bwUniCluster 3.0 inside a Docker container. The scripts assume access to the MIRP benchmark dataset in the layout expected by the control scripts and a local model checkout under [models/](models/).
+The project was run on bwUniCluster 3.0 inside a Docker container. 
+
+```eval
+vllm+vllm-openai+v0.19.0.sqsh
+```
+The scripts assume access to the MIRP benchmark dataset in the layout expected by the control scripts and a local model checkout under [models/](models/).
 
 All python dependencies are include in the bash file
 
@@ -95,6 +100,5 @@ The repository stores run outputs in the result folders under [control/results/]
 | MedGemma 1.5 (0)        | 51% | 51% | 54%  | 60%  |
 
 
-The results of the models in detail are showen in these files within [control/results/](control/results/) `Control_Results.xlsx`, `Results_Image.xlsx`
-
+The results of the models in detail are shown in this file`Control_Results.xlsx` within [control/results/](control/results/) 
 
