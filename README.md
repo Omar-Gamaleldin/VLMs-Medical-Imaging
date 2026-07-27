@@ -1,6 +1,8 @@
 # Evaluating Reasoning Models on the MIRP Benchmark
 
-This repository contains the scripts and outputs used to evaluate vision-language models on the MIRP benchmark. The project focuses on binary medical-imaging questions across four settings:
+This repository contains the scripts and outputs used to evaluate reasoning vision-language models on the MIRP benchmark.
+
+![Diagram of evaluation](Main_Process.png)
 
 ## Project Structure
 
