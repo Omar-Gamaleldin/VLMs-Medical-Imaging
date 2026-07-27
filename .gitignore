@@ -1,4 +1,5 @@
 models/*
+!models/README.md
 slurm_log/*
 python_logs/*
 control/results/*/
