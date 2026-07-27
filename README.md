@@ -84,14 +84,15 @@ Both scripts read answer JSON files from the local results tree and write Excel 
 
 The repository stores run outputs in the result folders under [control/results/](control/results/). Representative output locations include:
 
-| Model | RQ1 | RQ2 | RQ3 | AS |
-| Gemma 4, 0 | 51% | 60% | 90% | 94% |
-| Gemma 4, 2048 | 49% | 94% | 100% | 100% |
-| Gemma 4, 4096 | 51% | 94% | 100% | 100% |
-| Qwen 3.5, 0 | 52% | 65% | 92% | 96% | 
-| Qwen 3.5, 2048 | 51% | 91% | 100% | 100% |
-| Qwen 3.5, 4096 | 51% | 95% | 100% | 100% |
-| MedGemma 1.5 | 51% | 51% | 54% | 60% |
+| Model           | RQ1 | RQ2 | RQ3  | AS   |
+|-----------------|-----|-----|------|------|
+| Gemma 4, 0      | 51% | 60% | 90%  | 94%  |
+| Gemma 4, 2048   | 49% | 94% | 100% | 100% |
+| Gemma 4, 4096   | 51% | 94% | 100% | 100% |
+| Qwen 3.5, 0     | 52% | 65% | 92%  | 96%  |
+| Qwen 3.5, 2048  | 51% | 91% | 100% | 100% |
+| Qwen 3.5, 4096  | 51% | 95% | 100% | 100% |
+| MedGemma 1.5    | 51% | 51% | 54%  | 60%  |
 
 
 The results of the models in detail are showen in these files within [control/results/](control/results/) `Control_Results.xlsx`, `Results_Image.xlsx`
